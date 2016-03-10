@@ -12,4 +12,5 @@ struct raw_fields
 	int client_port;
 	string url;
 	string dns_server;
+	string package_record_type;
 };
