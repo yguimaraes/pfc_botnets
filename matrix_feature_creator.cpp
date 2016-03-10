@@ -65,5 +65,6 @@ int main(int argc, char const *argv[]){
     string file_name = string(argv[1]);
 
     process_dns_log(file_name);
+    //TODO compute features.
     return 0;
 }
