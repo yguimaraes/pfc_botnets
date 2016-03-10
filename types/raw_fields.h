@@ -11,6 +11,6 @@ struct raw_fields
 	string client_ip;
 	int client_port;
 	string url;
-	string dns_server;
 	string package_record_type;
+	string dns_server_ip;
 };
