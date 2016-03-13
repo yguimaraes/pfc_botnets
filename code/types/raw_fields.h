@@ -4,8 +4,9 @@
 
 using namespace std;
 
-struct raw_fields
+class raw_fields
 {
+public:
 	string date;
 	string time;
 	string client_ip;
@@ -13,4 +14,8 @@ struct raw_fields
 	string url;
 	string package_record_type;
 	string dns_server_ip;
+
+	string toString() {
+		return date + "," + time + "," + client_ip + "," + client_port + "," + url + "," + package_record_type + "," + dns_server_ip;
+	}
 };

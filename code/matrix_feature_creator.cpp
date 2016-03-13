@@ -12,7 +12,7 @@ using namespace std;
 raw_fields* filter_fields(string request_line){
     // ");//
     raw_fields *compiled_fields = new raw_fields();
-    regex request_line_re("(\\d+-\\w+-\\d+) (\\d+:\\d+:\\d+.?\\d*) queries: info: client (\\d+\\.\\d+\\.\\d+\\.\\d+)#(\\d+): query: ([^ ]+) IN (\\w+) \\+ \\((\\d+\\.\\d+\\.\\d+\\.\\d+)\\)");
+    regex request_line_re("(\\d+-\\w+-\\d+) (\\d+:\\d+:\\d+.?\\d*) queries: info: client (\\d+\\.\\d+\\.\\d+\\.\\d+)#(\\d+): query: ([^ ]+) IN (\\w+) (?:\\+|-|-EDC) \\((\\d+\\.\\d+\\.\\d+\\.\\d+)\\)");
     smatch request_line_match; //= sregex_iterator(request_line.begin(), request_line.end(), request_line_re);
 
     regex_search(request_line, request_line_match, request_line_re);
@@ -31,6 +31,7 @@ raw_fields* filter_fields(string request_line){
 list<raw_fields*> process_dns_log(string file_name){
     
     ifstream dns_log_file;
+    ofstream filtered_dns_log_file(file_name+"(filtered)");
     list<raw_fields*> dns_log_list;
     string request_line;
 
@@ -40,10 +41,14 @@ list<raw_fields*> process_dns_log(string file_name){
         dns_log_file.open(file_name);
     
         while (getline(dns_log_file, request_line)){
-            dns_log_list.push_back(filter_fields(request_line));
+            //dns_log_list.push_back(filter_fields(request_line));
+            if (request_line.empty())
+                continue;
+            filtered_dns_log_file << filter_fields(request_line)->toString() << endl;
         }
 
         dns_log_file.close();
+        filtered_dns_log_file.close();
     }
     
     catch(ifstream::failure e){
