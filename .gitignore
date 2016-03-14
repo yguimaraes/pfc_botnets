@@ -161,5 +161,8 @@ TSWLatexianTemp*
 # Useless files
 .DS_Store
 
-#Compiled C++ files
+# Compiled C++ files
 *.bin
+
+# Private info
+*/private/*
