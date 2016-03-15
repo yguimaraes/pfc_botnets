@@ -17,11 +17,6 @@ class FeaturesCalculator{
 		
 	}
 
-	void CalculateReadableStringLength(){
-		// TODO Faremos??
-		
-	}
-
 	void CalculateDomainLength(){
 		// TODO
 
