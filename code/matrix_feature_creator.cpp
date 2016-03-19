@@ -82,7 +82,7 @@ int main(int argc, char const *argv[]){
 
     string file_name = string(argv[1]);
 
-    printf("%d", calculate_features(process_dns_log(file_name)));
+    cout << calculate_features(process_dns_log(file_name)) << endl;
 
     return 0;
 }

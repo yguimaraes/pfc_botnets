@@ -12,6 +12,19 @@ class FeaturesCalculator{
 				number_of_digits++;
 		}
 	}
+	void IsSufixSuspect(){
+		// TODO Checar se sufixo está na lista_tld.txt
+		
+	}
+
+	void CalculateDomainLength(){
+		// TODO
+
+	}
+
+	void GetFeatures(){
+		// TODO extract all results
+	}
 public:
 	FeaturesCalculator(raw_fields raw_field){
 		data = raw_field;
