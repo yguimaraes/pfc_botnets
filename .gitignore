@@ -165,4 +165,4 @@ TSWLatexianTemp*
 *.bin
 
 # Private info
-*/private/*
+private/*
