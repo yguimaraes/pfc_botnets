@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include "types/raw_fields.h"
 #include "features_calculator.cpp"
+#include "domain_features_calculator.cpp"
 #include <fstream>
 #include <list>
 #include <regex>
@@ -81,8 +82,9 @@ int main(int argc, char const *argv[]){
     }
 
     string file_name = string(argv[1]);
-
-    cout << calculate_features(process_dns_log(file_name)) << endl;
+    process_dns_log(file_name);
+    DomainFeaturesCalculator(file_name+FILTERED_SUFIX);
+    //cout << calculate_features(process_dns_log(file_name)) << endl;
 
     return 0;
 }
