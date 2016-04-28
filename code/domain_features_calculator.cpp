@@ -9,16 +9,22 @@ using namespace std;
 
 class DomainFeaturesCalculator{
     unordered_set<string> domains;
-    void CalculateNumberOfDigits() {
-    }
-    void IsSufixSuspect(){
-        // TODO Checar se sufixo está na lista_tld.txt
-        
+
+    int CalculateNumberOfDigits(string domain) {
+        int number_of_digits = 0;
+        for(string::iterator it=domain.begin(); it!=domain.end(); ++it) {
+            if(*it >= '0' && *it <= '9')
+                number_of_digits+=1;
+        }
+        cout << domain << " " << number_of_digits << endl;
+        return number_of_digits;
     }
 
-    void CalculateDomainLength(){
-        // TODO
-
+    int IsSufixSuspect(string domain){
+        size_t found = domain.find_last_of(".");
+        string sufix = domain.substr(found+1);
+        cout << sufix << " ";
+        return 0;
     }
 
     void GetFeatures(){
@@ -38,11 +44,6 @@ public:
             while(getline(treated_dns_log_file, current_line)){
                 domains.insert(get_domain_from_log_row(current_line));
             }
-            
-            std::cout << "myset contains:";
-            for (const std::string& x: domains) std::cout << " " << x;
-            std::cout <<  std::endl;
-
             treated_dns_log_file.close();
         }
         else{
@@ -51,7 +52,9 @@ public:
     }
 
     void Calculate() {
-        CalculateNumberOfDigits();
-        //cout << number_of_digits << endl;
+        for (const std::string& domain: domains) {
+            int is_sufix_suspect = IsSufixSuspect(domain);
+            int number_of_digits = CalculateNumberOfDigits(domain); 
+        }; 
     }
 };

@@ -83,7 +83,8 @@ int main(int argc, char const *argv[]){
 
     string file_name = string(argv[1]);
     process_dns_log(file_name);
-    DomainFeaturesCalculator(file_name+FILTERED_SUFIX);
+    DomainFeaturesCalculator dfc = DomainFeaturesCalculator(file_name+FILTERED_SUFIX);
+    dfc.Calculate();
     //cout << calculate_features(process_dns_log(file_name)) << endl;
 
     return 0;
