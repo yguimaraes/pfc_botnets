@@ -52,9 +52,12 @@ public:
     }
 
     void Calculate() {
+        ofstream domains_data("dominios.csv");
         for (const std::string& domain: domains) {
             int is_sufix_suspect = IsSufixSuspect(domain);
-            int number_of_digits = CalculateNumberOfDigits(domain); 
+            int number_of_digits = CalculateNumberOfDigits(domain);
+            domains_data << domain << "," << is_sufix_suspect << "," << number_of_digits << endl;
         }; 
+        domains_data.close();
     }
 };
