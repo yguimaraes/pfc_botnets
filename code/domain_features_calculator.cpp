@@ -27,6 +27,10 @@ class DomainFeaturesCalculator{
         return 0;
     }
 
+    int isDomainSuspicious() {
+        //whitelist alexia;
+    }
+
     void GetFeatures(){
         // TODO extract all results
     }
