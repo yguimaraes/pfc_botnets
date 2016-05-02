@@ -5,12 +5,18 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern} %fonte
 \usepackage{lastpage} %ficha catalografica
-\usepackage[num, overcite]{abntex2cite}
+\usepackage[num]{abntex2cite}
 \usepackage{graphicx} %for figures
 \usepackage[brazilian]{translator}\usepackage{pgfgantt}
 \usepackage{lscape}
+\usepackage{lastpage}
 \citebrackets[]
-\setlength{\parskip}{0.75cm} % tente também \onelineskip
+\setlength{\parindent}{0.75cm}
+
+%%SET MARGINS
+\setulmarginsandblock{2.5cm}{3cm}{*}
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\checkandfixthelayout
 
 \graphicspath{{images/}}
 
