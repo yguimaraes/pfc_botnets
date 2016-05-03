@@ -5,9 +5,21 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern} %fonte
 \usepackage{lastpage} %ficha catalografica
-\usepackage[num, overcite]{abntex2cite}
+\usepackage[num]{abntex2cite}
+\usepackage{graphicx} %for figures
+\usepackage[brazilian]{translator}
+\usepackage{pgfgantt}
+\usepackage{lscape}
+\usepackage{lastpage}
 \citebrackets[]
-\setlength{\parskip}{0.75cm} % tente também \onelineskip
+\setlength{\parindent}{0.75cm}
+
+%%SET MARGINS
+\setulmarginsandblock{2.5cm}{3cm}{*}
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}
+\checkandfixthelayout
+
+\graphicspath{{images/}}
 
 \titulo{Ferramenta para detecção de padrões de botnet baseado em algoritmos de agrupamento de aprendizagem de máquina}
 \autor{Jonas Rocha Lima Amaro \and Yago Guimarães Coimbra}
@@ -31,13 +43,15 @@
 \listoftables*
 \cleardoublepage
 \input{lista_abreviaturas.tex}
-\input{lista_simbolos.tex}
+%\input{lista_simbolos.tex}
 \tableofcontents*
 
 \textual
 
-\chapter*{Introducao}
-dadsa\cite{gu2008botminer}
+\input{introducao.tex}
+\input{botnets.tex}
+\input{cronograma.tex}
+\input{conclusao.tex}
 
 \postextual
 \bibliography{refs}
