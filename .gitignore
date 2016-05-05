@@ -165,7 +165,7 @@ TSWLatexianTemp*
 *.bin
 
 #PDFs
-*.pdf
+/report/*.pdf
 
 # Private info
 */private/*

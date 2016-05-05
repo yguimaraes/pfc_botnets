@@ -63,25 +63,25 @@ Categoriza-se\cite{mohri2012foundations} sete cenários para os algoritmos de ap
 
 \item \textbf{Aprendizado On-line}: Neste cenário, iterasse no modelo a cada exemplo recebido em rodadas. No início da rodada, o modelo recebe um exemplo, inicialmente sem etiqueta, realiza uma predição, recebe a etiqueta e atualiza os parâmetros do modelo.
 
-\item \textbf{Aprendizado por Reforço}: Neste cenário, os modelos são criados baseado num sistema de recompensa. O modelo é recompensado a cada decisão bem feita ao interagir com um ambiente.
+\item \textbf{Aprendizado por Reforço}: Neste cenário, os modelos são criados baseado num sistema de recompensa. O modelo é recompensado a cada decisão bem-feita ao interagir com um ambiente.
 
 \item \textbf{Aprendizado Ativo}: O algoritmo é quem realiza requisições a uma entidade capaz de etiquetar exemplos para melhorar os parâmetros do modelo. O objetivo é conseguir gerar um modelo tão bom quando o modelo supervisionado, porém com menos exemplos.
 
 \end{description}
 
-E ainda há outras possíveis cenários ainda mais complexos e específicos, não catalogados neste trabalho porque a ciência de Aprendizado de Máquina está ainda em constante fase de crescimento.
+E ainda há outros possíveis cenários ainda mais complexos e específicos, não catalogados neste trabalho porque a ciência de Aprendizado de Máquina está ainda em constante fase de crescimento.
 
 \section{Exemplo: Regressão Supervisionada}
 
 Dado um conjunto de tamanho de imóveis e seus respectivos valores de compra em uma vizinhança hipotética estimar o valor de um apartamento sabendo apenas seu tamanho.
 
-Seja o vetor ordenado \(\mathbf{X} = [x_{1},x_{2},...,x_{m}]\), \(\#\mathbf{X} = m\), o tamanho em Metros quadrados de apartamentos em um bairro. Seja \(\mathbf{Y} = [y_{1},y_{2},...,y_{m}]\), o preço do i-ésimo apartamento indexado em \(\mathbf{X}\). Se arranjarmos os valores graficamente obtem-se a Figura 1.
+Seja o vetor ordenado \(\mathbf{X} = [x_{1},x_{2},...,x_{m}]\), \(\#\mathbf{X} = m\), o tamanho em Metros quadrados de apartamentos em um bairro. Seja \(\mathbf{Y} = [y_{1},y_{2},...,y_{m}]\), o preço do i-ésimo apartamento indexado em \(\mathbf{X}\). Se arranjarmos os valores graficamente a Figura \ref{fig:casas} é obtida.
 
 \begin{figure}
 	\centering
 		\includegraphics[width=0.9\textwidth]{figure_1.png}
 		\caption{A distribuição do preço das casas}
-		\label{casas}
+		\label{fig:casas}
 \end{figure}
 
 Suponha que de posse do tamanho \(x\), não apresentado em \(\mathbf{X}\), o usuário queira inferir um preço \(y\). Para tal é necessário construir uma hipotese \(h_{\theta}\) que melhor interpole os valores de já conhecidos. Para poder avaliar se \(h_{\theta}\) é ótimo, existe uma função custo, \(custo(h_{\theta},\mathbf{Y})\).
@@ -90,7 +90,7 @@ Para esse problema, considera-se:
 
 \[h_{\theta}(x) = \theta_{1}*x + \theta_{0}\]
 
-Ou seja, um modelo linear. Além disso, para avaliar a proximidade do modelo e da amostra, aplica-se o erro quadrádico médio como função custo, isto é:
+Ou seja, um modelo linear. Além disso, para avaliar a proximidade do modelo e da amostra, aplica-se o erro quadrático médio como função custo, isto é:
 
 \[custo(h_{\theta}(X),\mathbf{Y}) = \frac{1}{m}*\sum_{i=1}^{m}(h(x_{i})-y_{i})^2\]
 
@@ -99,13 +99,13 @@ Tem-se dados, função de custo, precisa-se introduzir um método de otimizaçã
 \[\theta_{0} = \theta_{0} - \alpha * \frac{\partial}{\partial \theta_{0}}  custo(h_{\theta}(X),Y)\]
 \[\theta_{1} = \theta_{1} - \alpha * \frac{\partial}{\partial \theta_{1}}  custo(h_{\theta}(X),Y)\]
 
-Converge-se à solução ótima que minimiza o valor da função custo, sendo possível com algum erro inferir o valor do imóvel sabendo seu tamanho. Tal hipótese \(h_{\theta}\) está representado na Figura 2
+Converge-se à solução ótima que minimiza o valor da função custo, sendo possível com algum erro inferir o valor do imóvel sabendo seu tamanho. Tal hipótese \(h_{\theta}\) está representado na Figura \ref{fig:casas2}.
 
 \begin{figure}
 	\centering
 		\includegraphics[width=0.9\textwidth]{figure_2.png}
 		\caption{O modelo acompanhado e a distribuição do preço das casas}
-		\label{casas}
+		\label{fig:casas2}
 \end{figure}
 
 
@@ -118,11 +118,11 @@ O artigo, \textit{Anomaly Detection: A Survey}\cite{chandola2009anomaly}, define
 
 Geralmente a tarefa etiquetar os dados de modo representativo e preciso é custosa. A forma mais comum de etiquetagem é feita manualmente por um especialista. Esse processo é geralmente custoso, pois são necessários muitos exemplos para encontrar uma anomalia, que por definição é um caso raro. Dentro desse contexto, existem 3 cenários possíveis na operação da Detecção de Anomalias, Supervisionado, Semi-Supervisionado, Não Supervisionado.
 
-Os algoritmos de Detecção de Anomalia Supervisionados convertem têm poucos exemplos de anomalias, por definição, que isso pode trazer problemas quanto a análise da acurácia. O caso extremo seria considerar todos normais e ter acurácia de alta, uma vez que os exemplos anomalos podem representar menos de \(1\%\) da amostra. Isso pode ser resolvido observando a precisão e a exaustividade que resultariam \(0\%\). Como é preciso se chegar em um número para poder comparar performance, Witten\cite{witten2011data} propõe que se avalie o \textit{F1 score}, que seria a média harmônica das duas medidas.
+Os algoritmos de Detecção de Anomalia Supervisionados convertem têm poucos exemplos de anomalias, por definição, que isso pode trazer problemas quanto a análise da acurácia. O caso extremo seria considerar todos normais e ter acurácia de alta, uma vez que os exemplos anômalos podem representar menos de \(1\%\) da amostra. Isso pode ser resolvido observando a precisão e a exaustividade que resultariam \(0\%\). Como é preciso se chegar em um número para poder comparar performance, Witten\cite{witten2011data} propõe que se avalie o \textit{F1 score}, que seria a média harmônica das duas medidas.
 
 Assume-se que as amostras de treinamento são exemplos etiquetados como normais quando se trabalha no cenário Semi-Supervisionados desse modo é possível criar uma estimativa de como se comportam os exemplos normais e assumir que os que fogem do escopo é anomalia.
 
-Por último, quando não se tem etiqueta para os exemplos opera-se num cenário Não Supervisionado, assume-se que os casos anoma-los são menos frequentes. Note que se essa premissa não for satisfeita, o sistema está sujeito à alta quantidade falsos negativos.
+Por último, quando não se tem etiqueta para os exemplos opera-se num cenário Não Supervisionado, assume-se que os casos anômalos são menos frequentes. Note que se essa premissa não for satisfeita, o sistema está sujeito à alta quantidade falsos negativos.
 
 \subsection{Proposta de Modelo}
 
@@ -140,3 +140,4 @@ O qual \(\mathbb{E}\) é o operador valor esperado. Após a construção do mode
 \[\mathcal{N}(\mathbf{x}|\mathbf{\mu},\mathbf{\Sigma}) < \varepsilon\]
 
 O qual \(\varepsilon\) é um valor gatilho escolhido previamente que resultou o melhor \textit{F1 score}, se o modelo for aplicado em um cenário Supervisionado.
+
