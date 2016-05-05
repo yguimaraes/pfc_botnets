@@ -164,6 +164,9 @@ TSWLatexianTemp*
 # Compiled C++ files
 *.bin
 
+#PDFs
+*.pdf
+
 # Private info
 */private/*
 private/*
