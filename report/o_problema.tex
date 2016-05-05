@@ -1,0 +1,24 @@
+\chapter{O Problema}
+
+De posse das informações apresentadas nos capítulos anteriores é possível definir o problema que esse trabalho se propõe a resolver e, em linhas gerais, como ele será abordados.
+O objetivo desse trabalho é a partir dos registros de um servidor DNS, acusar quais máquinas na rede são suspeitos de pertencer a uma botnet e merecem atenção para uma investigação. A caracterização dos IPs será feita através da análise das características da iteração que seriam
+
+\begin{itemize}
+\item Quantidade de consultas a domínios com sufixos suspeitos;
+\item Quantidade de consultas a domínios com alta quantidade de números;
+\item Quantidade de domínios consultadas com string legível pequena;
+\item Quantidade de consultas a domínios com baixo grau no Alexa;
+\item Quantidade total de consultas realizadas;
+\item Média do comprimento de domínios consultados;
+\item Desvio Padrão dos comprimentos dos domínios consultados;
+\item Média do intervalo entre as consultas;
+\item Desvio padrão dos intervalos entre consultas;
+\item Total de consultas que resultaram em NXDOMAIN;
+\item Porcentagem de consultas que resultaram em NXDOMAIN;
+\item Quantidade de consultas para cada tipo de DNS;
+\item Porcentagem de consultas para cada tipo de DNS;
+\item Tamanho do menor clique que a máquina participa;
+\item Tamanho médio dos cliques em que a máquina participa.
+\end{itemize}
+
+Após o levantamento de todas as máquinas da rede, é feita a construnção do modelo probabilístico gaussiano e de acordo após a escolha da probabilidade mínima dos exemplos normais, o sistema estará pronto para decidir se uma nova máquina poderia pertencer ou não a uma botnet.
