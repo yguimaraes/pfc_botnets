@@ -28,7 +28,7 @@ Define-se \textit{F1 score} como:
 \[\frac{2 * \mathrm{precisão} * \mathrm{recall}}{\mathrm{precisão} + \mathrm{recall}}\]
 
 \subsection{Matriz \(\mathbf{X}\)}
-Seja \(\mathbf{X}\), amostra de treinamento, uma matriz \(m \times n\), onde \(m\) é quantidade de instâncias e \(n\) é a quantidade de características. \(\mathbf{X}\) é a representação matemática da amostra.
+Seja \(\mathbf{X}\), amostra de treinamento, uma matriz \(m \times n\), o qual \(m\) é quantidade de instâncias e \(n\) é a quantidade de características. \(\mathbf{X}\) é a representação matemática da amostra.
 
 \subsection{Vetor \(\mathbf{Y}\)}
 Seja \(\mathbf{Y}\), conjunto de etiquetas, um vetor de tamanho \(m\), a quantidade de instâncias, \(\mathbf{Y}\) é o conjunto ordenado das respectivas saídas esperadas de cada linha da matriz \(\mathbf{X}\), ou seja as etiquetas.
@@ -124,12 +124,19 @@ Assume-se que as amostras de treinamento são exemplos etiquetados como normais 
 
 Por último, quando não se tem etiqueta para os exemplos opera-se num cenário Não Supervisionado, assume-se que os casos anoma-los são menos frequentes. Note que se essa premissa não for satisfeita, o sistema está sujeito à alta quantidade falsos negativos.
 
+\subsection{Proposta de Modelo}
 
+Será exposto um modelo de Detecção de Anomalia baseado em modelo probabilístico. Suponha que os dados de uma determinada amostra se distribuam no plano determinado pelas características de acordo com o padrão normal. Dessa forma é possível associar cada exemplo \(\mathbf{x}\) à uma probabilidade, \(p(\mathbf{x})\).
+Sabe-se\cite{bishop2006pattern} que a distribuição normal multidimensional é
 
+\[\mathcal{N}(\mathbf{x}|\mathbf{\mu},\mathbf{\Sigma})=\frac{1}{(2\pi)^{\sfrac{D}{2}}} \frac{1}{|\mathbf{\Sigma}|^{\sfrac{1}{2}}}\exp\left\{ -\frac{1}{2} (\mathbf{x} - \mathbf{\mu})^T \mathbf{\Sigma}^{-1} (\mathbf{x} - \mathbf{\mu}) \right\}\]
 
+O qual \(D\) é a dimenção de \(\mathbf{x}\), \(\mathbf{\mu}\) é o vetor média de todas as caracteríticas da Matriz \(\mathbf{X}\) e \(\mathbf{\Sigma}\) é uma matriz covariância, \(D \times D\), \(|\mathbf{\Sigma}|\) é seu determinante.
 
+\[\mathbf{\Sigma}=\mathit{cov}[ \mathbf{x} ] = \mathbb{E} \left \lbrack ( \mathbf{x} - \mathbb{E} [ \mathbf{x} ] ) ( x - \mathbb{E} [ \mathbf{x} ] ) ^ T \right \rbrack \]
 
+O qual \(\mathbb{E}\) é o operador valor esperado. Após a construção do modelo probabilístico, o algoritmo decide se tal um novo exemplo \(\mathbf{x}\) é uma anomalia se
 
+\[\mathcal{N}(\mathbf{x}|\mathbf{\mu},\mathbf{\Sigma}) < \varepsilon\]
 
-
-
+O qual \(\varepsilon\) é um valor gatilho escolhido previamente que resultou, por exemplo o melhor \textit{F1 score}, se o modelo for aplicado em um cenário Supervisionado.
