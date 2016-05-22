@@ -10,7 +10,7 @@ public:
 	string m_client_ip;
 	string m_client_port;
 	string m_domain;
-	string m_package_record_type;
+	string m_type;
 	string m_dns_server_ip;
 
 	string toString();

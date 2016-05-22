@@ -11,6 +11,15 @@ public:
 			addDomain(query.m_domain);
 		if(!containsClient(query.m_client_ip))
 			addClient(query.m_client_ip);
+		string sSQL = "INSERT INTO dns_queries (client_ip,domain, type) VALUES('";
+		sSQL.append(query.m_client_ip);
+		sSQL.append("','");
+		sSQL.append(query.m_domain);
+		sSQL.append("','");
+		sSQL.append(query.m_type);
+		sSQL.append("');");
+		PGresult *res = PQexec(m_connection, sSQL.c_str());
+		PQclear(res);
 	}
 
 	void addDomain(string domain) {

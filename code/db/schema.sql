@@ -1,3 +1,5 @@
+#CREATE DB
+
 CREATE DATABASE botnets_pfc;
 
 CREATE TABLE dns_queries(
@@ -35,3 +37,10 @@ CREATE TABLE clients(
 	count_dns_mx_requests integer,
 	percentage_dns_mx_requests real
 );
+
+#CLEAR DB
+
+DELETE FROM dns_queries;
+DELETE FROM domains;
+DELETE FROM clients;
+SELECT SETVAL((SELECT pg_get_serial_sequence('dns_queries', 'id')), 1, false);
