@@ -10,6 +10,7 @@ using namespace std;
 
 typedef vector< boost::iterator_range<string::iterator> > find_vector_type;
 
+enum FILE_TYPE {prefix_file, white_list_file, dictionary_file};
 
 class DomainFeaturesCalculator{
     string domain_name;
@@ -17,55 +18,43 @@ class DomainFeaturesCalculator{
     static unordered_set<string> white_list;
     static unordered_set<string> dictionary;
 
-    static void populate_prefix(){
-        string line;
-        ifstream file("../private/lista_tld.txt");
+    static void populate(FILE_TYPE var){
+        string line, file_name;
+        unordered_set<string> *variable;
+        switch (var){
+            case prefix_file:
+                file_name = "../private/lista_tld.txt";
+                variable = &prefix;
+                break;
+            case white_list_file:
+                file_name = "../private/whitelist_dom.txt";
+                variable = &white_list;
+                break;
+            case dictionary_file:
+                file_name = "../private/dicionario.txt";
+                variable = &dictionary;
+                break;
+        }
+        ifstream file(file_name);
         if (file.is_open()){
             while (getline(file, line)){
-                prefix.insert(line);
+                variable->insert(line);
             }
         }
         else{
-            cerr << "Sorry, we can't provide you our data" << endl << "To reference your own data, change populate_prefix method on domain_features_calculator.cpp" << endl;
-        }
-    }
-
-    static void populate_white_list(){
-        string line;
-        ifstream file("../private/whitelist_dom.txt");
-        if (file.is_open()){
-            while (getline(file, line)){
-                white_list.insert(line);
-            }
-        }
-        else{
-            cerr << "Sorry, we can't provide you our data" << endl << "To reference your own data, change populate_white_list method on domain_features_calculator.cpp" << endl;
-        }
-    }
-
-    static void populate_dictionary(){
-        string line;
-        ifstream file("../private/dicionario.txt");
-        if (file.is_open()){
-            while (getline(file, line)){
-                dictionary.insert(line);
-            }
-        }
-        else{
-            cerr << "Sorry, we can't provide you our data" << endl << "To reference your own data, change populate_dictionary method on domain_features_calculator.cpp" << endl;
+            cerr << "Sorry, we can't provide you our data" << endl << "To reference your own data, change " << var << "method on domain_features_calculator.cpp" << endl;
         }
     }
 
 public:
     DomainFeaturesCalculator(string domain_name) : domain_name(domain_name){
-        populate_prefix();
     }
 
 
     bool isSufixSuspect(){
         size_t found = domain_name.find_last_of(".");
         string sufix = domain_name.substr(found+1);
-        cout << sufix << " ";
+        // cout << sufix << " ";
         return false;
     }
 
@@ -79,7 +68,7 @@ public:
             if(*it >= '0' && *it <= '9')
                 number_of_digits+=1;
         }
-        cout << domain_name << " " << number_of_digits << endl;
+        // cout << domain_name << " " << number_of_digits << endl;
         return number_of_digits;
     }
 
@@ -90,7 +79,9 @@ public:
 
         int biggest_readable = 0;
         string part_domain;
-        populate_dictionary();
+        if (dictionary.empty()){
+            populate(dictionary_file);
+        }
         
         for (int i = 0; i < domain_length; i++){
             for (int j = biggest_readable+1; j <= domain_length - i; j++){ // Parte do maior já encontrado
@@ -98,7 +89,7 @@ public:
                 part_domain = domain_without_dots.substr(i,j);
                 
                 if (dictionary.count(part_domain) > 0){
-                    cout << part_domain << endl;
+                    // cout << part_domain << endl;
                     biggest_readable = part_domain.length();
                 }
             }
@@ -118,8 +109,7 @@ public:
 
     bool isInWhiteList(){
         if (white_list.empty()){
-            populate_white_list();
-            cout << "populate_white_list" << endl;
+            populate(white_list_file);
         }
         return white_list.count(domain_name) == 0;
     }
