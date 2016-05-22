@@ -20,13 +20,17 @@ public:
         return false;
     }
 
-    int CalculateNumberOfDigits(string domain) {
+    string getDomain(){
+        return domain_name;
+    }
+
+    int CalculateNumberOfDigits() {
         int number_of_digits = 0;
-        for(string::iterator it=domain.begin(); it!=domain.end(); ++it) {
+        for(string::iterator it=domain_name.begin(); it!=domain_name.end(); ++it) {
             if(*it >= '0' && *it <= '9')
                 number_of_digits+=1;
         }
-        cout << domain << " " << number_of_digits << endl;
+        cout << domain_name << " " << number_of_digits << endl;
         return number_of_digits;
     }
 
