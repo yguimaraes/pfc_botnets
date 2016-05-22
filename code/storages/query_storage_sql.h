@@ -24,12 +24,16 @@ public:
 
 	void addDomain(string domain) {
 		DomainFeaturesCalculator dfc(domain);
-		string sSQL = "INSERT INTO domains (domain, length,numeric_count) VALUES('";
+		string sSQL = "INSERT INTO domains (domain,length,numeric_count,is_in_whitelist, readable_string_length) VALUES('";
 		sSQL.append(dfc.getDomain());
 		sSQL.append("',");
 		sSQL.append(to_string(dfc.CalculateDomainLength()));
 		sSQL.append(",");
 		sSQL.append(to_string(dfc.CalculateNumberOfDigits()));
+		sSQL.append(",'");
+		sSQL.append(to_string(dfc.isInWhiteList()));
+		sSQL.append("',");
+		sSQL.append(to_string(dfc.ReadableStringLength()));
 		sSQL.append(");");
 		PGresult *res = PQexec(m_connection, sSQL.c_str());
 		PQclear(res);

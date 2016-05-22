@@ -8,6 +8,7 @@ CREATE TABLE domains(
 	is_suspect boolean,
 	numeric_count integer,
 	alexa_degree integer,
+	readable_string_length integer,
 	is_in_whitelist boolean
 );
 
