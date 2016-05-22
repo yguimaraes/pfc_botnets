@@ -9,6 +9,8 @@ public:
 	void save(DnsQuery query){
 		if(!containsDomain(query.m_domain))
 			addDomain(query.m_domain);
+		if(!containsClient(query.m_client_ip))
+			addClient(query.m_client_ip);
 	}
 
 	void addDomain(string domain) {
@@ -28,6 +30,27 @@ public:
 		bool result = false;
 		string sSQL = "SELECT * FROM domains WHERE domain LIKE '";
 		sSQL.append(domain);
+		sSQL.append("';");
+		PGresult *res = PQexec(m_connection, sSQL.c_str());
+		if(PQntuples(res) > 0){
+			result=true;
+		}
+		PQclear(res);
+		return result;
+	}
+
+	void addClient(string client_ip) {
+		string sSQL = "INSERT INTO clients (client_ip) VALUES('";
+		sSQL.append(client_ip);
+		sSQL.append("');");
+		PGresult *res = PQexec(m_connection, sSQL.c_str());
+		PQclear(res);
+	}
+
+	bool containsClient(string client_ip){
+		bool result = false;
+		string sSQL = "SELECT * FROM clients WHERE client_ip LIKE '";
+		sSQL.append(client_ip);
 		sSQL.append("';");
 		PGresult *res = PQexec(m_connection, sSQL.c_str());
 		if(PQntuples(res) > 0){
