@@ -24,6 +24,7 @@ int main(){
 	cout << b.isInWhiteList() << endl;
 	cout << a.CalculateDomainLength() << endl;
 	cout << b.CalculateDomainLength() << endl;
+	cout << b.ReadableStringLength() << endl;
 	cout << c.ReadableStringLength() << endl;
 	cout << d.ReadableStringLength() << endl;
 	// unordered_set<string> a = unordered_set<string>();
