@@ -1,6 +1,7 @@
 #include "models/dns_query.h"
 #include "storages/query_storage.h"
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -19,11 +20,10 @@ public:
 
 	void ProcessDnsLog(){
         string request_line;
-    
         while (getline(dns_log_file, request_line)){
             if (request_line.empty())
                 continue;
-            DnsQuery current_query = DnsQuery(request_line);
+            DnsQuery current_query(request_line);
             query_storage->save(current_query);
         }
     }

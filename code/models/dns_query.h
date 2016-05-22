@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-
 using namespace std;
 
 class DnsQuery {
@@ -15,5 +14,5 @@ public:
 	string m_dns_server_ip;
 
 	string toString();
-	DnsQuery(string query_line);
+	DnsQuery(string request_line);
 };

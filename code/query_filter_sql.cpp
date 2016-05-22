@@ -1,14 +1,16 @@
 #include "query_filter.h"
-#include "storages/query_storage_sql.cpp"
+#include "storages/query_storage_sql.h"
 
 class QueryFilterSql: public QueryFilter{
 public:
-    QueryFilterSql(string path): QueryFilter(path){
-    	m_storage = QueryStorageSQL();
+    QueryFilterSql(): QueryFilter(){
+    	m_storage = new QueryStorageSQL();
     };
-
-protected:
-	void save(raw_fields query_data){
-
-	}
 };
+
+int main() {
+	QueryFilter* qf = new QueryFilterSql();
+	qf->ProcessLogs();
+	delete qf;
+	return 0;
+}

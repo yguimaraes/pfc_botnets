@@ -1,12 +1,11 @@
-#pragma once
-
 #include "dns_query.h"
 #include <string>
+#include <regex>
 
 using namespace std;
 
 string DnsQuery::toString(){
-	return date + "," + time + "," + client_ip + "," + client_port + "," + url + "," + package_record_type + "," + dns_server_ip;
+	return m_date + "," + m_time + "," + m_client_ip + "," + m_client_port + "," + m_url + "," + m_package_record_type + "," + m_dns_server_ip;
 }
 
 DnsQuery::DnsQuery(string request_line){
