@@ -7,30 +7,10 @@
 #include "domain_features_calculator.cpp"
 #include <fstream>
 #include <list>
-#include <regex>
 
 using namespace std;
 
 const string FILTERED_SUFIX = "(filtered)";
-
-raw_fields filter_fields(string request_line){
-    // ");//
-    raw_fields compiled_fields = raw_fields();
-    regex request_line_re("(\\d+-\\w+-\\d+) (\\d+:\\d+:\\d+.?\\d*) queries: info: client (\\d+\\.\\d+\\.\\d+\\.\\d+)#(\\d+): query: ([^ ]+) IN (\\w+) (?:\\+|-|-EDC) \\((\\d+\\.\\d+\\.\\d+\\.\\d+)\\)");
-    smatch request_line_match; //= sregex_iterator(request_line.begin(), request_line.end(), request_line_re);
-
-    regex_search(request_line, request_line_match, request_line_re);
-
-    compiled_fields.date = request_line_match[1];
-    compiled_fields.time = request_line_match[2];
-    compiled_fields.client_ip = request_line_match[3];
-    compiled_fields.client_port = request_line_match[4];
-    compiled_fields.url = request_line_match[5];
-    compiled_fields.package_record_type = request_line_match[6];
-    compiled_fields.dns_server_ip = request_line_match[7];
-    
-    return compiled_fields;
-}
 
 list<raw_fields> process_dns_log(string file_name){
     
