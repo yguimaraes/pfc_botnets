@@ -5,7 +5,7 @@
 using namespace std;
 
 string DnsQuery::toString(){
-	return m_date + "," + m_time + "," + m_client_ip + "," + m_client_port + "," + m_url + "," + m_package_record_type + "," + m_dns_server_ip;
+	return m_date + "," + m_time + "," + m_client_ip + "," + m_client_port + "," + m_domain + "," + m_type + "," + m_dns_server_ip;
 }
 
 DnsQuery::DnsQuery(string request_line){
@@ -18,7 +18,7 @@ DnsQuery::DnsQuery(string request_line){
     m_time = request_line_match[2];
     m_client_ip = request_line_match[3];
     m_client_port = request_line_match[4];
-    m_url = request_line_match[5];
-    m_package_record_type = request_line_match[6];
+    m_domain = request_line_match[5];
+    m_type = request_line_match[6];
     m_dns_server_ip = request_line_match[7];
 }
