@@ -1,30 +1,31 @@
 \chapter{Introdução}
-\section{Contextualização}
-As botnets são uma forma de \textit{malware} que apresentou um elevado crescimento, se tornando uma das maiores ameaças da área de segurança da informação. A detecção dessas redes se tornou um tópico muito importante entre os interessados em segurança, devido ao desafio que é realizar essa detecção já que as botnets são muito flexíveis e robustas, além de estarem sempre em processo de aprimoramento contínuo.
+As botnets, que são redes formadas por máquinas infectadas por alguma forma de \textit{malware}, apresentaram um elevado crescimento, se tornando uma das maiores ameaças da área de segurança da informação. A detecção dessas redes se tornou um tópico muito importante na área de segurança da informação, devido ao desafio que é realizar essa detecção. Pois, as botnets são muito flexíveis e robustas, além de estarem em processo de aprimoramento contínuo.
 
-Com a necessidade de realizar essa detecção mesmo com as mudanças realizadas no funcionamento das botnets ao longo do tempo, o emprego de técnicas de aprendizagem de máquina é muito promissor. Devido ao fato do tráfego das botnets serem relativamente pequenos quando comparado ao total da rede, inclusive por motivos de camuflagem, e características diferentes das de um usuário normal, esses fluxos das botnets podem ser identificados como uma anomalia. 
+Com a necessidade de realizar essa detecção, mesmo com as mudanças realizadas no funcionamento das botnets ao longo do tempo, o emprego de técnicas de aprendizagem de máquina é muito promissor, especialmente as técnicas de agrupamento. Porque é esperado, que os bots que formam as botnets, tenham comportamento diferente de usuários convencionais, e, dessa forma, espera-se que eles sejam agrupados em clusters menores dos formados pela massa de usuários normais.
 
-Levando em conta essas características, o presente trabalho busca desenvolver uma ferramenta para a detecção de botnets, utilizando as informações das consultas ao servidor DNS realizadas na rede para alimentar algoritmos de aprendizagem de máquina.
+Levando em conta essas características, o presente trabalho busca desenvolver uma ferramenta para a detecção de botnets, utilizando as informações das consultas ao servidor DNS realizadas na rede através de algoritmos de aprendizagem de máquina.
 
 \section{Objetivo}
-O objetivo deste trabalho é desenvolver e analisar uma ferramenta para detectar possíveis hospedeiros de bots em uma botnet, utilizando algoritmos de agrupamento que utilizarão dados de consultas de DNS realizadas. Para esta análise, serão utilizados logs de consulta com os hospedeiros previamente mapeados.
+O objetivo deste trabalho é desenvolver uma ferramenta para detectar possíveis hospedeiros de bots em uma botnet, reduzindo o trabalho humano utilizado na detecção das botnets. Isso será feito utilizando algoritmos de agrupamento, que utilizarão dados que serão calculados através das informações contidas em consultas de DNS realizadas. 
+
+Além disso, o desempenho dessa ferramenta será avaliado, utilizando as informações do log de DNS dos servidores do IME, para o qual já temos algumas máquinas infectadas previamente mapeadas.
 
 \section{Motivação}
-O crescimento e diversificação do uso da Internet, criaram o cenário ideal para o desenvolvimento das botnets, que são consideradas uma das maiores ameaças atuais na área de segurança da informação.
+O crescimento e diversificação do uso da Internet, criaram o cenário ideal para o desenvolvimento das botnets, que são consideradas uma das maiores ameaças atuais na área de segurança da informação\cite{ji2008botnet}.
 
 A detecção das botnets é um grande desafio, pois os atacantes estão sempre aprimorando o funcionamento dos bots, com isso os mecanismos atuais muitas vezes falham ao detectar novas implementações de botnets. Isso motivou o uso de algoritmos de agrupamento para serem utilizados na detecção de botnets, de forma que a ferramenta seja capaz de detectar inclusive botnets que eram desconhecidas. 
 
 \section{Justificativa}
-A justificativa desse trabalho é reduzir o trabalho manual de identificar possíveis botnets em uma rede, funcionando como um filtro que já informará com maior velocidade as máquinas suspeitas. Por isso, os algoritmos de agrupamento se destacam para auxiliar nesse processo, além de poder servir no futuro como um módulo de um sistema integrado de detecção de botnets\cite{silva2012arquitetura}.
+A justificativa desse trabalho é contribuir para a área de defessa cibernética, uma área de interesse do IME, apoiando à pesquisa com o conhecimento de características de consultas de DNS que podem ser usadas para realiar a detecção de botnets. Além disso, a ferramenta pode ser utilizado pelo Centro de Defesa Cibernética (CDCiber) ou servir como um módulo de um sistema integrado de detecção de botnets\cite{silva2012arquitetura}.
 
 \section{Metodologia}
 Este trabalho foi dividido em três fases principais: estudo teórico, preparação dos dados, implementação e análise e testes dos resultados. 
 
-Na etapa de estudo teórico foi feito um levantamento da funcionalidade das botnets e do funcionamento e aplicações dos algoritmos de máquina, com o objetivo de identificar vulnerabilidades e padrões nas botnets, para podermos selecionar características relevantes dos dados que possuímos de forma que a melhorar a performance do algoritmo.
+Na etapa de estudo teórico foi feito um levantamento da funcionalidade das botnets e do funcionamento e aplicações dos algoritmos de aprendizagem de máquina, com o objetivo de identificar vulnerabilidades e padrões nas botnets, motivando a seleção de características relevantes dos dados utilizados, de forma a melhorar a performance do algoritmo.
 
-Na etapa seguinte, foi feito um levantamento das \textit{features} que iríamos utilizar. De posse dessa \textit{features}, foi implementado um programa para realizar a extração automática dessas \textit{features} da base de dados que utilizamos.
+Na etapa seguinte, foi feito um levantamento das características canditadas a serem utilizadas pelo algoritmo da ferramenta. De posse dessas características, foi implementado um programa para realizar a extração automática dessas características da base de dados que utilizamos.
 
-As próximas etapas serão a implementação das técnicas de agrupamento nos dados tratados, por fim será feita uma análise, para identificar a técnica mais adequada e possíveis refinamentos na ferramenta.
+A próxima etapa será a implementação das técnicas de agrupamento nos dados tratados, por fim será feita uma análise, para identificar a técnica mais adequada e possíveis refinamentos na ferramenta.
 
 \section{Estrutura}
-Este trabalho é composto por seis capítulos, iniciando com esta introdução. No capítulo 2 é feito um estudo teórico sobre botnets para identificar o tipo de \textit{malware} que desejamos identificar. Em seguida, no capítulo 3 é realizado um estudo sobre algoritmos de aprendizagem de máquina dando ênfase nos algoritmos de agrupamento, que será a estratégia de algoritmo usada neste trabalho. Em seguida, no capítulo 4 são explicados os procedimentos e a motivação que levaram à forma de tratamento dos dados. No capítulo 5, é mostrado o cronograma que planejamos seguir até a conclusão do trabalho. Ao final, no capítulo 6, estão as conclusões realizadas até o presente momento.
+Este trabalho é composto por seis capítulos, iniciando com esta introdução. No capítulo 2 é feito um estudo teórico sobre botnets para identificar o tipo de \textit{malware} que desejamos identificar. Em seguida, no capítulo 3 é realizado um estudo sobre algoritmos de aprendizagem de máquina dando ênfase nos algoritmos de agrupamento, que será a estratégia usada neste trabalho. Em seguida, no capítulo 4 são explicados os procedimentos e a motivação que levaram à forma de tratamento dos dados. No capítulo 5, é mostrado o cronograma que planejamos seguir até a conclusão do trabalho. Ao final, no capítulo 6, estão as conclusões realizadas até o presente momento.
