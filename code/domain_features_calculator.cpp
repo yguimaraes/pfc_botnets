@@ -111,7 +111,7 @@ public:
         if (white_list.empty()){
             populate(white_list_file);
         }
-        return white_list.count(domain_name) == 0;
+        return white_list.count(domain_name) > 0;
     }
     
 };
