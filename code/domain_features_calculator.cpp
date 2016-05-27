@@ -58,10 +58,6 @@ public:
         return false;
     }
 
-    string getDomain(){
-        return domain_name;
-    }
-
     int CalculateNumberOfDigits() {
         int number_of_digits = 0;
         for(string::iterator it=domain_name.begin(); it!=domain_name.end(); ++it) {
