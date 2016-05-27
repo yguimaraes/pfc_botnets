@@ -2,21 +2,12 @@
 
 using namespace std;
 #include <iostream>
-#include "types/raw_fields.h"
 
 
 class ClientManager{
-	raw_fields data;
 	int number_of_digits;
 
 public:
-	void CalculateNumberOfDigits() {
-		number_of_digits = 0;
-		for(int i=0; i<data.url.size(); i++) {
-			if(isdigit(data.url[i]))
-				number_of_digits++;
-		}
-	}
 	virtual int DnsRequestNumber(string ip_address) {
 		// TODO
 		return 0;
