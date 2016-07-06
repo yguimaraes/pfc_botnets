@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <unordered_set>
+#include <iostream>
 
 using namespace std;
 
@@ -12,7 +13,19 @@ class QueryExecuter {
     unordered_set<string> whitelist;
 public:
     QueryExecuter(string path, QueryStorage* qs){
-    	dns_log_file.open(path);
+        dns_log_file.exceptions( std::ifstream::failbit | std::ifstream::badbit );
+        
+        try {
+    	
+           dns_log_file.open(path);
+        
+        } catch(std::ifstream::failure e) {
+        
+            cerr << "Failed to open file: " << path << endl << "check the path"
+            " on code/query_filter.h" << endl;
+            exit(1);
+        }
+        
         whitelist.insert("200.20.120.45");
         whitelist.insert("200.20.189.41");
         whitelist.insert("200.20.218.11");
