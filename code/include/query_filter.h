@@ -4,7 +4,7 @@
 
 class QueryFilter{
 protected:
-    QueryStorageSQL* m_storage;
+    QueryStorage* m_storage;
 public:
 
     void ProcessLogs();
