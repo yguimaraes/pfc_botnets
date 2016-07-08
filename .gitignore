@@ -170,3 +170,8 @@ TSWLatexianTemp*
 # Private info
 */private/*
 private/*
+
+# Compiled files
+*/build/*
+
+*.run
