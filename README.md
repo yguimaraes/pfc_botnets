@@ -14,6 +14,13 @@ Para iniciar é necessário criar um banco de dados PostgreSQL. Certifique-se qu
 1. Crie o banco de dados: `createdb botnets_pfc`
 2. Execute o script: `psql botnets_pfc -f"./code/db/schema.sql"`
 
-Agora pode se compilar e executar o projeto
+Para compilar basta executar
 
-Para compilar basta executar `clang++ -lpq query_filter_sql.cpp models/dns_query.cpp -o query_filter_sql.bin`
+1. `cd code`
+2. `make`
+
+Para iniciar execute `./dataloader.run`
+
+##Nota importante:
+
+O makefile vai compilar qualquer arquivo na pasta `/src` até 1 pastas de profundidade partindo da `/src` e vai incluir os headers da pasta `/include`
