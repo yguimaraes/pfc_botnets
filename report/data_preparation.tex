@@ -1,26 +1,56 @@
 \chapter{Preparação Dos Dados}
 
 \section{Levantamento das Possíveis Features Relevantes}
-De posse das informações apresentadas nos capítulos anteriores é possível definir o problema que esse trabalho se propõe a resolver e, em linhas gerais, como ele será abordado.
+De posse das informações apresentadas, nos capítulos anteriores, é possível definir o problema que esse trabalho se propõe a resolver e, em linhas gerais, como ele será abordado.
 
-O objetivo desse trabalho é a partir dos registros de um servidor DNS, acusar quais máquinas na rede são suspeitos de pertencer a uma botnet e merecem atenção para uma investigação. A caracterização dos IPs será feita através da análise das características da iteração que seriam
+O objetivo desse trabalho é a partir dos registros de um servidor DNS, acusar quais máquinas na rede são suspeitos de pertencer a uma botnet e merecem atenção para uma investigação. A caracterização dos IPs será feita através da análise das características da iteração que seriam.
+
+Afim de levantar essas características três comportamentos divergentes do uso comum foram observados: a escolha dos domínios, o comportamento de máquina, os domínios visitados em comum.
+
+\subsection{Escolha dos Domínios}
+Domínios gerados automaticamente é uma prática comum entre as redes de botnets. Essa prática gera nomes provavelmente não inteligíveis podendo inclusive trazer números. Além disso, por conveniência é possível que os domínios criados tendem a ter o mesmo número caractéres. Por outro lado, apenas 7.3\% dos domínios dos um milhão primeiros domínios da Alexa contem número e que o tamanho do domínio de um usuário comum não segue nenhum padrão específico.
+
+Não há garantia que essa feature é sempre efetiva, dado que o atacante pode gerar domínios de tamanho variável e evitar números ao gerar o domínio, por isso após a realização dos experiementos será possível confirmar ou não essa hipótese.
+
+Para explorar essas propriedades foram propostas as seguintes caracteríticas
 
 \begin{itemize}
-\item Quantidade de consultas a domínios com sufixos suspeitos;
-\item Quantidade de consultas a domínios com alta quantidade de números;
-%\item Quantidade de domínios consultadas com string legível pequena;
-\item Quantidade de consultas a domínios com baixo grau no Alexa;
-\item Quantidade total de consultas realizadas;
-\item Média do comprimento de domínios consultados;
-\item Desvio Padrão dos comprimentos dos domínios consultados;
-\item Média do intervalo entre as consultas;
-\item Desvio padrão dos intervalos entre consultas;
-\item Total de consultas que resultaram em NXDOMAIN;
-\item Porcentagem de consultas que resultaram em NXDOMAIN;
-\item Quantidade de consultas para cada tipo de DNS;
-\item Porcentagem de consultas para cada tipo de DNS;
-\item Tamanho do menor clique que a máquina participa;
-\item Tamanho médio dos cliques em que a máquina participa.
+\item Quantidade de consultas a domínios com alta quantidade de números
+\item Média do comprimento de domínios consultados
+\item Desvio Padrão dos comprimentos dos domínios consultados
 \end{itemize}
+
+\subsection{Comportamento de Máquina}
+
+O tempo de reação de um humano a uma requisição sem sucesso não pode ser de décimos de segundo, por mera limitação de reflexo. Qualquer sinal de uso que aparente como uma máquina como essa deve ser considerada suspeita. Além disso, é possível que a máquina acabe por visitar uma quantidade de domínios maior do que o normal. Esse tipo de feature necessita ser validada, pois o comportamento de máquina pode ser mascarado.
+
+Para explorar essas propriedades foram propostas as seguintes caracteríticas
+
+\begin{itemize}
+\item Média do intervalo entre as consultas
+\item Desvio padrão dos intervalos entre consultas
+\item Quantidade total de consultas realizadas
+\end{itemize}
+
+\subsection{Domínio Visitados em Comum}
+Do fato de que domínios suspeitos são acessados por poucas máquinas: As botnets costumam utilizar algoritmos de geração de domínios para tentar estabelecer uma comunicação com o C\&C. Devido a isso, espera-se que os bots tentem acessar domínios que dificilmente serão procurados por máquinas normais, além do que, se a máquina infectada procura o centro de comando e controle, espera-se que muito dos domínios consultados sejam desse forma, pouco procurado por outras máquinas.
+
+Para analisar essa propriedade, recomenda-se realizar um pré-processamento, que analisa para cada domínio consultado, por quantas máquinas diferentes ele foi consultado. Essa quantidade de máquinas que requisitou um domínio específico chamaremos de grau de requisição do domínio.
+
+Dessa forma, acredita-se que as informações relativas ao grau dos domínios consultados pela máquina podem ser úteis para identificar um comportamento suspeito em uma máquina. Foram levantadas as seguintes característica:
+
+\begin{itemize}
+\item Grau de requisição mínimo entre os graus dos domínios consultados pela máquina
+\item Média dos graus de requisição dos domínios consultados pela máquina
+\item Desvio Padrão dos graus de requisição dos domínios consultados pela máquina
+\end{itemize}
+
+\subsection{Experimentos}
+
+Não se tem garantia alguma de alteração no padrão dos tipos de consulta. Porém, esse dado é de fácil acesso e seu estudo pode evidenciar a exploração de alguma outra fragilidade nas requisições DNS.
+
+\begin{itemize}
+\item Quantidade de consultas para cada tipo de DNS
+\item Porcentagem de consultas para cada tipo de DNS
 
 Após o levantamento de todas as máquinas da rede, é feita a construção do modelo probabilístico gaussiano e de acordo após a escolha da probabilidade mínima dos exemplos normais, o sistema estará pronto para decidir se uma nova máquina poderia pertencer ou não a uma botnet.
