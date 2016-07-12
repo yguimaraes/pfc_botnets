@@ -11,5 +11,5 @@ public:
 
     ~DomainExecuter();
 
-	void CalcuteDomainDegrees();
+	void CalculateDomainDegrees();
 };

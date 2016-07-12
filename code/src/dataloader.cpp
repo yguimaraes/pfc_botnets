@@ -6,6 +6,9 @@ int main(int argc, char const *argv[]){
     QueryFilter* qf = new QueryFilterSql();
     qf->ProcessLogs();
     delete qf;
+    DomainExecuter* de = new DomainExecuterSql();
+    de->CalculateDomainDegrees();
+    delete df;
     ClientExecuter* ce = new ClientExecuter("sql");
     ce->update();
     delete ce;
