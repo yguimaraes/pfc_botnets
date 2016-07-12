@@ -13,7 +13,7 @@ public:
 	virtual void save(DnsQuery query) = 0;
 };
 
-class QueryStorageSQL: public QueryStorage {
+class QueryStorageSql: public QueryStorage {
 private:
 	PGconn* m_connection;
 public:
@@ -27,7 +27,7 @@ public:
 
 	bool containsClient(string client_ip);
 
-	QueryStorageSQL();
+	QueryStorageSql();
 
-	~QueryStorageSQL();
+	~QueryStorageSql();
 };
