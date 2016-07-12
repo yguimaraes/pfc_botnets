@@ -1,4 +1,4 @@
-#CREATE DB
+-- CREATE DB
 
 CREATE DATABASE botnets_pfc;
 
@@ -41,7 +41,7 @@ CREATE TABLE dns_queries(
 );
 
 
-#CLEAR DB
+-- CLEAR DB
 
 DELETE FROM dns_queries;
 DELETE FROM domains;

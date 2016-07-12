@@ -1,6 +1,6 @@
-#include "dns_query.h"
 #include <string>
 #include <regex>
+#include "dns_query.h"
 
 using namespace std;
 
