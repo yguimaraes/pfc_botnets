@@ -3,5 +3,5 @@
 
 
 QueryFilterSql::QueryFilterSql(): QueryFilter(){
-	m_storage = new QueryStorageSQL();
+	m_storage = new QueryStorageSql();
 };

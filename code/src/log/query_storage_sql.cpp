@@ -3,7 +3,7 @@
 #include "domain_features_calculator.h"
 
 
-void QueryStorageSQL::save(DnsQuery query){
+void QueryStorageSql::save(DnsQuery query){
 	if(!containsDomain(query.m_domain))
 		addDomain(query.m_domain);
 	if(!containsClient(query.m_client_ip))
@@ -19,7 +19,7 @@ void QueryStorageSQL::save(DnsQuery query){
 	PQclear(res);
 }
 
-void QueryStorageSQL::addDomain(string domain) {
+void QueryStorageSql::addDomain(string domain) {
 	DomainFeaturesCalculator dfc(domain);
 	string sSQL = "INSERT INTO domains (domain,length,numeric_count,is_in_whitelist, readable_string_length) VALUES('";
 	sSQL.append(dfc.getDomain());
@@ -36,7 +36,7 @@ void QueryStorageSQL::addDomain(string domain) {
 	PQclear(res);
 }
 
-bool QueryStorageSQL::containsDomain(string domain){
+bool QueryStorageSql::containsDomain(string domain){
 	bool result = false;
 	string sSQL = "SELECT * FROM domains WHERE domain LIKE '";
 	sSQL.append(domain);
@@ -49,7 +49,7 @@ bool QueryStorageSQL::containsDomain(string domain){
 	return result;
 }
 
-void QueryStorageSQL::addClient(string client_ip) {
+void QueryStorageSql::addClient(string client_ip) {
 	string sSQL = "INSERT INTO clients (client_ip) VALUES('";
 	sSQL.append(client_ip);
 	sSQL.append("');");
@@ -57,7 +57,7 @@ void QueryStorageSQL::addClient(string client_ip) {
 	PQclear(res);
 }
 
-bool QueryStorageSQL::containsClient(string client_ip){
+bool QueryStorageSql::containsClient(string client_ip){
 	bool result = false;
 	string sSQL = "SELECT * FROM clients WHERE client_ip LIKE '";
 	sSQL.append(client_ip);
@@ -70,13 +70,13 @@ bool QueryStorageSQL::containsClient(string client_ip){
 	return result;
 }
 
-QueryStorageSQL::QueryStorageSQL(){
+QueryStorageSql::QueryStorageSql(){
 	m_connection = PQconnectdb(
 		"dbname=botnets_pfc hostaddr=127.0.0.1 port=5432"
 	);
 
 }
 
-QueryStorageSQL::~QueryStorageSQL(){
+QueryStorageSql::~QueryStorageSql(){
 	PQfinish(m_connection);
 }
