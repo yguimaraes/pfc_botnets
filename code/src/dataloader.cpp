@@ -1,5 +1,7 @@
 #include "client_executer.h"
 #include "query_filter.h"
+#include "domain_executer.h"
+#include "domain_executer_sql.h"
 
 int main(int argc, char const *argv[]){
 
@@ -7,10 +9,10 @@ int main(int argc, char const *argv[]){
     qf->ProcessLogs();
     delete qf;
     DomainExecuter* de = new DomainExecuterSql();
-    de->CalculateDomainDegrees();
-    delete df;
+    //de->CalculateDomainDegrees();
+    delete de;
     ClientExecuter* ce = new ClientExecuter("sql");
-    ce->update();
+    //ce->update();
     delete ce;
     return 0;
 }

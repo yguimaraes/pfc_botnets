@@ -1,6 +1,6 @@
-#include "domain_executer.h"
+#include "domain_executer_sql.h"
 #include "domain_storage.h"
 
 DomainExecuterSql::DomainExecuterSql(): DomainExecuter(){
-	m_storage = new DomainExecuterSql();
+	m_domain_storage = new DomainStorageSql();
 };

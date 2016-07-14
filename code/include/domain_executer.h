@@ -5,9 +5,10 @@
 using namespace std;
 
 class DomainExecuter {
-    DomainStorage* domain_storage;
+protected:
+    DomainStorage* m_domain_storage;
 public:
-    DomainExecuter(DomainStorage* qs);
+    DomainExecuter();
 
     ~DomainExecuter();
 
