@@ -28,7 +28,7 @@ void QueryFilter::ProcessLogs(){
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120403-log-dns-ime.txt",
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120404-log-dns-ime.txt"
     };
-    for(int i=0; i<24; i++){   
+    for(int i=0; i<1; i++){   
         printf("Processing file %d \n", i);   
         QueryExecuter query_executer(files[i], m_storage);
         query_executer.ProcessDnsLog();

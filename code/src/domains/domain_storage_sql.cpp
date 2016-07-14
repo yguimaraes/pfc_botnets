@@ -3,6 +3,8 @@
 #include "domain_features_calculator.h"
 
 void DomainStorageSql::save(DnsQuery query){
+	string IMPORTANT_QUERY = "SELECT domains.domain, count(dns_queries.id) as inner_degree FROM domains INNER JOIN dns_queries ON domains.domain=dns_queries.domain GROUP BY domains.domain ORDER BY inner_degree ASC;"
+
 	if(!containsDomain(query.m_domain))
 		addDomain(query.m_domain);
 	if(!containsClient(query.m_client_ip))
