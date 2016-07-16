@@ -46,7 +46,14 @@ build/src/%.o: src/%.cpp
 
 # DO NOT DELETE
 
-build/src/features/client_manager.o: include/client_manager.h
+build/src/client/client_executer.o: include/client_executer.h
+build/src/client/client_executer.o: include/client_storage.h
+build/src/client/client_executer.o: include/client_info.h
+build/src/client/client_executer.o: include/client_calculator.h
+build/src/client/client_storage.o: include/client_storage.h
+build/src/client/client_storage.o: include/client_info.h
+build/src/features/client_calculator.o: include/client_calculator.h
+build/src/features/client_calculator.o: include/client_info.h
 build/src/features/domain_features_calculator.o: include/domain_features_calculator.h
 build/src/log/dns_query.o: include/dns_query.h
 build/src/log/query_executer.o: include/dns_query.h include/query_executer.h
@@ -58,5 +65,6 @@ build/src/log/query_filter_sql.o: include/query_storage.h include/dns_query.h
 build/src/log/query_storage_sql.o: include/query_storage.h
 build/src/log/query_storage_sql.o: include/dns_query.h
 build/src/log/query_storage_sql.o: include/domain_features_calculator.h
-build/src/dataloader.o: include/query_filter.h include/query_storage.h
-build/src/dataloader.o: include/dns_query.h
+build/src/dataloader.o: include/client_executer.h include/client_storage.h
+build/src/dataloader.o: include/client_info.h include/query_filter.h
+build/src/dataloader.o: include/query_storage.h include/dns_query.h
