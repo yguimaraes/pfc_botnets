@@ -8,5 +8,6 @@ int main(int argc, char const *argv[]){
     delete qf;
     ClientExecuter* ce = new ClientExecuter("sql");
     ce->update();
+    delete ce;
     return 0;
 }

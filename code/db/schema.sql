@@ -14,22 +14,22 @@ CREATE TABLE domains(
 
 CREATE TABLE clients(
 	client_ip inet PRIMARY KEY,
-	count_suspect_domain_requests integer,
-	count_numeric_domain_requests integer,
-	count_low_level_domain_requests integer,
-	count_total_requests integer,
-	domain_length_average real,
-	domain_length_std_deviation real,
-	dns_request_interval_average real,
-	dns_request_interval_std_deviation real,
-	count_dns_cname_requests integer,
-	percentage_dns_cname_requests real,
-	count_dns_txt_requests integer,
-	percentage_dns_txt_requests real,
-	count_dns_a_requests integer,
-	percentage_dns_a_requests real,
-	count_dns_mx_requests integer,
-	percentage_dns_mx_requests real
+	count_domain_with_numbers integer,
+	average_domain_length real,
+	std_domain_length real,
+	average_request_interval real,
+	std_request_interval real,
+	count_request integer,
+	average_click_size real,
+	minimum_click_size integer,
+	count_request_cname integer,
+	percentage_request_cname real,
+	count_request_a integer,
+	percentage_request_a real,
+	count_request_mx integer,
+	percentage_request_mx real,
+	count_request_txt integer,
+	percentage_request_txt real
 );
 
 CREATE TABLE dns_queries(
