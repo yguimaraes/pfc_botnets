@@ -1,7 +1,7 @@
 \chapter{Preparação Dos Dados}
 
 \section{Levantamento das Possíveis Features Relevantes}
-De posse das informações apresentadas nos capítulos anteriores é possível definir o problema que esse trabalho se propõe a resolver e, em linhas gerais, como ele será abordado.
+De posse das informações apresentadas nos capítulos anteriores, é possível definir o problema que esse trabalho se propõe a resolver e, em linhas gerais, como ele será abordado.
 
 O objetivo desse trabalho é a partir dos registros de um servidor DNS, acusar quais máquinas na rede são suspeitos de pertencer a uma botnet e merecem atenção para uma investigação. A caracterização dos IPs será feita através da análise das características da iteração que seriam.
 
@@ -37,13 +37,13 @@ Do fato de que domínios suspeitos são acessados por poucas máquinas: As botne
 
 Para analisar essa propriedade, recomenda-se realizar um pré-processamento, que analisa para cada domínio consultado, por quantas máquinas diferentes ele foi consultado. Essa quantidade de máquinas que requisitou um domínio específico chamaremos de grau de requisição do domínio.
 
-Dessa forma, acredita-se que as informações relativas ao grau dos domínios consultados pela máquina podem ser úteis para identificar um comportamento suspeito em uma máquina. Foram levantas as possíveis features: Grau de requisição mínimo entre os graus dos domínios consultados, média e desvio padrão dos graus de requisição dos domínios consultados.
-
-Para explorar essas propriedades foram propostas as seguintes caracteríticas
+Dessa forma, acredita-se que as informações relativas ao grau dos domínios consultados pela máquina podem ser úteis para identificar um comportamento suspeito em uma máquina. Foram levantadas as seguintes característica:
 
 \begin{itemize}
-\item Tamanho do menor clique que a máquina participa
-\item Tamanho médio dos cliques em que a máquina participa
+\item Grau de requisição mínimo entre os graus dos domínios consultados pela máquina
+\item Média dos graus de requisição dos domínios consultados pela máquina
+\item Desvio Padrão dos graus de requisição dos domínios consultados pela máquina
+
 \end{itemize}
 
 \subsection{Experimentos}
@@ -54,6 +54,5 @@ Não se tem garantia alguma de alteração no padrão dos tipos de consulta. Por
 \item Quantidade de consultas para cada tipo de DNS
 \item Porcentagem de consultas para cada tipo de DNS
 \end{itemize}
-
 
 Após o levantamento de todas as máquinas da rede, é feita a construção do modelo probabilístico gaussiano e de acordo após a escolha da probabilidade mínima dos exemplos normais, o sistema estará pronto para decidir se uma nova máquina poderia pertencer ou não a uma botnet.
