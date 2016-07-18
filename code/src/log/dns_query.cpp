@@ -9,7 +9,7 @@ string DnsQuery::toString(){
 }
 
 DnsQuery::DnsQuery(string request_line){
-    regex request_line_re("(\\d+-\\w+-\\d+) (\\d+:\\d+:\\d+.?\\d*) queries: info: client (\\d+\\.\\d+\\.\\d+\\.\\d+)#(\\d+): query: ([^ ]+) IN (\\w+) [\\+|-](?:EDC||ED|EC|E) \\((\\d+\\.\\d+\\.\\d+\\.\\d+)\\)");
+    regex request_line_re("(\\d+-\\w+-\\d+) (\\d+:\\d+:\\d+.?\\d*) queries: info: client (\\d+\\.\\d+\\.\\d+\\.\\d+)#(\\d+): query: ([^ ]+) IN (\\w+) [\\+|-](?:EDC||ED|EC|E|T) \\((\\d+\\.\\d+\\.\\d+\\.\\d+)\\)");
     smatch request_line_match; //= sregex_iterator(request_line.begin(), request_line.end(), request_line_re);
 
     regex_search(request_line, request_line_match, request_line_re);
