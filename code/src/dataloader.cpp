@@ -12,7 +12,7 @@ int main(int argc, char const *argv[]){
     de->CalculateDomainDegrees();
     delete de;
     ClientExecuter* ce = new ClientExecuter("sql");
-    //ce->update();
+    ce->update();
     delete ce;
     return 0;
 }
