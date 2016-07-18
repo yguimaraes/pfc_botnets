@@ -43,6 +43,15 @@ void QueryExecuter::ProcessDnsLog(){
         DnsQuery current_query(request_line);
         if(whitelist.count(current_query.m_client_ip) == 0){
             query_storage->save(current_query);
+            try{
+                DnsQuery current_query(request_line);
+                if(whitelist.count(current_query.m_client_ip) == 0){
+                    query_storage->save(current_query);
+                    }
+                }
+            catch(std::runtime_error &e){
+                printf("%s\n", e.what());
+            }
         }
     }
 }

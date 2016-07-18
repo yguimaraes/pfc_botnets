@@ -21,4 +21,7 @@ DnsQuery::DnsQuery(string request_line){
     m_domain = request_line_match[5];
     m_type = request_line_match[6];
     m_dns_server_ip = request_line_match[7];
+    
+    if(m_domain.empty())
+        throw std::runtime_error("Couldn't match: '" + request_line + "'");
 }
