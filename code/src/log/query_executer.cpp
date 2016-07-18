@@ -7,7 +7,7 @@
 using namespace std;
 
 QueryExecuter::QueryExecuter(string path, QueryStorage* qs){
-    dns_log_file.exceptions( std::ifstream::failbit | std::ifstream::badbit );
+    dns_log_file.exceptions(std::ifstream::badbit );
     
     try {
 	
@@ -35,7 +35,9 @@ QueryExecuter::~QueryExecuter(){
 
 void QueryExecuter::ProcessDnsLog(){
     string request_line;
+    int i = 0;
     while (getline(dns_log_file, request_line)){
+        i++;
         if (request_line.empty())
             continue;
         DnsQuery current_query(request_line);

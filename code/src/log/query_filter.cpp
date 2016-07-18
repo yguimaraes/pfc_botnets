@@ -9,6 +9,7 @@ void QueryFilter::ProcessLogs(){
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120227-log-dns-ime.txt",
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120228-log-dns-ime.txt",
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120229-log-dns-ime.txt",
+        "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120311-log-dns-ime.txt",
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120312-log-dns-ime.txt",
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120313-log-dns-ime.txt",
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120314-log-dns-ime.txt",
@@ -28,7 +29,9 @@ void QueryFilter::ProcessLogs(){
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120403-log-dns-ime.txt",
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120404-log-dns-ime.txt"
     };
-    for(int i=0; i<1; i++){   
+    int begin = 6;
+    int num_files = 1;
+    for(int i=begin; i < begin+num_files; i++){   
         printf("Processing file %d \n", i);   
         QueryExecuter query_executer(files[i], m_storage);
         query_executer.ProcessDnsLog();

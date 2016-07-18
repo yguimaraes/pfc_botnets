@@ -41,10 +41,15 @@ CREATE TABLE dns_queries(
 	type varchar(30)
 );
 
-
 -- CLEAR DB
 
 DELETE FROM dns_queries;
 DELETE FROM domains;
 DELETE FROM clients;
 SELECT SETVAL((SELECT pg_get_serial_sequence('dns_queries', 'id')), 1, false);
+
+-- DELETE DB
+
+DROP TABLE dns_queries;
+DROP TABLE domains;
+DROP TABLE clients;
