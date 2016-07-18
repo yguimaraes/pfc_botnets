@@ -9,7 +9,8 @@ CREATE TABLE domains(
 	numeric_count integer,
 	alexa_degree integer,
 	readable_string_length integer,
-	is_in_whitelist boolean
+	is_in_whitelist boolean,
+	requisition_degree integer
 );
 
 CREATE TABLE clients(
