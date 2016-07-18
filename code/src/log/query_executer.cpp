@@ -7,7 +7,7 @@
 using namespace std;
 
 QueryExecuter::QueryExecuter(string path, QueryStorage* qs){
-    dns_log_file.exceptions(std::ifstream::badbit );
+    dns_log_file.exceptions( std::ifstream::failbit | std::ifstream::badbit );
     
     try {
 	
@@ -27,6 +27,7 @@ QueryExecuter::QueryExecuter(string path, QueryStorage* qs){
     whitelist.insert("200.20.188.117");
 
 	query_storage = qs;
+    m_path = path;
 };
 
 QueryExecuter::~QueryExecuter(){
@@ -36,13 +37,12 @@ QueryExecuter::~QueryExecuter(){
 void QueryExecuter::ProcessDnsLog(){
     string request_line;
     int i = 0;
-    while (getline(dns_log_file, request_line)){
-        i++;
-        if (request_line.empty())
-            continue;
-        DnsQuery current_query(request_line);
-        if(whitelist.count(current_query.m_client_ip) == 0){
-            query_storage->save(current_query);
+    try{
+        while (getline(dns_log_file, request_line)){
+            i++;
+            if (!i%10000 && i > 0){
+                printf("%d\n", i);
+            }
             try{
                 DnsQuery current_query(request_line);
                 if(whitelist.count(current_query.m_client_ip) == 0){
@@ -53,5 +53,7 @@ void QueryExecuter::ProcessDnsLog(){
                 printf("%s\n", e.what());
             }
         }
+    } catch(std::ifstream::failure e){
+        printf("Finished processing file: '%s'\n", m_path.c_str());
     }
 }
