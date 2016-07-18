@@ -9,7 +9,7 @@ int main(int argc, char const *argv[]){
     qf->ProcessLogs();
     delete qf;
     DomainExecuter* de = new DomainExecuterSql();
-    //de->CalculateDomainDegrees();
+    de->CalculateDomainDegrees();
     delete de;
     ClientExecuter* ce = new ClientExecuter("sql");
     //ce->update();
