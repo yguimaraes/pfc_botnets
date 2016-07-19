@@ -101,8 +101,6 @@ void ClientStorageSql::save(ClientInfo * client_info){
 	sSQL.append("')");
 	sSQL.append(";");
 
-	printf("%s\n", sSQL.c_str());
-
 	PGresult *res = PQexec(m_connection, sSQL.c_str());
 	PQclear(res);
 }

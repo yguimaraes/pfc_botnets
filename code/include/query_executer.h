@@ -12,6 +12,7 @@ class QueryExecuter {
     ifstream dns_log_file;
     QueryStorage* query_storage;
     unordered_set<string> whitelist;
+    string m_path;
 public:
     QueryExecuter(string path, QueryStorage* qs);
 
