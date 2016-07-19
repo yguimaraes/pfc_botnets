@@ -1,0 +1,41 @@
+\chapter{Cronograma}
+Embora o objetivo do trabalho seja o desenvolvimento de um projeto e não pesquisa, foi preciso começar por um intenso estudo do problema que queríamos resolver, ou seja das botnets. Isso é uma etapa importante de um projeto de aprendizagem de máquina, pois permite uma melhor identificação de quais \textit{features} serão mais relevantes.
+
+Em seguida, foi feito um estudo dos algoritmos de \textit{clustering} existentes e os objetivos de cada técnica.
+
+Após esses estudos, começa a implementação do sistema detector de botnets. A primeira etapa é desenvolver um tratamento automatizado dos dados obtidos pela coleta dos logs DNS, já que o objetivo final é de que esse tratamento seja feito diariamente. Depois serão implementados algoritmos de agrupamento que usarão os dados tratados para identificar padrões de botnets no log DNS coletado. Por fim, os resultados dessas técnicas serão testados e analisados e servirão de motivação para possíveis refinamentos nos algoritmos.
+
+Durante essas tarefas, desenvolveremos também os relatórios e apresentações para as seguintes avaliações:
+
+\begin{itemize}  
+\item Verificação Especial em Maio,
+\item Verificação Corrente em Julho,
+\item Verificação Final em Setembro.
+\end{itemize}
+
+\begin{landscape}
+\begin{figure}
+\centering
+\begin{ganttchart}[
+	hgrid,
+	vgrid,
+	x unit=1.8cm,
+	compress calendar,
+    bar/.append style={fill=green!40},
+	time slot format=isodate-yearmonth
+]{2016-02}{2016-09}
+\gantttitlecalendar{year, month=shortname} \\
+\ganttbar{Estudo de Botnets}{2016-02}{2016-02} \\
+\ganttbar{Estudo de \textit{Clustering}}{2016-02}{2016-03} \\
+\ganttbar{Escolha das possíveis \textit{features}}{2016-02}{2016-03} \\
+\ganttbar{Preparação dos Dados}{2016-03}{2016-04} \\
+\ganttbar{Preparar Relatório e Apresentação VE}{2016-04}{2016-05} \\
+\ganttbar{Selecionar e Implementar Algoritmos de \textit{Clustering}}{2016-06}{2016-07} \\
+\ganttbar{Preparar Relatório e Apresentação VC}{2016-07}{2016-07} \\
+\ganttbar{Teste e Análise de Resultados}{2016-08}{2016-09} \\
+\ganttbar{Refinar Algoritmos}{2016-08}{2016-09} \\
+\ganttbar{Preparar Relatório e Apresentação VF}{2016-09}{2016-09} \\
+\end{ganttchart}
+\caption[Cronograma]{Cronograma} \label{fig:cronograma}
+\end{figure}
+\end{landscape}

@@ -1,0 +1,136 @@
+%%
+%
+% ARQUIVO: pre-texto.tex
+%
+% VERSÃO: 1.0
+% DATA: Maio de 2016
+% AUTOR: Coordenação de Trabalhos Especiais SE/8
+% 
+%  Arquivo tex para a criação da parte pré-textual do documento de Projeto de Fim de Curso.
+%
+%%
+
+
+% -----
+% PÁGINA DE CAPA DO DOCUMENTO DE PFC
+% -----
+\makecapa
+
+% -----
+% PÁGINA DE TÍTULO DO PFC
+% -----
+\prepareadvisors
+\maketitle
+
+% -----
+% PÁGINA DE CRÉDITOS DO DOCUMENTO DE PFC
+% -----
+\makecredits
+
+% -----
+% PÁGINA DE FOLHA DE ASSINATURAS
+% -----
+\preparemembers
+\approvalpage
+
+% -----
+% PÁGINA DE DEDICATÓRIA (OPCIONAL, ie. pode remover toda a página)
+% -----
+%%% DEDICATÓRIA - PREENCHER...
+\dedicatoria{%
+Ao Instituto Militar de Engenharia, alicerce da minha formação e aperfeiçoamento.
+}%
+\makededication
+
+% -----
+% PÁGINA DE AGRADECIMENTOS (OPCIONAL, ie. pode remover toda a página)
+% -----
+%%% AGRADECIMENTOS - PREENCHER...
+\agradecimentos{%
+Agradeço a todas as pessoas que me incentivaram, apoiaram e possibilitaram esta oportunidade de ampliar meus horizontes. \\
+\indent
+Meus familiares, cônjuge e mestres.\\
+\indent
+Em especial ao meu Professor Orientador Dr. Antonio José Reis e ao Professor Co-orientador Dr. Joel Duarte Silva, por suas disponibilidades e atenções.
+}%
+\makethanks
+
+% -----
+% PÁGINA DE EPÍGRAFE (OPCIONAL, ie. pode remover toda a página)
+% -----
+%%% EPÍGRAFE - PREENCHER...
+\epigrafe{%
+Sem publicação, a ciência é morta.
+}%
+\autorepigrafe{%    %% Se não tem autor, coloque "Anônimo"
+Gerard Piel
+}%
+\makeepigraph
+
+% -----
+% PÁGINA DE SUMÁRIO
+% -----
+\tableofcontents
+
+% -----
+% PÁGINAS DE LISTAS DE FIGURAS E DE TABELAS
+% se o documento de PFC não possui figuras e/ou tabelas, REMOVA O COMANDO CORRESPONDENTE
+% -----
+\listoffigures
+\listoftables
+
+% -----
+% PÁGINA DE LISTA DE SIGLAS
+% se o documento de PFC não possui siglas, REMOVA TODA A PÁGINA
+% -----
+%%% SIGLAS - PREENCHER...
+\acronimo{LA}{Los Angeles}
+\acronimo{NY}{New York}
+\acronimo{PRODASEN}{Centro de Informática e Processamento de Dados do Senado Federal}
+\acronimo{UN}{United Nations}
+
+\listofnicks
+
+% -----
+% PÁGINA DE LISTA DE ABREVIATURAS
+% se o documento de PFC não possui abreviaturas ou símbolos, REMOVA TODA A PÁGINA
+% -----
+%%% ABREVIATURAS - PREENCHER...
+\abreviatura{Ja}{jacobiano}
+\abreviatura{JS}{fluxo secundário (difusivo)}
+\abreviatura{M}{número de Mach}
+
+%%% SÍMBOLOS - PREENCHER...
+\simbolo{$\Phi$}{termo de dissipação viscosa}
+\simbolo{$\Gamma$}{coeficiente de difusão efetivo}
+\simbolo{$\alpha$}{fator de sub-relaxação}
+\simbolo{$\phi$}{variável dependente da equação diferencial geral}
+
+\listofsymbols
+
+% -----
+% PÁGINA DE RESUMO
+% -----
+%%% RESUMO - PREENCHER...
+\resumo{%
+O resumo \textbf{deve} conter minimamente três parágrafos:
+\begin{itemize}
+\item Contextualização do tema
+\item Apresentação do objetivo
+\item Citação das contribuições principais
+\end{itemize}
+\indent
+At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.\\
+\indent
+Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+}%
+\makeresumo
+
+% -----
+% PÁGINA DE ABSTRACT
+% -----
+%%% ABSTRACT - PREENCHER...
+\abstract{%
+\lipsum[1]
+}%
+\makeabstract

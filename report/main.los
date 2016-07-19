@@ -1,0 +1,5 @@
+\\ \parbox [t]{0.9\textwidth }{\bfseries \MakeUppercase {S\'{\i }mbolos}} \\[0.5cm]
+\parbox [t]{0.1\textwidth }{$\Phi $} \parbox [t]{0.05\textwidth }{-} \parbox [t]{0.9\textwidth }{termo de dissipa\IeC {\c c}\IeC {\~a}o viscosa} 
+\parbox [t]{0.1\textwidth }{$\Gamma $} \parbox [t]{0.05\textwidth }{-} \parbox [t]{0.9\textwidth }{coeficiente de difus\IeC {\~a}o efetivo} 
+\parbox [t]{0.1\textwidth }{$\alpha $} \parbox [t]{0.05\textwidth }{-} \parbox [t]{0.9\textwidth }{fator de sub-relaxa\IeC {\c c}\IeC {\~a}o} 
+\parbox [t]{0.1\textwidth }{$\phi $} \parbox [t]{0.05\textwidth }{-} \parbox [t]{0.9\textwidth }{vari\IeC {\'a}vel dependente da equa\IeC {\c c}\IeC {\~a}o diferencial geral} 

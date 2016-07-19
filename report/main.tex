@@ -1,0 +1,150 @@
+%%
+%
+% ARQUIVO: main.tex
+%
+% VERSÃO: 1.0
+% DATA: Maio de 2016
+% AUTOR: Coordenação de Trabalhos Especiais SE/8
+% 
+%  Arquivo tex principal do documento de Projeto de Fim de Curso (PFC).
+%  Este arquivo SÓ PRECISA SER MODIFICADO NA PARTE DE CONTEÚDO:
+%
+%    a. colocar um \include{•} para cada capítulo do documento de PFC.
+%
+%%
+
+% -----
+% CLASSE DO DOCUMENTO DE PFC
+% -----
+\documentclass{pfc}
+
+% -----
+% PACOTES LATEX USADOS NO DOCUMENTO DE PFC
+% -----
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{color}
+\usepackage{amsfonts,amssymb}
+\usepackage[authoryear]{natbib}
+
+\usepackage{enumitem}
+\usepackage{rotating}
+\usepackage{lipsum}
+\usepackage{lastpage}
+\usepackage{stringstrings}
+\usepackage{pgffor}
+
+\usepackage{pgfgantt} %for tikzpicture
+\usepackage{xfrac} % for maths
+\usepackage{lscape} % enable landscape page
+
+% -----
+% MARGENS DO DOCUMENTO DE PFC
+% -----
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={210mm,297mm},
+	left=25mm,
+	right=25mm,
+	top=25mm,
+	bottom=30mm,
+	textwidth=160mm,
+	textheight=242mm,
+	headheight=0mm,
+	headsep=0mm,
+}
+
+% -----
+% DECLARAÇÕES AUXILIARES PARA REFERÊNCIAS
+%
+%  Diferencia \citet e \citep de acordo com a NBR 10520:2002
+% -----
+\DeclareRobustCommand{\NATand}{;}
+\DeclareRobustCommand{\NATetal}{et~al.}
+\makeatletter
+\renewcommand{\NAT@nmfmt}[1]{%
+  \ifNAT@swa\expandafter\MakeUppercase
+  \else\DeclareRobustCommand{\NATand}{ e}\expandafter\@firstofone\fi{{\NAT@up #1}}%
+}
+\makeatother
+
+% -----
+% AMBIENTE DE FIGURAS DE PFC
+%
+%  A classe do documento está configurada SOMENTE para figuras no formato EPS.
+%  Logo, use PREFERENCIALMENTE este tipo de arquivo.
+%
+%    a. os arquivos das figuras devem estar no diretório 'img'
+% -----
+\graphicspath{{./img/}}
+
+% -----
+% INÍCIO DO DOCUMENTO DE PFC
+% -----
+\begin{document}
+
+% -----
+% PARTE PRÉ-TEXTUAL DE PFC
+%
+% Alterar o CONTEÚDO dos arquivos siglas.tex E pre-texto.tex
+% -----
+\include{dados-pfc}
+\include{pre-texto}
+
+\parindent 0.75cm
+
+% -----
+% PARTE DE CONTEÚDO DE PFC
+%
+%  Escrever cada capitulo do documento de PFC em um arquivo .tex separado.
+%  Adicionar os arquivos .tex ao documento com comando \include{•}
+% -----
+
+\include{introducao}
+\include{botnets}
+\include{machine_learning}
+\include{data_preparation}
+\include{cronograma}
+\include{conclusao}
+
+% -----
+% PARTE DE REFERÊCIAS BIBLIOGRÁFICAS DE PFC
+%
+%  As referências do documento de PFC devem estar no arquivo refs.bib
+%  Devem seguir o formato bibtex - ver Manual-Referencias.pdf para mais detalhes.
+% -----
+\bibliographystyle{pfc}
+\bibliography{refs}
+
+% -----
+% PARTE DE APÊNDICE DE PFC
+%
+%  Se o documento de PFC não tiver apêndices REMOVER AS LINHAS ABAIXO
+%  Adicionar os arquivos .tex de apêndice ao documento com comando \include{•}
+% -----
+%\inappendix
+%\include{apendice}
+%\outappendix
+
+% -----
+% PARTE DE ANEXO DE PFC
+%
+%  Se o documento de PFC não tiver anexos REMOVER AS LINHAS ABAIXO
+%  Adicionar os arquivos .tex de anexo ao documento com comando \include{•}
+% -----
+%\inannex
+%\include{anexo}
+%\outannex
+
+% -----
+% FIM DO DOCUMENTO DE PFC
+% -----
+\label{theend}
+\end{document}
