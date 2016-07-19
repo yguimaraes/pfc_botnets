@@ -37,35 +37,35 @@
 % PÁGINA DE DEDICATÓRIA (OPCIONAL, ie. pode remover toda a página)
 % -----
 %%% DEDICATÓRIA - PREENCHER...
-\dedicatoria{%
-Ao Instituto Militar de Engenharia, alicerce da minha formação e aperfeiçoamento.
-}%
-\makededication
+%\dedicatoria{%
+%Ao Instituto Militar de Engenharia, alicerce da minha formação e aperfeiçoamento.
+%}%
+%\makededication
 
 % -----
 % PÁGINA DE AGRADECIMENTOS (OPCIONAL, ie. pode remover toda a página)
 % -----
 %%% AGRADECIMENTOS - PREENCHER...
-\agradecimentos{%
-Agradeço a todas as pessoas que me incentivaram, apoiaram e possibilitaram esta oportunidade de ampliar meus horizontes. \\
-\indent
-Meus familiares, cônjuge e mestres.\\
-\indent
-Em especial ao meu Professor Orientador Dr. Antonio José Reis e ao Professor Co-orientador Dr. Joel Duarte Silva, por suas disponibilidades e atenções.
-}%
-\makethanks
+%\agradecimentos{%
+%Agradeço a todas as pessoas que me incentivaram, apoiaram e possibilitaram esta oportunidade de ampliar meus horizontes. \\
+%\indent
+%Meus familiares, cônjuge e mestres.\\
+%\indent
+%Em especial ao meu Professor Orientador Dr. Antonio José Reis e ao Professor Co-orientador Dr. Joel Duarte Silva, por suas disponibilidades e atenções.
+%}%
+%\makethanks
 
 % -----
 % PÁGINA DE EPÍGRAFE (OPCIONAL, ie. pode remover toda a página)
 % -----
 %%% EPÍGRAFE - PREENCHER...
-\epigrafe{%
-Sem publicação, a ciência é morta.
-}%
-\autorepigrafe{%    %% Se não tem autor, coloque "Anônimo"
-Gerard Piel
-}%
-\makeepigraph
+%\epigrafe{%
+%Sem publicação, a ciência é morta.
+%}%
+%\autorepigrafe{%    %% Se não tem autor, coloque "Anônimo"
+%Gerard Piel
+%}%
+%\makeepigraph
 
 % -----
 % PÁGINA DE SUMÁRIO
@@ -77,17 +77,20 @@ Gerard Piel
 % se o documento de PFC não possui figuras e/ou tabelas, REMOVA O COMANDO CORRESPONDENTE
 % -----
 \listoffigures
-\listoftables
+%\listoftables
 
 % -----
 % PÁGINA DE LISTA DE SIGLAS
 % se o documento de PFC não possui siglas, REMOVA TODA A PÁGINA
 % -----
 %%% SIGLAS - PREENCHER...
-\acronimo{LA}{Los Angeles}
-\acronimo{NY}{New York}
-\acronimo{PRODASEN}{Centro de Informática e Processamento de Dados do Senado Federal}
-\acronimo{UN}{United Nations}
+\acronimo{C\&C}{Comando e Controle}
+\acronimo{IRC}{Internet Relay Chat}
+\acronimo{HTTP}{HyperText Transfer Protocol}
+\acronimo{P2P}{Peer-to-peer}
+\acronimo{IDS}{Intrusion Detection System}
+\acronimo{DNS}{Domain Name System}
+\acronimo{CDCiber}{Centro de Cibernética}
 
 \listofnicks
 
@@ -96,33 +99,28 @@ Gerard Piel
 % se o documento de PFC não possui abreviaturas ou símbolos, REMOVA TODA A PÁGINA
 % -----
 %%% ABREVIATURAS - PREENCHER...
-\abreviatura{Ja}{jacobiano}
-\abreviatura{JS}{fluxo secundário (difusivo)}
-\abreviatura{M}{número de Mach}
+%\abreviatura{Ja}{jacobiano}
+%\abreviatura{JS}{fluxo secundário (difusivo)}
+%\abreviatura{M}{número de Mach}
 
 %%% SÍMBOLOS - PREENCHER...
-\simbolo{$\Phi$}{termo de dissipação viscosa}
-\simbolo{$\Gamma$}{coeficiente de difusão efetivo}
-\simbolo{$\alpha$}{fator de sub-relaxação}
-\simbolo{$\phi$}{variável dependente da equação diferencial geral}
+%\simbolo{$\Phi$}{termo de dissipação viscosa}
+%\simbolo{$\Gamma$}{coeficiente de difusão efetivo}
+%\simbolo{$\alpha$}{fator de sub-relaxação}
+%\simbolo{$\phi$}{variável dependente da equação diferencial geral}
 
-\listofsymbols
+%\listofsymbols
 
 % -----
 % PÁGINA DE RESUMO
 % -----
 %%% RESUMO - PREENCHER...
 \resumo{%
-O resumo \textbf{deve} conter minimamente três parágrafos:
-\begin{itemize}
-\item Contextualização do tema
-\item Apresentação do objetivo
-\item Citação das contribuições principais
-\end{itemize}
+Botnets são uma ameaça cibernética que já trouxe muito prejuízo\cite{silva2013botnets}. Essa ameaça utiliza computadores infectados para realizar atividades fraudulentas como servir páginas piratas para roubar informações sensíveis, enviar \textit{spam} para usuários comuns e enviar sucessivas requisições para derrubar servidores. Por ser uma atividade ilegal, os criminosos realizam a comunicação entre as máquinas com comportamentos divergentes.\\
 \indent
-At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.\\
+Baseado nessa premissa, esse projeto se propõe a detectar máquinas que pertencem a botnets a partir de algoritmos orientados à Detecção de Anomalia.\\
 \indent
-Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+Dentro do contexto Exército Brasileiro, o projeto auxiliará a Inteligência do Exército Brasileiro na prevenção de ataques por botnets. Esse sistema será o raciocinador para um sistema que desarticula botnets.
 }%
 \makeresumo
 
@@ -131,6 +129,10 @@ Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saep
 % -----
 %%% ABSTRACT - PREENCHER...
 \abstract{%
-\lipsum[1]
+Botnets are a cyber threat that already brought plenty of money dispend\cite{silva2013botnets}. This threat uses infected computers to perform fraudulent activities, such as serving pirated sites to steal sensible information, sending spam to common users and sending successive requests to get servers down. Because it is an illegal activity, the criminals do the communication between the machines with divergent behaviours.\\
+\indent
+Based on that premise, this project proposes to detect machines that are part of a botnet using Anomaly Detection oriented algorithm.\\
+\indent
+Inside the Brazilian Army context, the project will help the Inteligence of Brazilian Army preventing botnet attacks. This system will be the Decision Maker for a botnet desarticulating system.
 }%
 \makeabstract
