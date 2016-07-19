@@ -1,0 +1,4 @@
+\parbox [t]{0.2\textwidth }{LA} \parbox [t]{0.8\textwidth }{Los Angeles} 
+\parbox [t]{0.2\textwidth }{NY} \parbox [t]{0.8\textwidth }{New York} 
+\parbox [t]{0.2\textwidth }{PRODASEN} \parbox [t]{0.8\textwidth }{Centro de Inform\IeC {\'a}tica e Processamento de Dados do Senado Federal} 
+\parbox [t]{0.2\textwidth }{UN} \parbox [t]{0.8\textwidth }{United Nations} 
