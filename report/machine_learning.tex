@@ -1,5 +1,5 @@
 \chapter{Aprendizado de Máquina}
-Como Bishop \cite{bishop2006pattern} descreve, aprendizado de máquina é uma maneira de abordar um problema de computação. Nessa abordagem, a partir de um grande conjunto de dados, chamados como conjunto de treinamento, são inferidos um conjunto de parâmetros a serem utilizados em um modelo parametrizado.
+Como \citet{bishop2006pattern} descreve, aprendizado de máquina é uma maneira de abordar um problema de computação. Nessa abordagem, a partir de um grande conjunto de dados, chamados como conjunto de treinamento, são inferidos um conjunto de parâmetros a serem utilizados em um modelo parametrizado.
 
 \section{Definições}
 
@@ -30,7 +30,7 @@ Algumas breves definições serão apresentadas para fim de ambientar o leitor n
 
 \section{Categorias de Problemas}
 
-Para ser mais específico, é possível classificar os problemas resolvidos pela aprendizado de máquina em cinco categorias\cite{mohri2012foundations}.
+Para ser mais específico, é possível classificar os problemas resolvidos pela aprendizado de máquina em cinco categorias \citep{mohri2012foundations}.
 
 \begin{description}
 \item \textbf{Classificação}: Decidir a classe de exemplo dadas às suas características, por exemplo decidir qual dígito foi escrito a apartir de uma imagem de dígito escrita a mão.
@@ -48,7 +48,7 @@ Neste projeto foi decidido encarar o problema como agrupamento, apesar de també
 
 \section{Cenários dos Dados}
 
-Categoriza-se\cite{mohri2012foundations} sete cenários para os algoritmos de aprendizado, esse cenários são fortemente influenciados pelas condições dos dados de treinamento.
+Categoriza-se \citep{mohri2012foundations} sete cenários para os algoritmos de aprendizado, esse cenários são fortemente influenciados pelas condições dos dados de treinamento.
 
 \begin{description}
 \item \textbf{Aprendizado Supervisionado}: O modelo tem acesso a dados com os resultados de saída já esperados, ou etiquetados, como lê-se na literatura. Os problemas mais comuns desse tipo de cenário são classificação, regressão e ordenação.
@@ -112,13 +112,13 @@ E ainda há outros possíveis cenários ainda mais complexos e específicos. Ess
 
 \section{Detecção de Anomalia}
 
-O artigo, \textit{Anomaly Detection: A Survey}\cite{chandola2009anomaly}, define Detecção de Anomalia como o problema da busca por padrões nos dados para apontar os dados que não seguem um padrão esperado. Essas anomalias podem acontecer em diversos contextos, ruídos nas medidas, defeitos em equipamentos, comportamentos inovadores ou até atividades fraudulentas, como fraude de cartão de crédito e ataques cibernéticos. Os algoritmos de Detecção de Anomalia podem ser utilizados para resolver problemas de Classificação e Agrupamento.
+\citet{chandola2009anomaly} define Detecção de Anomalia como o problema da busca por padrões nos dados para apontar os dados que não seguem um padrão esperado. Essas anomalias podem acontecer em diversos contextos, ruídos nas medidas, defeitos em equipamentos, comportamentos inovadores ou até atividades fraudulentas, como fraude de cartão de crédito e ataques cibernéticos. Os algoritmos de Detecção de Anomalia podem ser utilizados para resolver problemas de Classificação e Agrupamento.
 
 \subsection{Etiquetas em Detecção de Anomalia}
 
 Geralmente a tarefa de etiquetar os dados de modo representativo e preciso é custosa. A forma mais comum de etiquetagem é feita manualmente por um especialista. Esse processo é geralmente custoso, pois são necessários muitos exemplos para encontrar uma anomalia, que por definição é um caso raro. Dentro desse contexto, existem 3 cenários possíveis na operação da Detecção de Anomalias: Supervisionado, Semi-Supervisionado, Não Supervisionado.
 
-Os algoritmos de Detecção de Anomalia Supervisionados têm poucos exemplos de anomalias, por definição. Isso pode trazer problemas quanto a análise da acurácia. Para ilustrar, considere o caso extremo: Considerar todos normais. Isso resultaria em uma acurácia alta, uma vez que os exemplos anômalos podem representar menos de \(1\%\) do conjunto de exemplos. Para se resolver isso, observa-se a precisão e a exaustividade que resultariam \(0\%\). Como é preciso se chegar em um número para poder comparar performance, Witten\cite{witten2011data} propõe que se avalie o \textit{F1 score}, que seria a média harmônica das duas medidas.
+Os algoritmos de Detecção de Anomalia Supervisionados têm poucos exemplos de anomalias, por definição. Isso pode trazer problemas quanto a análise da acurácia. Para ilustrar, considere o caso extremo: Considerar todos normais. Isso resultaria em uma acurácia alta, uma vez que os exemplos anômalos podem representar menos de \(1\%\) do conjunto de exemplos. Para se resolver isso, observa-se a precisão e a exaustividade que resultariam \(0\%\). Como é preciso se chegar em um número para poder comparar performance, \citet{witten2011data} propõe que se avalie o \textit{F1 score}, que seria a média harmônica das duas medidas.
 
 Assume-se que os exemplos de treinamento são etiquetados como normais quando se trabalha no cenário Semi-Supervisionados desse modo é possível criar uma estimativa de como se comportam os exemplos normais e assumir que os que fogem do escopo é anomalia.
 
@@ -127,7 +127,7 @@ Por último, quando não se tem etiqueta para os exemplos opera-se num cenário 
 \subsection{Proposta de Modelo}
 
 Será exposto um modelo de Detecção de Anomalia baseado em modelo probabilístico. Suponha que os dados de um conjunto de exemplos se distribuam no plano determinado pelas características de acordo com o padrão normal. Dessa forma é possível associar cada exemplo \(\mathbf{x}\) à uma probabilidade, \(p(\mathbf{x})\).
-Sabe-se\cite{bishop2006pattern} que a distribuição normal multidimensional é
+Sabe-se \citep{bishop2006pattern} que a distribuição normal multidimensional é
 
 \[\mathcal{N}(\mathbf{x}|\mathbf{\mu},\mathbf{\Sigma})=\frac{1}{(2\pi)^{\sfrac{D}{2}}} \frac{1}{|\mathbf{\Sigma}|^{\sfrac{1}{2}}}\exp\left\{ -\frac{1}{2} (\mathbf{x} - \mathbf{\mu})^T \mathbf{\Sigma}^{-1} (\mathbf{x} - \mathbf{\mu}) \right\}\]
 
