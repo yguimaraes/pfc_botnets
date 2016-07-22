@@ -41,9 +41,10 @@ void QueryExecuter::ProcessDnsLog(){
         while (getline(dns_log_file, request_line)){
             i++;
             if (request_line.empty())
-              	continue;
-            if (!i%10000 && i > 0){
-                printf("%d\n", i);
+            	continue;
+            if (!(i%10000) && i > 0){
+                printf("\rProcessed %d requests", i);
+                fflush(stdout);
             }
             try{
                 DnsQuery current_query(request_line);
@@ -56,6 +57,6 @@ void QueryExecuter::ProcessDnsLog(){
             }
         }
     } catch(std::ifstream::failure e){
-        printf("Finished processing file: '%s'\n", m_path.c_str());
+        printf("\nFinished processing file: '%s'\n", m_path.c_str());
     }
 }
