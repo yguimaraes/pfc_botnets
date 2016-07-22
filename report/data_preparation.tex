@@ -24,6 +24,18 @@ A extração dos dados de cada linha é feita através de uma Expressão Regular
 
 Após aplicar o filtro em cada linha extraída diretamente do registro do servidor DNS do IME, o dado sanitizado é armazenado de modo amigável para a criação do modelo. O sistema salva os dados em um banco de dados PostgreSQL, mas é possível extender o armazenamento em arquivos de texto.
 
+\section{Banco de Dados}
+Previu-se que para o cálculo das características dos usuários a rapidez ao acesso das informações seria crítica para a temporização do sistema. Partindo dessa premissa, decidiu-se integrar a um Gerenciador de Banco de Dados, no caso PostgreSQL, como parte da nossa solução, para facilitar a escrita, leitura e atualização das informações coletadas dos registros DNS.
+
+A figura \ref{fig:relational_diagram} apresenta a representação relacional do banco de dados, no qual já está incluso as características a serem analisadas como será esclarecido na sessão Levantamento das Características.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{relational_diagram}
+\caption[Diagrama Relacional do Sistema]{Diagrama Relacional do Sistema} \label{fig:relational_diagram}
+\end{figure}
+
+Do ponto de vista da criação do modelo, a única tabela relevante no banco de dados é a \textit{clients}, já que o sistema está preocupado em descobrir os usuários infectados. Todavia, as tabelas \textit{domains} e \textit{dns_queries} são extremamente importantes para o cálculo das características do cliente, já que elas guardam a informação de como o cliente tem se comportado na rede.
+
 \section{Levantamento das Características}
 De posse das informações apresentadas nos capítulos anteriores, é possível definir o problema que esse trabalho se propõe a resolver e, em linhas gerais, como ele será abordado.
 
