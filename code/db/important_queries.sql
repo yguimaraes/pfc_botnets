@@ -32,23 +32,20 @@ FROM (
 WHERE x.client_ip = y.client_ip;
 
 UPDATE clients x 
-SET count_request = y.count_request
+SET count_request = y.count_request,
+count_request_cname = y.count_request_cname,
+count_request_a = y.count_request_a,
+count_request_mx = y.count_request_mx,
+count_request_txt= y.count_request_txt
 FROM(
-	SELECT clients.client_ip, count(dns_queries.id) as count_request
+	SELECT clients.client_ip, count(dns_queries.id) as count_request, 
+	count(dns_queries.is_type_a) as count_request_a, 
+	count(dns_queries.is_type_cname) as count_request_cname,
+	count(dns_queries.is_type_mx) as count_request_mx,
+	count(dns_queries.is_type_txt) as count_request_txt
 	FROM clients INNER JOIN dns_queries ON dns_queries.client_ip = clients.client_ip
 	GROUP BY clients.client_ip
 ) AS y
-WHERE x.client_ip = y.client_ip;
-
-
-## WORKING ON COUNT PER TYPE
-UPDATE clients x 
-SET count_request_a = y.count_request_a
-	FROM(
-		SELECT clients.client_ip, count(dns_queries.is_type_a) as count_request_a, dns_queries.type
-		FROM clients INNER JOIN dns_queries ON dns_queries.client_ip = clients.client_ip
-		GROUP BY clients.client_ip, dns_queries.type
-	) AS y
 WHERE x.client_ip = y.client_ip;
 
 
