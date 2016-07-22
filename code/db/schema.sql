@@ -16,13 +16,14 @@ CREATE TABLE domains(
 CREATE TABLE clients(
 	client_ip inet PRIMARY KEY,
 	count_domain_with_numbers integer,
-	average_domain_length real,
-	std_domain_length real,
-	average_request_interval real,
-	std_request_interval real,
+	average_domain_length numeric,
+	std_domain_length numeric,
+	average_request_interval real, 
+	std_request_interval real, 
 	count_request integer,
-	average_click_size real,
-	minimum_click_size integer,
+	average_requisition_degree numeric,
+	std_requisition_degree numeric,
+	minimum_requistion_degree integer,
 	count_request_cname integer,
 	percentage_request_cname real,
 	count_request_a integer,
@@ -38,7 +39,11 @@ CREATE TABLE dns_queries(
 	query_time timestamp,
 	client_ip inet REFERENCES clients,
 	domain varchar(255) REFERENCES domains,
-	type varchar(30)
+	type varchar(30),
+	is_type_a integer,
+	is_type_mx integer,
+	is_type_txt integer,
+	is_type_cname integer
 );
 
 -- CLEAR DB

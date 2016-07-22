@@ -1,6 +1,7 @@
 #include <libpq-fe.h>
 #include "query_storage.h"
 #include "domain_features_calculator.h"
+#include <iostream>
 
 
 void QueryStorageSql::save(DnsQuery query){
@@ -8,15 +9,27 @@ void QueryStorageSql::save(DnsQuery query){
 		addDomain(query.m_domain);
 	if(!containsClient(query.m_client_ip))
 		addClient(query.m_client_ip);
-	string sSQL = "INSERT INTO dns_queries (client_ip,domain, type) VALUES('";
+	string sSQL = "INSERT INTO dns_queries (client_ip,domain,type,is_type_a,is_type_mx,is_type_txt,is_type_cname) VALUES('";
 	sSQL.append(query.m_client_ip);
 	sSQL.append("','");
 	sSQL.append(query.m_domain);
 	sSQL.append("','");
 	sSQL.append(query.m_type);
-	sSQL.append("');");
+	sSQL.append("',");
+	sSQL.append(BoolToString(query.m_is_type_a));
+	sSQL.append(",");
+	sSQL.append(BoolToString(query.m_is_type_mx));
+	sSQL.append(",");
+	sSQL.append(BoolToString(query.m_is_type_txt));
+	sSQL.append(",");
+	sSQL.append(BoolToString(query.m_is_type_cname));
+	sSQL.append(");");
 	PGresult *res = PQexec(m_connection, sSQL.c_str());
 	PQclear(res);
+}
+	
+string QueryStorageSql::BoolToString(bool p_bool){
+	return p_bool ? "1" : "0";
 }
 
 void QueryStorageSql::addDomain(string domain) {

@@ -41,7 +41,7 @@ void QueryExecuter::ProcessDnsLog(){
         while (getline(dns_log_file, request_line)){
             i++;
             if (request_line.empty())
- -          	continue;
+              	continue;
             if (!i%10000 && i > 0){
                 printf("%d\n", i);
             }
