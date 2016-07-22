@@ -1,5 +1,29 @@
 \chapter{Preparação Dos Dados}
 
+\section{Dado Bruto}
+O modelo criado pelo sistema é baseado nos dados coletados no servidor DNS do IME. Esses dados são privados e foram coletados em diversos dias de fevereiro a abril de 2012.
+
+Cada linha possui
+\begin{itemize}
+\item Data
+\item Horário
+\item Ip do Cliente
+\item Porta do Cliente
+\item URL Buscada
+\item Tipo de Requisição
+\item Ip do Servidor DNS
+\end{itemize}
+
+Veja em seguida um exemplo de registro de requisição extraído da base de dados
+
+\begin{quote}
+11-Mar-2012 12:24:16.772 queries: info: client 41.128.225.42\#57135: query: rEcREIo.DE9.iMe.eb.br IN A - (200.20.120.33)
+\end{quote}
+
+A extração dos dados de cada linha é feita através de uma Expressão Regular e o usuário é avisado quando o sistema falha em aplicar o filtro, seja por expressão não prevista pela Expressão Regular, seja por má formação no registro. 
+
+Após aplicar o filtro em cada linha extraída diretamente do registro do servidor DNS do IME, o dado sanitizado é armazenado de modo amigável para a criação do modelo. O sistema salva os dados em um banco de dados PostgreSQL, mas é possível extender o armazenamento em arquivos de texto.
+
 \section{Levantamento das Características}
 De posse das informações apresentadas nos capítulos anteriores, é possível definir o problema que esse trabalho se propõe a resolver e, em linhas gerais, como ele será abordado.
 
