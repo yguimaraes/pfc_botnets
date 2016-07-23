@@ -1,7 +1,0 @@
-\parbox [t]{0.2\textwidth }{C\&C} \parbox [t]{0.8\textwidth }{Comando e Controle} 
-\parbox [t]{0.2\textwidth }{IRC} \parbox [t]{0.8\textwidth }{Internet Relay Chat} 
-\parbox [t]{0.2\textwidth }{HTTP} \parbox [t]{0.8\textwidth }{HyperText Transfer Protocol} 
-\parbox [t]{0.2\textwidth }{P2P} \parbox [t]{0.8\textwidth }{Peer-to-peer} 
-\parbox [t]{0.2\textwidth }{IDS} \parbox [t]{0.8\textwidth }{Intrusion Detection System} 
-\parbox [t]{0.2\textwidth }{DNS} \parbox [t]{0.8\textwidth }{Domain Name System} 
-\parbox [t]{0.2\textwidth }{CDCiber} \parbox [t]{0.8\textwidth }{Centro de Cibern\IeC {\'e}tica} 
