@@ -9,7 +9,8 @@ CREATE TABLE domains(
 	numeric_count integer,
 	alexa_degree integer,
 	readable_string_length integer,
-	is_in_whitelist boolean
+	is_in_whitelist boolean,
+	requisition_degree integer
 );
 
 CREATE TABLE clients(
@@ -39,7 +40,6 @@ CREATE TABLE dns_queries(
 	domain varchar(255) REFERENCES domains,
 	type varchar(30)
 );
-
 
 -- CLEAR DB
 
