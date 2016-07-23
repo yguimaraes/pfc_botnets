@@ -1,0 +1,138 @@
+%%
+%
+% ARQUIVO: pre-texto.tex
+%
+% VERSÃO: 1.0
+% DATA: Maio de 2016
+% AUTOR: Coordenação de Trabalhos Especiais SE/8
+% 
+%  Arquivo tex para a criação da parte pré-textual do documento de Projeto de Fim de Curso.
+%
+%%
+
+
+% -----
+% PÁGINA DE CAPA DO DOCUMENTO DE PFC
+% -----
+\makecapa
+
+% -----
+% PÁGINA DE TÍTULO DO PFC
+% -----
+\prepareadvisors
+\maketitle
+
+% -----
+% PÁGINA DE CRÉDITOS DO DOCUMENTO DE PFC
+% -----
+\makecredits
+
+% -----
+% PÁGINA DE FOLHA DE ASSINATURAS
+% -----
+\preparemembers
+\approvalpage
+
+% -----
+% PÁGINA DE DEDICATÓRIA (OPCIONAL, ie. pode remover toda a página)
+% -----
+%%% DEDICATÓRIA - PREENCHER...
+%\dedicatoria{%
+%Ao Instituto Militar de Engenharia, alicerce da minha formação e aperfeiçoamento.
+%}%
+%\makededication
+
+% -----
+% PÁGINA DE AGRADECIMENTOS (OPCIONAL, ie. pode remover toda a página)
+% -----
+%%% AGRADECIMENTOS - PREENCHER...
+%\agradecimentos{%
+%Agradeço a todas as pessoas que me incentivaram, apoiaram e possibilitaram esta oportunidade de ampliar meus horizontes. \\
+%\indent
+%Meus familiares, cônjuge e mestres.\\
+%\indent
+%Em especial ao meu Professor Orientador Dr. Antonio José Reis e ao Professor Co-orientador Dr. Joel Duarte Silva, por suas disponibilidades e atenções.
+%}%
+%\makethanks
+
+% -----
+% PÁGINA DE EPÍGRAFE (OPCIONAL, ie. pode remover toda a página)
+% -----
+%%% EPÍGRAFE - PREENCHER...
+%\epigrafe{%
+%Sem publicação, a ciência é morta.
+%}%
+%\autorepigrafe{%    %% Se não tem autor, coloque "Anônimo"
+%Gerard Piel
+%}%
+%\makeepigraph
+
+% -----
+% PÁGINA DE SUMÁRIO
+% -----
+\tableofcontents
+
+% -----
+% PÁGINAS DE LISTAS DE FIGURAS E DE TABELAS
+% se o documento de PFC não possui figuras e/ou tabelas, REMOVA O COMANDO CORRESPONDENTE
+% -----
+\listoffigures
+%\listoftables
+
+% -----
+% PÁGINA DE LISTA DE SIGLAS
+% se o documento de PFC não possui siglas, REMOVA TODA A PÁGINA
+% -----
+%%% SIGLAS - PREENCHER...
+\acronimo{C\&C}{Comando e Controle}
+\acronimo{IRC}{Internet Relay Chat}
+\acronimo{HTTP}{HyperText Transfer Protocol}
+\acronimo{P2P}{Peer-to-peer}
+\acronimo{IDS}{Intrusion Detection System}
+\acronimo{DNS}{Domain Name System}
+\acronimo{CDCiber}{Centro de Cibernética}
+
+\listofnicks
+
+% -----
+% PÁGINA DE LISTA DE ABREVIATURAS
+% se o documento de PFC não possui abreviaturas ou símbolos, REMOVA TODA A PÁGINA
+% -----
+%%% ABREVIATURAS - PREENCHER...
+%\abreviatura{Ja}{jacobiano}
+%\abreviatura{JS}{fluxo secundário (difusivo)}
+%\abreviatura{M}{número de Mach}
+
+%%% SÍMBOLOS - PREENCHER...
+%\simbolo{$\Phi$}{termo de dissipação viscosa}
+%\simbolo{$\Gamma$}{coeficiente de difusão efetivo}
+%\simbolo{$\alpha$}{fator de sub-relaxação}
+%\simbolo{$\phi$}{variável dependente da equação diferencial geral}
+
+%\listofsymbols
+
+% -----
+% PÁGINA DE RESUMO
+% -----
+%%% RESUMO - PREENCHER...
+\resumo{%
+Botnets são uma ameaça cibernética que já trouxe muito prejuízo \citep{silva2013botnets}. Essa ameaça utiliza computadores infectados para realizar atividades fraudulentas como servir páginas piratas para roubar informações sensíveis, enviar \textit{spam} para usuários comuns e enviar sucessivas requisições para derrubar servidores. Por ser uma atividade ilegal, os criminosos realizam a comunicação entre as máquinas com comportamentos divergentes.\\
+\indent
+Baseado nessa premissa, esse projeto se propõe a detectar máquinas que pertencem a botnets a partir de algoritmos orientados à Detecção de Anomalia.\\
+\indent
+Dentro do contexto Exército Brasileiro, o projeto auxiliará a Inteligência do Exército Brasileiro na prevenção de ataques por botnets. Esse sistema será o raciocinador para um sistema que desarticula botnets.
+}%
+\makeresumo
+
+% -----
+% PÁGINA DE ABSTRACT
+% -----
+%%% ABSTRACT - PREENCHER...
+\abstract{%
+Botnets are a cyber threat that already brought plenty of money dispend \citep{silva2013botnets}. This threat uses infected computers to perform fraudulent activities, such as serving pirated sites to steal sensible information, sending spam to common users and sending successive requests to get servers down. Because it is an illegal activity, the criminals do the communication between the machines with divergent behaviours.\\
+\indent
+Based on that premise, this project proposes to detect machines that are part of a botnet using Anomaly Detection oriented algorithm.\\
+\indent
+Inside the Brazilian Army context, the project will help the Inteligence of Brazilian Army preventing botnet attacks. This system will be the Decision Maker for a botnet desarticulating system.
+}%
+\makeabstract

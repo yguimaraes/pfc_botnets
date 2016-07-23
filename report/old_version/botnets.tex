@@ -1,5 +1,5 @@
 \chapter{Botnets}
-As Botnets são redes formadas por máquinas infectadas com \textit{malware}, permitindo que o atacante (\textit{botmaster}) realize diversas atividades criminais remotamente, como roubo de informações, ataques de negação de serviço, envio de SPAM, etc. \citep{silva2013botnets}.
+As Botnets são redes formadas por máquinas infectadas com \textit{malware}, permitindo que o atacante (\textit{botmaster}) realize diversas atividades criminais remotamente, como roubo de informações, ataques de negação de serviço, envio de SPAM, etc.\cite{silva2013botnets}
 
 Com o crescimento e diversificação do uso da Internet, o meio cibernético se tornou mais relevante e mais atraente para a realização de ataques maliciosos. Isso motivou o crescimento do número de botnets existentes e aumentou o potencial de contaminação das mesmas, além disso, para evitar os mecanismos de detecção existentes, elas se tornaram cada vez mais sofisticadas.
 
@@ -9,24 +9,25 @@ Para que o detector se torne mais robusto, é preciso compreender o funcionament
 As botnets apresentam alguns elementos estruturais tipicamente envolvidos, que estão presentes independente do protocolo ou arquitetura utilizada. A Figura \ref{fig:typical_elements} mostra a estrutura desses elementos e como eles se relacionam em uma botnet. Segue uma descrição para cada componente:
 \begin{itemize}  
 \item Bots: São \textit{malwares} instalados nos computadores das vítimas que podem realizar as ações maliciosas que o \textit{botmaster} envia através do canal de comando e controle (C\&C). Geralmente, o \textit{malware} é inicializado quando o hospedeiro inicializa a máquina, porém isso pode ser configurado pelo \textit{botmaster} para dificultar a detecção da atividade maliciosa.
-\item Hospedeiros: São as máquinas em que o bot foi instalado, ou seja, infectadas \citep{puri2003bots}.
+\item Hospedeiros (Zumbis): São as máquinas em que o bot foi instalado, ou seja, infectadas.\cite{puri2003bots}
 \item \textit{Botmaster}: é o indivíduo que configura o bot, dissemina e controla a botnet.
 \item Canal de Comando e Controle (C\&C): é o meio que o \textit{botmaster} tem para se comunicar com a sua botnet. É a parte chave do funcionamento, pois é necessário para o envio dos comandos de atividade maliciosa aos hospedeiros. Dessa forma, grande parte das características da botnet, como robustez, facilidade de detecção/desativação, estabilidade, etc., são definidas pela forma que a infraestrutura de C\&C está organizada.
 \end{itemize}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{typical_elements}
-\caption[Elementos das botnets]{Elementos das botnets \citep{silva2013botnets}} \label{fig:typical_elements}
+\caption[Elementos das botnets]{Elementos das botnets \cite{silva2013botnets}} \label{fig:typical_elements}
 \end{figure}
 
 \section{Ameaças e Formas de Defesa}
-O crescimento do número de máquinas conectadas constantemente a enlaces de alta velocidade e rodando sistemas com vulnerabilidades consideráveis, criou um ambiente favorável à formação de botnets. Além disso, muitas vezes o bot é transparente ao responsável pela máquina infectada, ou seja, não atrapalha o funcionamento da máquina, fazendo com que a vítima não perceba a infecção e tente combatê-la. Esses fatores, aliados ao enorme potencial de causar danos, fazem com que as botnets sejam um dos maiores desafios de pesquisa em segurança no espaço cibernético atual \citep{soltani2014survey}.
+O crescimento do número de máquinas conectadas constantemente a enlaces de alta velocidade e rodando sistemas com vulnerabilidades consideráveis, criou um ambiente favorável à formação de botnets. Além disso, muitas vezes o bot é transparente ao responsável pela máquina infectada, ou seja, não atrapalha o funcionamento da máquina, fazendo com que a vítima não perceba a infecção e tente combatê-la. Esses fatores, aliados ao enorme potencial de causar danos, fazem com que as botnets sejam um dos maiores desafios de pesquisa em segurança no espaço cibernético atual. \cite{soltani2014survey}
 
 Existem características que tornam o host mais interessante ao \textit{botmaster} como: altas taxas de transmissão, baixos níveis de segurança e monitoração, alta disponibilidade e localização distante (dificultando que as agências reguladoras detectem as atividades, já que os bots estarão espalhados por diversas nações). Esses fatores ajudam o bot a passar desapercebido e a contribuir com maior capacidade de banda ao \textit{botmaster}, facilitando ataques como os de negação de serviço.
 
 Existem duas formas para combater um ataque realizado por botnets: reativamente ou preventivamente. A forma reativa é a mais comum e envolve detectar a existência da atividade maliciosa e reagir ao ataque tentando reduzir o tráfego malicioso para níveis aceitáveis. Uma desvantagem é que o ataque já vai ter sido inicializado quando for detectado, ou seja, já vai haver causado danos antes de ser solucionado. A forma preventiva busca evitar que a botnet possa realizar alguma atividade maliciosa, porém essa atividade não é simples, já que o atacante pode aprimorar seus bots, tornando-os mais sofisticados, exigindo grandes investimentos para manter os recursos de segurança atualizados.
 
-O mecanismo que estamos desenvolvendo é da forma preventiva, já que o algoritmo busca encontrar padrões e identificar possíveis máquinas infectadas por botnets. Tudo isso na fase em que o \textit{botmaster} ainda está infectando máquinas com o bot para a botnet. Ou seja, buscamos detectar as máquinas infectadas antes do ataque, como um ataque de negação de serviço, em si ser efetivado. Uma característica desejável para um detector é a detecção em tempo real, com o objetivo de minimizar os danos causados e o tempo de reação do \textit{botmaster}. Porém, obter essa característica é um desafio, devido ao grande número de dados que devem ser tratados e analisados. Dessa forma, nosso projeto não fará detecção em tempo real, mas tentará se aproximar disso, utilizando a detecção dos dados coletados ao longo de um dia para detectar bots que atuaram nas últimas 24 horas.
+O mecanismo que estamos desenvolvendo é da forma preventiva, já que o algoritmo busca encontrar padrões e identificar possíveis máquinas infectadas por botnets. Tudo isso na fase em que o \textit{botmaster} ainda está infectando máquinas com o bot para a botnet. Ou seja, buscamos detectar as máquinas infectadas antes do ataque, como um ataque de negação de serviço, em si ser efetivado
+. Uma característica desejável para um detector é a detecção em tempo real, com o objetivo de minimizar os danos causados e o tempo de reação do \textit{botmaster}. Porém, obter essa característica é um desafio, devido ao grande número de dados que devem ser tratados e analisados. Dessa forma, nosso projeto não fará detecção em tempo real, mas tentará se aproximar disso, utilizando a detecção dos dados coletados ao longo de um dia para detectar bots que atuaram nas últimas 24 horas.
 
 \section{Ciclo de Vida das Botnets}
 Na maioria dos casos, existe um ciclo com fases bem definidas de como uma botnet é criada e mantida, a Figura \ref{fig:botnets_lifecycle} mostra essas fases para cada novo hospedeiro que é contaminado.
@@ -54,7 +55,7 @@ Na maioria dos casos, existe um ciclo com fases bem definidas de como uma botnet
 \caption[Ciclo de Vida das Botnets]{Ciclo de Vida das Botnets} \label{fig:botnets_lifecycle}
 \end{figure}
 
-Na primeira fase, chamada de injeção inicial, o atacante procura vulnerabilidades na máquina do futuro hospedeiro para explorá-las e infectá-lo com o \textit{malware}, tornando-se um bot em potencial, isso pode ocorrer, por exemplo, através de um \textit{download} indesejado ou através de um anexo em um e-mail. Após a infecção ser bem sucedida, ocorre a injeção secundária: o host infectado, através do \textit{malware} inicial instalado, busca em uma rede os reais binários do \textit{malware} do bot, os quais após baixados e executados concluirão a infecção e transformam o host em um bot real.\citep{feily2009survey}
+Na primeira fase, chamada de injeção inicial, o atacante procura vulnerabilidades na máquina do futuro hospedeiro para explorá-las e infectá-lo com o \textit{malware}, tornando-se um bot em potencial, isso pode ocorrer, por exemplo, através de um \textit{download} indesejado ou através de um anexo em um e-mail. Após a infecção ser bem sucedida, ocorre a injeção secundária: o host infectado, através do \textit{malware} inicial instalado, busca em uma rede os reais binários do \textit{malware} do bot, os quais após baixados e executados concluirão a infecção e transformam o host em um bot real.\cite{feily2009survey}.
 
 Durante a fase de conexão, o bot estabelece conexão com o canal de C\&C. Isso se repete sempre que o host é reiniciado, podendo ser considerada uma fase vulnerável já que é uma fase essencial, além de geralmente seguir um padrão. Após a efetivação da conexão, o bot se torna ativo na botnet, e passa a realizar os comandos enviados pelo \textit{botmaster} através do canal de C\&C, efetivando as atividades maliciosas solicitadas. A última fase é a de manutenção e atualização, e tem por objetivo manter a botnet ativa e atualizada, já que se o \textit{botmaster} deseja que os bots possam evitar novas técnicas de detecção, adicionar novas funcionalidades ou até mesmo alterar o servidor de C\&C, os binários do programa bot devem ser modificados.
 
@@ -65,7 +66,7 @@ Na arquitetura centralizada, mostrada na Figura \ref{fig:centralized_architectur
 
 \begin{figure}
 \includegraphics[width=\textwidth]{centralized}
-\caption[Arquitetura Centralizada]{Arquitetura Centralizada\citep{wang2010advanced}} \label{fig:centralized_architecture}
+\caption[Arquitetura Centralizada]{Arquitetura Centralizada\cite{wang2010advanced}} \label{fig:centralized_architecture}
 \end{figure}
 
 A fragilidade da arquitetura centralizada, motivou o desenvolvimento da arquitetura descentralizada, na qual uma variedade de protocolos P2P (\textit{Peer-to-peer}) é utilizada. A flexibilidade e robustez dessa arquitetura, permite que mesmo que muitos bots sejam desativados a botnet possa continuar funcionando, já que não existem pontos centralizados de C\&C. 
@@ -76,7 +77,7 @@ Por fim, a arquitetura aleatória é um modelo, até agora, apenas teórico. No 
 
 \begin{figure}
 \includegraphics[width=\textwidth]{hybrid}
-\caption[Arquitetura Híbrida]{Arquitetura Híbrida\citep{wang2010advanced}} \label{fig:hybrid_architecture}
+\caption[Arquitetura Híbrida]{Arquitetura Híbrida\cite{wang2010advanced}} \label{fig:hybrid_architecture}
 \end{figure}
 
 \section{Detecção de Botnets}
@@ -91,6 +92,7 @@ As técnicas baseadas em anomalias, podem ser focadas no host ou na rede. Nas t�
 
 A monitoração passiva de uma rede consiste em analisar o tráfego da rede buscando por comunicações suspeitas que podem ter sido enviadas pelos bots ou canais de C\&C. Essa monitoração é possível pois os bots de uma mesma botnet costumam apresentar padrões de comunicação, já que eles são pré-programados pelo mesmo \textit{botmaster} para entrar contato com o servidor de C\&C.
 
-Para que a análise do tráfego seja viabilizada, são empregadas diversas técnicas como métodos estatísticos, mineração de tráfego, teoria de grafos, agrupamento, modelos estocásticos, redes neurais, entre outras.
+Para que a análise do tráfego seja viabilizada, são empregadas diversas técnicas como métodos estatísticos, mineração de tráfego, teoria de grafos, clustering, modelos estocásticos, redes neurais, entre outras.
 
-A detecção de botnets é uma tarefa bastante desafiadora porque os \textit{botmasters} estão sempre aprimorando os bots, tornando-os mais difíceis de serem detectados. Por exemplo, as primeiras detecções buscavam mensagens suspeitas nos conteúdos da mensagem, afim de evitar isso os \textit{botmasters} passaram a utilizar criptografia tornando essa técnica de detecção obsoleta. Outra dificuldade para algoritmos de agrupamento é que podem ser evitados usando técnicas de randomização nas comunicações e atribuição de tarefas diferentes para os bots.
+A detecção de botnets é uma tarefa bastante desafiadora porque os \textit{botmaster}s estão sempre aprimorando os bots, tornando-os mais difíceis de serem detectados. Por exemplo, as primeiras detecções buscavam mensagens suspeitas nos conteúdos da mensagem, afim de evitar isso os \textit{botmaster}s passaram a utilizar criptografia tornando essa técnica de detecção obsoleta. Outra dificuldade para algoritmos de clustering é que podem ser evitados usando técnicas de randomização nas comunicações e atribuição de tarefas diferentes para os bots.
+
