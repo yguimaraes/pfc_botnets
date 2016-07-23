@@ -9,7 +9,7 @@ Para que o detector se torne mais robusto, é preciso compreender o funcionament
 As botnets apresentam alguns elementos estruturais tipicamente envolvidos, que estão presentes independente do protocolo ou arquitetura utilizada. A Figura \ref{fig:typical_elements} mostra a estrutura desses elementos e como eles se relacionam em uma botnet. Segue uma descrição para cada componente:
 \begin{itemize}  
 \item Bots: São \textit{malwares} instalados nos computadores das vítimas que podem realizar as ações maliciosas que o \textit{botmaster} envia através do canal de comando e controle (C\&C). Geralmente, o \textit{malware} é inicializado quando o hospedeiro inicializa a máquina, porém isso pode ser configurado pelo \textit{botmaster} para dificultar a detecção da atividade maliciosa.
-\item Hospedeiros (Zumbis): São as máquinas em que o bot foi instalado, ou seja, infectadas \citep{puri2003bots}.
+\item Hospedeiros: São as máquinas em que o bot foi instalado, ou seja, infectadas \citep{puri2003bots}.
 \item \textit{Botmaster}: é o indivíduo que configura o bot, dissemina e controla a botnet.
 \item Canal de Comando e Controle (C\&C): é o meio que o \textit{botmaster} tem para se comunicar com a sua botnet. É a parte chave do funcionamento, pois é necessário para o envio dos comandos de atividade maliciosa aos hospedeiros. Dessa forma, grande parte das características da botnet, como robustez, facilidade de detecção/desativação, estabilidade, etc., são definidas pela forma que a infraestrutura de C\&C está organizada.
 \end{itemize}
