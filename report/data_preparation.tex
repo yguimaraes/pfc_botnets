@@ -1,6 +1,7 @@
 \chapter{Preparação Dos Dados}
+Grande parte dos métodos existentes para detecção de botnets, utilizam informações completas do tráfego da rede, inclusive de informações do \textit{payload} para extrair as características relevantes \citep{krmicek2011inspecting}. Infelizmente, nem sempre todas essas informações estão presentes, por diversos motivos, como: questões de privacidade, falta de autorização para acessar, etc. Por isso, torna-se necessário analisar a capacidade de utilizar informações mais simples, como o registro do log de requisições a um servidor DNS, para características.
 
-\section{Dado Bruto}
+\section{Estrutura do Log bruto de DNS }
 O modelo criado pelo sistema é baseado nos dados coletados no servidor DNS do IME. Esses dados são privados e foram coletados em diversos dias de fevereiro a abril de 2012.
 
 Cada linha possui
