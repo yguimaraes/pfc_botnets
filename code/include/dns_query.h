@@ -12,7 +12,13 @@ public:
 	string m_domain;
 	string m_type;
 	string m_dns_server_ip;
+	bool m_is_type_a;
+	bool m_is_type_mx;
+	bool m_is_type_txt;
+	bool m_is_type_cname;
 
 	string toString();
 	DnsQuery(string request_line);
+private:
+	void SetTypes();
 };

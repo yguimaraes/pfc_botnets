@@ -27,6 +27,8 @@ public:
 
 	bool containsClient(string client_ip);
 
+	string BoolToString(bool m_boolean);
+
 	QueryStorageSql();
 
 	~QueryStorageSql();
