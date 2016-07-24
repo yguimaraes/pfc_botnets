@@ -13,7 +13,7 @@ SET count_domain_with_numbers = y.count_domain_with_numbers,
 	std_domain_length = y.std_domain_length,
 	average_requisition_degree = y.average_requisition_degree,
 	std_requisition_degree = y.std_requisition_degree,
-	minimum_requistion_degree = y.minimum_requistion_degree
+	minimum_requisition_degree = y.minimum_requisition_degree
 FROM (
  SELECT clients.client_ip,
  	COUNT(domains.numeric_count) as count_domain_with_numbers,
@@ -21,7 +21,7 @@ FROM (
  	STDDEV_POP(domains.length) as std_domain_length,
  	AVG(domains.requisition_degree) as average_requisition_degree, 
  	STDDEV_POP(domains.requisition_degree) as std_requisition_degree, 
- 	MIN(domains.requisition_degree) as minimum_requistion_degree
+ 	MIN(domains.requisition_degree) as minimum_requisition_degree
  FROM clients 
  INNER JOIN (
  	SELECT DISTINCT dns_queries.domain, dns_queries.client_ip FROM dns_queries) as z 
