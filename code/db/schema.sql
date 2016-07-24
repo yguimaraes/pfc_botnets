@@ -21,6 +21,7 @@ CREATE TABLE clients(
 	average_request_interval real, 
 	std_request_interval real, 
 	count_request integer,
+	count_request_not_in_whitelist integer,
 	average_requisition_degree numeric,
 	std_requisition_degree numeric,
 	minimum_requistion_degree integer,

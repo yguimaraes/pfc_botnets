@@ -32,6 +32,21 @@ FROM (
 WHERE x.client_ip = y.client_ip;
 
 UPDATE clients x 
+SET count_request_not_in_whitelist = y.count_request_not_in_whitelist
+FROM (
+ SELECT clients.client_ip,
+ 	COUNT(z.id) as count_request_not_in_whitelist
+ FROM clients 
+ INNER JOIN (
+ 	SELECT dns_queries.id, dns_queries.domain, dns_queries.client_ip FROM dns_queries) as z 
+ 	ON clients.client_ip = z.client_ip
+ INNER JOIN domains ON z.domain = domains.domain
+ WHERE domains.is_in_whitelist = false
+ GROUP BY clients.client_ip
+ ) AS y 
+WHERE x.client_ip = y.client_ip;
+
+UPDATE clients x 
 SET count_request = y.count_request,
 count_request_cname = y.count_request_cname,
 count_request_a = y.count_request_a,
