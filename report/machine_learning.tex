@@ -69,9 +69,16 @@ No caso deste trabalho, algumas máquinas identificadas pelo IP foram confirmada
 
 Note que se as máquinas conhecidamente suspeitas não se encontrarem no grupo divergente, o sistema falhou.
 
+\section{\textit{K-Means}}
 
+Segundo \citet{witten2011data}, \textit{K-Means} é um algoritmo de aprendizado iterativo baseado na distância geométrica. Inicialmente o algoritmo inicializa \textit{K} centróides em posições distintas. Cada exemplo, então, é associado ao centróide mais próximo. Em seguida o centróide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroíde em sua nova posição.
 
+\begin{figure}
+\includegraphics[width=\textwidth]{k_means_example}
+\caption[Aplicação do K-Means]{Aplicação do K-Means} \label{fig:k_means_example}
+\end{figure}
 
+A \ref{fig:k_means_example} representa a aplicação da técnica em dados bidimensionais com três grupos. É possível notar que converge rapidamente, nesse caso em apenas 9 iterações chegou-se a um resultado satisfatório. Além disso, espera-se uma quantidade de máquinas da ordem de \(10^4\), como o algoritmo \textit{K-Means} é linear tanto na decisão do cluster para cada instância quanto no cálculo do novo centróide.
 
 
 
