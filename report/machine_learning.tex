@@ -80,10 +80,28 @@ Segundo \citet{witten2011data}, \textit{K-Means} é um algoritmo de aprendizado 
 
 A \ref{fig:k_means_example} representa a aplicação da técnica em dados bidimensionais com três grupos. É possível notar que converge rapidamente, nesse caso em apenas 9 iterações chegou-se a um resultado satisfatório. Além disso, espera-se uma quantidade de máquinas da ordem de \(10^4\), como o algoritmo \textit{K-Means} é linear tanto na decisão do cluster para cada instância quanto no cálculo do novo centróide.
 
+\subsection{Determinação do Número de Grupos}
 
+Para a operação plena do algoritmo é necessário que seja informada a quantidade de grupos que são buscados. Isso pode ser um problema simples quandos é possível visualizar os dados, como na figura \ref{fig:k_means_example}, mas não é possível realizar o mesmo procedimento quando os exemplos têm mais que três dimensões, como no caso deste projeto.
 
+\begin{figure}
+\includegraphics[width=\textwidth]{between_two_clusters}
+\caption[Centróide Pouco Representativo]{Centróide Pouco Representativo} \label{fig:between_two_clusters}
+\end{figure}
 
+Além disso, se por um lado, pode-se carecer centróides levando a cenários como na figura \ref{fig:between_two_clusters}, no qual o centróide não generaliza os dados, por outro, como é possível visualizar na figura \ref{fig:cluster_overfitting}, um grupo pode acabar se separando centróides desnecessários.
 
+\begin{figure}
+\includegraphics[width=\textwidth]{cluster_overfitting}
+\caption[Grupo Dividido]{Grupo Dividido} \label{fig:cluster_overfitting}
+\end{figure}
 
+Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariya2013review}. Trata-se de um método visual no qual procura-se o ponto em que a adição de um novo centróide não implica mais na redução drática da soma das distâncias entre os exemplos e seus respectivos centróides. Esse efeito é observado na figura \ref{fig:elbow}
 
+\begin{figure}
+\centering
+\includegraphics{elbow}
+\caption[Ponto Crítico da Otimização]{Ponto Crítico da Otimização \citep{kodinariya2013review}} \label{fig:elbow}
+\end{figure}
 
+Dessa forma, evita-se os cenários das figuras \ref{fig:between_two_clusters} e \ref{fig:cluster_overfitting}.
