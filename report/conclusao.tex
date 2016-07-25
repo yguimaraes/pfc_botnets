@@ -1,6 +1,8 @@
 \chapter{Conclusão}
-Após os estudos apresentados, concluiu-se que pela raridade de ocorrência e tendência de anomalia nos comportamentos, o melhor tipo de modelo seria Detecção de Anomalia. Atualmente, há base de dados de IPs infectados etiquetados manualmente, porém é possível que se migre para o cenário Semi-Supervisionado, se for provado que há necessidade de mais dados. A aquisição de amostras é facilitada para este trabalho, pois dispõe-se um servidor de DNS no Instituto Militar de Engenharia que pode fornecer dados.
+O estudo sobre botnets permitiu entender como elas funcionam, entendendo a relevância e a dificuldade do combate desse tipo de ameaça, ao longo desse estudo pôde ser visto também a motivação para a seleção das características que foram posteriormente levantadas.
 
-Além disso, não há garantias de que o melhor modelo de distribuição de probabilidade poderia ser o Gaussiano. Porém é o escolhido por ser o mais simples. Alternativo a ele, pode-se usar o modelo de Misturas de Gaussianas, caso existam regiões não contíguas de máquinas em operação normal.
+O objetivo de utilizar o log do DNS não é alcançar a certeza de que todos os bots de uma rede foram encontrados, ou ainda, afirmar com certeza que determinado suspeito é um bot. Mas sim, conseguir oferecer uma detecção razoável, que permita filtrar tráfegos que são legítimos, permitindo que máquinas suspeitas sejam investigadas mais profundamente. Além de fornecer uma ferramenta que auxilie na detecção mesmo de novas botnets que possam surgir, já que a ferramente não passou por treinamento, apenas reconhece padrões raros, que tendem a ser suspeitos na rede.
 
-A escolha dos modelos de distribuição de probabilidade, a validação das características levantas e a constatação da necessidade de mais amostras fazem parte dos trabalhos futuros.
+COLOCAR CONCLUSOES SOBRE MACHINE LEARNING E RESULTADOS
+
+Dessa forma, pretende-se direcionar o trabalho agora para validar e selecionar as características mais úteis, eliminando as que não contribuem tanto para a formação dos grupos desejáveis. Além disso, é desejável aprimorar a qualidade das informações de retorno ao. 
