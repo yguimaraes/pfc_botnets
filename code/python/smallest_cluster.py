@@ -27,6 +27,7 @@ def main():
 	dist = get_cluster_distribution(cluster_labels, n_clusters=nc)
 	index = dist.index(min(dist))
 	smallest = Y[cluster_labels==index]
+	print dist
 	for i in smallest:
 		print i
 
