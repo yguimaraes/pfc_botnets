@@ -6,45 +6,27 @@ Como \citet{bishop2006pattern} descreve, aprendizado de máquina é uma maneira 
 Algumas breves definições serão apresentadas para fim de ambientar o leitor nos temas discutidos neste capítulo.
 
 \begin{description}
-\item \textbf{Conjunto de exemplos}: Seja o conjunto de exemplos os dados conhecidos do problema.
+\item \textbf{Conjunto de exemplos}: É o conjunto de entidades modeladas no problema.
 
-\item \textbf{Características}: Sejam características um conjunto ordenado de valores que descrevem um exemplo, a ser modelada pelo algoritmo de Aprendizado.
+\item \textbf{Características}: É um conjunto ordenado de valores que descrevem um exemplo. A escolha das características utilizidas pra representar os exemplos traz consequências diretas ao problema.
 
-\item \textbf{Etiquetas}: Seja etiqueta de exemplo, ou simplesmente etiqueta, a saída esperada do modelo para aquela instância.
-
-\item \textbf{Acurária}: A proporção de acertos pelo tamanho do conjunto de exemplos.
-
-\item \textbf{Precisão}: A proporção de exemplos inferidos corretamente como verdadeiros pela quantidade de inferidos como verdadeiro.
-
-\item \textbf{Abrangência}: A proporção de exemplos inferidos corretamente como verdadeiros pela quantidade de acertos.
-
-\item \textbf{\textit{F1 score}}: A média harmônica entre a precisão e a abrangência
-\[\frac{2 * \mathrm{precisão} * \mathrm{abrangência}}{\mathrm{precisão} + \mathrm{abrangência}}\]
-
-\item \textbf{Matriz \(\mathbf{X}\)}: Seja \(\mathbf{X}\), exemplos de treinamento, uma matriz \(m \times n\), o qual \(m\) é quantidade de instâncias e \(n\) é a quantidade de características. \(\mathbf{X}\) é a representação matemática do Conjunto de exemplos.
-
-\item \textbf{Vetor \(\mathbf{Y}\)}: Seja \(\mathbf{Y}\), conjunto de etiquetas, um vetor de tamanho \(m\), a quantidade de instâncias, \(\mathbf{Y}\) é o conjunto ordenado das respectivas saídas esperadas de cada linha da matriz \(\mathbf{X}\), ou seja as etiquetas.
+\item \textbf{Etiqueta}: É a classe o qual o exemplo particular pertence. Essa definição será utilizada para descrever o diversos tipos de cenário que os dados podem se encontrar.
 \end{description}
 
-É importante destacar a relevância dos conceitos de precisão, abrangência e \textit{F1 score} para problemas que possuem poucos exemplos positivos. Essas definições permitem avaliar esses tipo de dados, como discutiremos na sessão de Detecção de Anomalias.
 
 \section{Categorias de Problemas}
 
-Para ser mais específico, é possível classificar os problemas resolvidos pela aprendizado de máquina em cinco categorias \citep{mohri2012foundations}.
+Dentro do universo de problemas que são resolvidos pela aprendizagem de máquina, é possível classifica-los em cinco categorias \citep{mohri2012foundations}.
 
 \begin{description}
-\item \textbf{Classificação}: Decidir a classe de exemplo dadas às suas características, por exemplo decidir qual dígito foi escrito a apartir de uma imagem de dígito escrita a mão.
-\item \textbf{Regressão}: Determinar um valor real para cada exemplo, por exemplo o risco de um paciente ter contraído câncer a partir de imagens e resultados de exames.
+\item \textbf{Classificação}: Decidir a classe do exemplo partindo das suas características, por exemplo decidir qual dígito foi escrito conhecendo uma imagem de dígito escrita a mão.
+\item \textbf{Regressão}: Determinar um valor real para cada exemplo, por exemplo calcular o risco de um paciente ter contraído câncer a partir de imagens e resultados de exames.
 \item \textbf{Ordenação}: Ordenar os exemplos a partir de algum critério, por exemplo listar produtos por relevância a partir das palavras chaves da busca do usuário.
 \item \textbf{Agrupamento}: Particionar os exemplos em regiões homogêneas, por exemplo identificar comunidades dentro de redes sociais massivas.
-\item \textbf{Redução de Dimensionalidade}: Representar o conjunto de exemplos com um número reduzido de dimensões, por exemplo comprimindo imagens para processamento de imagens.
+\item \textbf{Redução de Dimensionalidade}: Representar o conjunto de exemplos com um número reduzido de dimensões, por exemplo comprimir imagens para processamento de imagens.
 \end{description}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Adicionar mais elementos à discussão %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Neste projeto foi decidido encarar o problema como agrupamento, apesar de também poder se confundir com classificação, já que o objetivo é auxiliar a detecção de botnets. 
+Neste projeto o objetivo é identificar grupos com padrão de comportamento semelhantes. A expectativa é que o comportamento dos bots formem grupos divergentes dos usuários legítimos. Todavia, nem toda máquina pertencente a esse grupo divergente está infectada, o que se quer garantir é um número de reduzido, não mais que 100, de máquinas suspeitas para serem analisadas.
 
 \section{Cenários dos Dados}
 
@@ -57,87 +39,56 @@ Categoriza-se \citep{mohri2012foundations} sete cenários para os algoritmos de 
 
 \item \textbf{Aprendizado Semi-Supervisionado}: Neste cenário, é possível acessar uma conjunto de exemplos sem etiquetas e uma com etiquetas. Esse é o caso de problemas em que dados sem etiquetas são fáceis de serem adiquiridos, ao contrário dos dados etiquetados, pela dificuldade de etiquetar.
 
-\item \textbf{Inferência Transdutiva}: Semelhante ao Aprendizado Semi-Supervisionado, nem todos os exemplos são etiquetados, mas o modelo só deve ser generalizado apenas para os exemplos conhecidos.
-
-\item \textbf{Aprendizado On-line}: Neste cenário, iterasse no modelo a cada exemplo recebido em rodadas. No início da rodada, o modelo recebe um exemplo, inicialmente sem etiqueta, realiza uma predição, recebe a etiqueta e atualiza os parâmetros do modelo.
-
-\item \textbf{Aprendizado por Reforço}: Neste cenário, os modelos são criados baseado num sistema de recompensa. O modelo é recompensado a cada decisão bem-feita ao interagir com um ambiente.
-
-\item \textbf{Aprendizado Ativo}: O algoritmo é quem realiza requisições a uma entidade capaz de etiquetar exemplos para melhorar os parâmetros do modelo. O objetivo é conseguir gerar um modelo tão bom quando o modelo supervisionado, porém com menos exemplos.
-
 \end{description}
 
 E ainda há outros possíveis cenários ainda mais complexos e específicos. Esses cenários não foram catalogados neste trabalho porque a campo de Aprendizado de Máquina está ainda em constante fase de crescimento.
 
-%%%%%%%%%%%%%%%%%%%%
-%% Trocar exemplo %%
-%%%%%%%%%%%%%%%%%%%%
+No caso deste trabalho, algumas máquinas identificadas pelo IP foram confirmadas como bots, mas não há garantia de que sejam os únicos bots na rede. O algoritmo se vê num cenário não supervisionado, mas os desenvolvedores validam os resultados a partir dos bots já conhecidos.
 
-% \section{Exemplo: Regressão Supervisionada}
+Note que se as máquinas conhecidamente suspeitas não se encontrarem no grupo divergente, o sistema falhou.
 
-% Dado um conjunto de tamanho de imóveis e seus respectivos valores de compra em uma vizinhança hipotética estimar o valor de um apartamento sabendo apenas seu tamanho.
+\section{K-Médias}
 
-% Seja o vetor ordenado \(\mathbf{X} = [x_{1},x_{2},...,x_{m}]\), \(\#\mathbf{X} = m\), o tamanho em Metros quadrados de apartamentos em um bairro. Seja \(\mathbf{Y} = [y_{1},y_{2},...,y_{m}]\), o preço do i-ésimo apartamento indexado em \(\mathbf{X}\). Se arranjarmos os valores graficamente a Figura \ref{fig:casas} é obtida.
+Segundo \citet{witten2011data}, K-Médias é um algoritmo de aprendizado iterativo baseado na distância geométrica. Inicialmente o algoritmo inicializa \textit{K} centróides em posições distintas. Cada exemplo, então, é associado ao centróide mais próximo. Em seguida o centróide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroíde em sua nova posição.
 
-% \begin{figure}
-% 	\centering
-% 		\includegraphics[width=0.9\textwidth]{figure_1.png}
-% 		\caption{A distribuição do preço das casas}
-% 		\label{fig:casas}
-% \end{figure}
+Note que a função custo que se espera minimizar é a soma de todas as distâncias entre os exemplos e seus respectivos centróides, como descrito na seguinte equação
 
-% Suponha que de posse do tamanho \(x\), não apresentado em \(\mathbf{X}\), o usuário queira inferir um preço \(y\). Para tal é necessário construir uma hipotese \(h_{\theta}\) que melhor interpole os valores de já conhecidos. Para poder avaliar se \(h_{\theta}\) é ótimo, existe uma função custo, \(custo(h_{\theta},\mathbf{Y})\).
+\[
+\sum_{i=1}^{n} \lVert cent(\mathbf{X_{i}}) - \mathbf{X_{i}} \rVert
+\]
 
-% Para esse problema, considera-se:
+O qual \(cent(\mathbf{X})\) é a função que retorna o centróide mais próximo das coordenadas \(\mathbf{X}\)
 
-% \[h_{\theta}(x) = \theta_{1}*x + \theta_{0}\]
+\begin{figure}
+\includegraphics[width=\textwidth]{k_means_example}
+\caption[Aplicação do K-Médias]{Aplicação do K-Médias} \label{fig:k_means_example}
+\end{figure}
 
-% Ou seja, um modelo linear. Além disso, para avaliar a proximidade do modelo e da amostra, aplica-se o erro quadrático médio como função custo, isto é:
+A \ref{fig:k_means_example} representa a aplicação da técnica em dados bidimensionais com três grupos. É possível notar que converge rapidamente, nesse caso em apenas 9 iterações chegou-se a um resultado satisfatório. Além disso, espera-se uma quantidade de máquinas da ordem de \(10^4\), como o algoritmo K-Médias é linear tanto na decisão do cluster para cada instância quanto no cálculo do novo centróide, a temporização do algoritmo é muito baixa.
 
-% \[custo(h_{\theta}(X),\mathbf{Y}) = \frac{1}{m}*\sum_{i=1}^{m}(h(x_{i})-y_{i})^2\]
+\subsection{Determinação do Número de Grupos}
 
-% Tem-se dados, função de custo, precisa-se introduzir um método de otimização. Propõe-se, então, o uso Método do Gradiente, que é um método para achar o mínimo local dado um ponto. Como a função de custo em questão é quadrática, ou seja, é convexa. Existe \(\alpha\) tal que atualizando iterativamente os parâmetros \(\theta_{0}\) e \(\theta_{1}\), seguindo a expressão
+Para a operação plena do algoritmo é necessário que seja informada a quantidade de grupos que são buscados. Isso pode ser um problema simples quandos é possível visualizar os dados, como na figura \ref{fig:k_means_example}, mas não é possível realizar o mesmo procedimento quando os exemplos têm mais que três dimensões, como no caso deste projeto.
 
-% \[\theta_{0} = \theta_{0} - \alpha * \frac{\partial}{\partial \theta_{0}}  custo(h_{\theta}(X),Y)\]
-% \[\theta_{1} = \theta_{1} - \alpha * \frac{\partial}{\partial \theta_{1}}  custo(h_{\theta}(X),Y)\]
+\begin{figure}
+\includegraphics[width=\textwidth]{between_two_clusters}
+\caption[Centróide Pouco Representativo]{Centróide Pouco Representativo} \label{fig:between_two_clusters}
+\end{figure}
 
-% Converge-se à solução ótima que minimiza o valor da função custo, sendo possível com algum erro inferir o valor do imóvel sabendo seu tamanho. Tal hipótese \(h_{\theta}\) está representado na Figura \ref{fig:casas2}.
+Além disso, se por um lado, pode-se carecer centróides levando a cenários como na figura \ref{fig:between_two_clusters}, no qual o centróide não generaliza os dados, por outro, como é possível visualizar na figura \ref{fig:cluster_overfitting}, um grupo pode acabar se separando por centróides desnecessários.
 
-% \begin{figure}
-% 	\centering
-% 		\includegraphics[width=0.9\textwidth]{figure_2.png}
-% 		\caption{O modelo acompanhado e a distribuição do preço das casas}
-% 		\label{fig:casas2}
-% \end{figure}
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{cluster_overfitting}
+\caption[Grupo Dividido]{Grupo Dividido} \label{fig:cluster_overfitting}
+\end{figure}
 
-\section{Detecção de Anomalia}
+Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariya2013review}. Trata-se de um método visual no qual procura-se o ponto em que a adição de um novo centróide não implica mais na redução drástica da função custo. Esse efeito é observado na figura \ref{fig:elbow}
 
-\citet{chandola2009anomaly} define Detecção de Anomalia como o problema da busca por padrões nos dados para apontar os dados que não seguem um padrão esperado. Essas anomalias podem acontecer em diversos contextos, ruídos nas medidas, defeitos em equipamentos, comportamentos inovadores ou até atividades fraudulentas, como fraude de cartão de crédito e ataques cibernéticos. Os algoritmos de Detecção de Anomalia podem ser utilizados para resolver problemas de Classificação e Agrupamento.
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{elbow}
+\caption[Ponto Crítico da Otimização]{Ponto Crítico da Otimização} \label{fig:elbow}
+\end{figure}
 
-\subsection{Etiquetas em Detecção de Anomalia}
-
-Geralmente a tarefa de etiquetar os dados de modo representativo e preciso é custosa. A forma mais comum de etiquetagem é feita manualmente por um especialista. Esse processo é geralmente custoso, pois são necessários muitos exemplos para encontrar uma anomalia, que por definição é um caso raro. Dentro desse contexto, existem 3 cenários possíveis na operação da Detecção de Anomalias: Supervisionado, Semi-Supervisionado, Não Supervisionado.
-
-Os algoritmos de Detecção de Anomalia Supervisionados têm poucos exemplos de anomalias, por definição. Isso pode trazer problemas quanto a análise da acurácia. Para ilustrar, considere o caso extremo: Considerar todos normais. Isso resultaria em uma acurácia alta, uma vez que os exemplos anômalos podem representar menos de \(1\%\) do conjunto de exemplos. Para se resolver isso, observa-se a precisão e a exaustividade que resultariam \(0\%\). Como é preciso se chegar em um número para poder comparar performance, \citet{witten2011data} propõe que se avalie o \textit{F1 score}, que seria a média harmônica das duas medidas.
-
-Assume-se que os exemplos de treinamento são etiquetados como normais quando se trabalha no cenário Semi-Supervisionados desse modo é possível criar uma estimativa de como se comportam os exemplos normais e assumir que os que fogem do escopo é anomalia.
-
-Por último, quando não se tem etiqueta para os exemplos opera-se num cenário Não Supervisionado, assume-se que os casos anômalos são menos frequentes. Note que se essa premissa não for satisfeita, o sistema está sujeito à alta quantidade falsos negativos.
-
-\subsection{Proposta de Modelo}
-
-Será exposto um modelo de Detecção de Anomalia baseado em modelo probabilístico. Suponha que os dados de um conjunto de exemplos se distribuam no plano determinado pelas características de acordo com o padrão normal. Dessa forma é possível associar cada exemplo \(\mathbf{x}\) à uma probabilidade, \(p(\mathbf{x})\).
-Sabe-se \citep{bishop2006pattern} que a distribuição normal multidimensional é
-
-\[\mathcal{N}(\mathbf{x}|\mathbf{\mu},\mathbf{\Sigma})=\frac{1}{(2\pi)^{\sfrac{D}{2}}} \frac{1}{|\mathbf{\Sigma}|^{\sfrac{1}{2}}}\exp\left\{ -\frac{1}{2} (\mathbf{x} - \mathbf{\mu})^T \mathbf{\Sigma}^{-1} (\mathbf{x} - \mathbf{\mu}) \right\}\]
-
-O qual \(D\) é a dimenção de \(\mathbf{x}\), \(\mathbf{\mu}\) é o vetor média de todas as caracteríticas da Matriz \(\mathbf{X}\) e \(\mathbf{\Sigma}\) é uma matriz covariância, \(D \times D\), \(|\mathbf{\Sigma}|\) é seu determinante.
-
-\[\mathbf{\Sigma}=\mathit{cov}[ \mathbf{x} ] = \mathbb{E} \left \lbrack ( \mathbf{x} - \mathbb{E} [ \mathbf{x} ] ) ( x - \mathbb{E} [ \mathbf{x} ] ) ^ T \right \rbrack \]
-
-O qual \(\mathbb{E}\) é o operador valor esperado. Após a construção do modelo probabilístico, o algoritmo decide se um novo exemplo \(\mathbf{x}\) é uma anomalia se
-
-\[\mathcal{N}(\mathbf{x}|\mathbf{\mu},\mathbf{\Sigma}) < \varepsilon\]
-
-O qual \(\varepsilon\) é um valor limiar escolhido previamente que resultou o melhor \textit{F1 score}, se o modelo for aplicado em um cenário Supervisionado.
-
+O artigo \citep{kodinariya2013review} também cita outros métodos para com critérios matemáticos menos subjetivos, porém este foi utilizado para fins de simplicidade. No capítulo 5 relativo aos experimentos, esse método será avaliado para os dados que utilizados neste trabalho.
