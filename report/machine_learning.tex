@@ -6,38 +6,24 @@ Como \citet{bishop2006pattern} descreve, aprendizado de máquina é uma maneira 
 Algumas breves definições serão apresentadas para fim de ambientar o leitor nos temas discutidos neste capítulo.
 
 \begin{description}
-\item \textbf{Conjunto de exemplos}: Seja o conjunto de exemplos os dados conhecidos do problema.
+\item \textbf{Conjunto de exemplos}: É o conjunto de entidades modeladas no problema.
 
-\item \textbf{Características}: Sejam características um conjunto ordenado de valores que descrevem um exemplo, a ser modelada pelo algoritmo de Aprendizado.
+\item \textbf{Características}: É um conjunto ordenado de valores que descrevem um exemplo. A escolha das características utilizidas pra representar os exemplos traz consequências diretas ao problema.
 
-\item \textbf{Etiquetas}: Seja etiqueta de exemplo, ou simplesmente etiqueta, a saída esperada do modelo para aquela instância.
-
-\item \textbf{Acurária}: A proporção de acertos pelo tamanho do conjunto de exemplos.
-
-\item \textbf{Precisão}: A proporção de exemplos inferidos corretamente como verdadeiros pela quantidade de inferidos como verdadeiro.
-
-\item \textbf{Abrangência}: A proporção de exemplos inferidos corretamente como verdadeiros pela quantidade de acertos.
-
-\item \textbf{\textit{F1 score}}: A média harmônica entre a precisão e a abrangência
-\[\frac{2 * \mathrm{precisão} * \mathrm{abrangência}}{\mathrm{precisão} + \mathrm{abrangência}}\]
-
-\item \textbf{Matriz \(\mathbf{X}\)}: Seja \(\mathbf{X}\), exemplos de treinamento, uma matriz \(m \times n\), o qual \(m\) é quantidade de instâncias e \(n\) é a quantidade de características. \(\mathbf{X}\) é a representação matemática do Conjunto de exemplos.
-
-\item \textbf{Vetor \(\mathbf{Y}\)}: Seja \(\mathbf{Y}\), conjunto de etiquetas, um vetor de tamanho \(m\), a quantidade de instâncias, \(\mathbf{Y}\) é o conjunto ordenado das respectivas saídas esperadas de cada linha da matriz \(\mathbf{X}\), ou seja as etiquetas.
+\item \textbf{Etiqueta}: É a classe o qual o exemplo particular pertence. Essa definição será utilizada para descrever o diversos tipos de cenário que os dados podem se encontrar.
 \end{description}
 
-É importante destacar a relevância dos conceitos de precisão, abrangência e \textit{F1 score} para problemas que possuem poucos exemplos positivos. Essas definições permitem avaliar esses tipo de dados, como discutiremos na sessão de Detecção de Anomalias.
 
 \section{Categorias de Problemas}
 
-Para ser mais específico, é possível classificar os problemas resolvidos pela aprendizado de máquina em cinco categorias \citep{mohri2012foundations}.
+Dentro do universo de problemas que são resolvidos pela aprendizagem de máquina, é possível classifica-los em cinco categorias \citep{mohri2012foundations}.
 
 \begin{description}
-\item \textbf{Classificação}: Decidir a classe de exemplo dadas às suas características, por exemplo decidir qual dígito foi escrito a apartir de uma imagem de dígito escrita a mão.
-\item \textbf{Regressão}: Determinar um valor real para cada exemplo, por exemplo o risco de um paciente ter contraído câncer a partir de imagens e resultados de exames.
+\item \textbf{Classificação}: Decidir a classe do exemplo partindo das suas características, por exemplo decidir qual dígito foi escrito conhecendo uma imagem de dígito escrita a mão.
+\item \textbf{Regressão}: Determinar um valor real para cada exemplo, por exemplo calcular o risco de um paciente ter contraído câncer a partir de imagens e resultados de exames.
 \item \textbf{Ordenação}: Ordenar os exemplos a partir de algum critério, por exemplo listar produtos por relevância a partir das palavras chaves da busca do usuário.
 \item \textbf{Agrupamento}: Particionar os exemplos em regiões homogêneas, por exemplo identificar comunidades dentro de redes sociais massivas.
-\item \textbf{Redução de Dimensionalidade}: Representar o conjunto de exemplos com um número reduzido de dimensões, por exemplo comprimindo imagens para processamento de imagens.
+\item \textbf{Redução de Dimensionalidade}: Representar o conjunto de exemplos com um número reduzido de dimensões, por exemplo comprimir imagens para processamento de imagens.
 \end{description}
 
 Neste projeto o objetivo é identificar grupos com padrão de comportamento semelhantes. A expectativa é que o comportamento dos bots formem grupos divergentes dos usuários legítimos. Todavia, nem toda máquina pertencente a esse grupo divergente está infectada, o que se quer garantir é um número de reduzido, não mais que 100, de máquinas suspeitas para serem analisadas.
@@ -53,14 +39,6 @@ Categoriza-se \citep{mohri2012foundations} sete cenários para os algoritmos de 
 
 \item \textbf{Aprendizado Semi-Supervisionado}: Neste cenário, é possível acessar uma conjunto de exemplos sem etiquetas e uma com etiquetas. Esse é o caso de problemas em que dados sem etiquetas são fáceis de serem adiquiridos, ao contrário dos dados etiquetados, pela dificuldade de etiquetar.
 
-\item \textbf{Inferência Transdutiva}: Semelhante ao Aprendizado Semi-Supervisionado, nem todos os exemplos são etiquetados, mas o modelo só deve ser generalizado apenas para os exemplos conhecidos.
-
-\item \textbf{Aprendizado On-line}: Neste cenário, iterasse no modelo a cada exemplo recebido em rodadas. No início da rodada, o modelo recebe um exemplo, inicialmente sem etiqueta, realiza uma predição, recebe a etiqueta e atualiza os parâmetros do modelo.
-
-\item \textbf{Aprendizado por Reforço}: Neste cenário, os modelos são criados baseado num sistema de recompensa. O modelo é recompensado a cada decisão bem-feita ao interagir com um ambiente.
-
-\item \textbf{Aprendizado Ativo}: O algoritmo é quem realiza requisições a uma entidade capaz de etiquetar exemplos para melhorar os parâmetros do modelo. O objetivo é conseguir gerar um modelo tão bom quando o modelo supervisionado, porém com menos exemplos.
-
 \end{description}
 
 E ainda há outros possíveis cenários ainda mais complexos e específicos. Esses cenários não foram catalogados neste trabalho porque a campo de Aprendizado de Máquina está ainda em constante fase de crescimento.
@@ -69,16 +47,24 @@ No caso deste trabalho, algumas máquinas identificadas pelo IP foram confirmada
 
 Note que se as máquinas conhecidamente suspeitas não se encontrarem no grupo divergente, o sistema falhou.
 
-\section{\textit{K-Means}}
+\section{K-Médias}
 
-Segundo \citet{witten2011data}, \textit{K-Means} é um algoritmo de aprendizado iterativo baseado na distância geométrica. Inicialmente o algoritmo inicializa \textit{K} centróides em posições distintas. Cada exemplo, então, é associado ao centróide mais próximo. Em seguida o centróide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroíde em sua nova posição.
+Segundo \citet{witten2011data}, K-Médias é um algoritmo de aprendizado iterativo baseado na distância geométrica. Inicialmente o algoritmo inicializa \textit{K} centróides em posições distintas. Cada exemplo, então, é associado ao centróide mais próximo. Em seguida o centróide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroíde em sua nova posição.
+
+Note que a função custo que se espera minimizar é a soma de todas as distâncias entre os exemplos e seus respectivos centróides, como descrito na seguinte equação
+
+\[
+\sum_{i=1}^{n} \lVert cent(\mathbf{X_{i}}) - \mathbf{X_{i}} \rVert
+\]
+
+O qual \(cent(\mathbf{X})\) é a função que retorna o centróide mais próximo das coordenadas \(\mathbf{X}\)
 
 \begin{figure}
 \includegraphics[width=\textwidth]{k_means_example}
-\caption[Aplicação do K-Means]{Aplicação do K-Means} \label{fig:k_means_example}
+\caption[Aplicação do K-Médias]{Aplicação do K-Médias} \label{fig:k_means_example}
 \end{figure}
 
-A \ref{fig:k_means_example} representa a aplicação da técnica em dados bidimensionais com três grupos. É possível notar que converge rapidamente, nesse caso em apenas 9 iterações chegou-se a um resultado satisfatório. Além disso, espera-se uma quantidade de máquinas da ordem de \(10^4\), como o algoritmo \textit{K-Means} é linear tanto na decisão do cluster para cada instância quanto no cálculo do novo centróide.
+A \ref{fig:k_means_example} representa a aplicação da técnica em dados bidimensionais com três grupos. É possível notar que converge rapidamente, nesse caso em apenas 9 iterações chegou-se a um resultado satisfatório. Além disso, espera-se uma quantidade de máquinas da ordem de \(10^4\), como o algoritmo K-Médias é linear tanto na decisão do cluster para cada instância quanto no cálculo do novo centróide, a temporização do algoritmo é muito baixa.
 
 \subsection{Determinação do Número de Grupos}
 
@@ -89,19 +75,20 @@ Para a operação plena do algoritmo é necessário que seja informada a quantid
 \caption[Centróide Pouco Representativo]{Centróide Pouco Representativo} \label{fig:between_two_clusters}
 \end{figure}
 
-Além disso, se por um lado, pode-se carecer centróides levando a cenários como na figura \ref{fig:between_two_clusters}, no qual o centróide não generaliza os dados, por outro, como é possível visualizar na figura \ref{fig:cluster_overfitting}, um grupo pode acabar se separando centróides desnecessários.
+Além disso, se por um lado, pode-se carecer centróides levando a cenários como na figura \ref{fig:between_two_clusters}, no qual o centróide não generaliza os dados, por outro, como é possível visualizar na figura \ref{fig:cluster_overfitting}, um grupo pode acabar se separando por centróides desnecessários.
 
-\begin{figure}
-\includegraphics[width=\textwidth]{cluster_overfitting}
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{cluster_overfitting}
 \caption[Grupo Dividido]{Grupo Dividido} \label{fig:cluster_overfitting}
 \end{figure}
 
-Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariya2013review}. Trata-se de um método visual no qual procura-se o ponto em que a adição de um novo centróide não implica mais na redução drática da soma das distâncias entre os exemplos e seus respectivos centróides. Esse efeito é observado na figura \ref{fig:elbow}
+Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariya2013review}. Trata-se de um método visual no qual procura-se o ponto em que a adição de um novo centróide não implica mais na redução drástica da função custo. Esse efeito é observado na figura \ref{fig:elbow}
 
-\begin{figure}
+\begin{figure}[htbp]
 \centering
-\includegraphics{elbow}
-\caption[Ponto Crítico da Otimização]{Ponto Crítico da Otimização \citep{kodinariya2013review}} \label{fig:elbow}
+\includegraphics[scale=0.5]{elbow}
+\caption[Ponto Crítico da Otimização]{Ponto Crítico da Otimização} \label{fig:elbow}
 \end{figure}
 
-Dessa forma, evita-se os cenários das figuras \ref{fig:between_two_clusters} e \ref{fig:cluster_overfitting}.
+O artigo \citep{kodinariya2013review} também cita outros métodos para com critérios matemáticos menos subjetivos, porém este foi utilizado para fins de simplicidade. No capítulo 5 relativo aos experimentos, esse método será avaliado para os dados que utilizados neste trabalho.
