@@ -3,6 +3,8 @@ O estudo sobre botnets permitiu entender como elas funcionam, entendendo a relev
 
 O objetivo de utilizar o log do DNS não é alcançar a certeza de que todos os bots de uma rede foram encontrados, ou ainda, afirmar com certeza que determinado suspeito é um bot. Mas sim, conseguir oferecer uma detecção razoável, que permita filtrar tráfegos que são legítimos, permitindo que máquinas suspeitas sejam investigadas mais profundamente. Além de fornecer uma ferramenta que auxilie na detecção mesmo de novas botnets que possam surgir, já que a ferramenta não passou por treinamento, apenas reconhece padrões raros, que tendem a ser suspeitos na rede.
 
-COLOCAR CONCLUSOES SOBRE MACHINE LEARNING E RESULTADOS
+A análise dos dados partiu da premissa de que se deve priorizar modelos simples antes e aumentar complexidade gradualmente. Própria ferramenta utilizada dispõe de diversos outros algoritmos de agrupamento que não foram testados pelo acréscimo desnecessário de complexidade. Os resultados alcançados foram bons o suficientes para que se continue a utilizar o K-médias.
+
+Por outro lado o critério de escolha do número de centroides, que também foi escolhido pela sua simplicidade, não foi explícito o suficiente pra decisão. Isso não foi proibitivo para a continuidade do experimento, porém, pode ser o caso de outro número de centroides melhorar a análise.
 
 Dessa forma, pretende-se direcionar o trabalho agora para implementar uma metodologia já utilizada para auxiliar na seleção das características mais úteis. Além disso, serão analisados os resultados para os diversos dias para os quais se possui informações sobre o log, com o objetivo de verificar se o bom desempenho dos grupos obtidos será repetido. Finalmente, mas não menos importante, será refinada a saída do sistema, fornecendo mais informações para que os usuários possam identificar com melhor propriedade os motivos que levaram ao sistema acusar as máquinas como suspeitas.
