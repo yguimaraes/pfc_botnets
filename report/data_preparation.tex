@@ -67,7 +67,7 @@ As características analisadas foram divididas em quatro tipos, que identificam 
 \subsection{Escolha dos Domínios}
 Muitas botnets utilizam técnicas de geração de domínio \citep{zhou2013dga}. Essa técnica permite que os bots consultem um grande conjunto de domínios a procura do C\&C, porém apenas um pequeno conjunto desses domínios são de fato utilizados. Essa prática gera nomes não legíveis, muitas vezes formados apenas por números e palavras não legíveis. Além disso, por conveniência, é possível que os domínios gerados por uma mesma botnet tenham o mesmo número de caracteres. Por outro lado, apenas 7.3\% dos domínios dos um milhão primeiros domínios da Alexa contem número e que o tamanho do domínio de um usuário comum não segue nenhum padrão específico.
 
-Não há garantia que essa feature é sempre efetiva, dado que o atacante pode gerar domínios de tamanho variável e evitar números ao gerar o domínio, por isso após a realização dos experimentos será possível confirmar ou não essa hipótese.
+Não há garantias de que essa característica seja sempre efetiva, dado que o atacante pode gerar domínios de tamanho variável e evitar números ao gerar o domínio, por isso após a realização dos experimentos será possível confirmar ou não essa hipótese.
 
 Para explorar essas propriedades foram propostas as seguintes características 
 
@@ -79,7 +79,7 @@ Para explorar essas propriedades foram propostas as seguintes características
 
 \subsection{Comportamento de Máquina}
 
-O tempo de reação de um humano a uma requisição sem sucesso não pode ser de décimos de segundo, por mera limitação de reflexo. Qualquer sinal de uso que apresente um baixo intervalo entre consultas, algo que apenas uma máquina pode fazer, deve ser considerada suspeita. Além disso, é possível que a máquina acabe por visitar uma quantidade de domínios maior do que o normal ou faça consultas em intervalos regulares, pré-programados, coisa que um ser humano normal raramente irá realizar. Novamente, esse tipo de feature precisa ser validado, pois o comportamento de máquina pode ser mascarado, ao configurar um intervalo aleatório entre consultas e com um certo atraso.
+O tempo de reação de um humano a uma requisição sem sucesso não pode ser de décimos de segundo, por mera limitação de reflexo. Qualquer sinal de uso que apresente um baixo intervalo entre consultas, algo que apenas uma máquina pode fazer, deve ser considerada suspeita. Além disso, é possível que a máquina acabe por visitar uma quantidade de domínios maior do que o normal ou faça consultas em intervalos regulares, pré-programados, coisa que um ser humano normal raramente irá realizar. Novamente, esse tipo de característica precisa ser validado, pois o comportamento de máquina pode ser mascarado, ao configurar um intervalo aleatório entre consultas e com um certo atraso.
 
 Para explorar essas propriedades foram propostas as seguintes características 
 
