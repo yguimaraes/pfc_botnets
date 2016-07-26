@@ -8,7 +8,7 @@ Algumas breves definições serão apresentadas para fim de ambientar o leitor n
 \begin{description}
 \item \textbf{Conjunto de exemplos}: É o conjunto de entidades modeladas no problema.
 
-\item \textbf{Características}: É um conjunto ordenado de valores que descrevem um exemplo. A escolha das características utilizidas pra representar os exemplos traz consequências diretas ao problema.
+\item \textbf{Características}: É um conjunto ordenado de valores que descrevem um exemplo. A escolha das características utilizadas pra representar os exemplos traz consequências diretas ao problema.
 
 \item \textbf{Etiqueta}: É a classe o qual o exemplo particular pertence. Essa definição será utilizada para descrever o diversos tipos de cenário que os dados podem se encontrar.
 \end{description}
@@ -37,7 +37,7 @@ Categoriza-se \citep{mohri2012foundations} sete cenários para os algoritmos de 
 
 \item \textbf{Aprendizado Não Supervisionado}: Só se dispõe da conjunto de exemplos para treinamento sem etiquetas. Geralmente é mais utilizado para classificação, agrupamento e redução de dimensionalidade
 
-\item \textbf{Aprendizado Semi-Supervisionado}: Neste cenário, é possível acessar uma conjunto de exemplos sem etiquetas e uma com etiquetas. Esse é o caso de problemas em que dados sem etiquetas são fáceis de serem adiquiridos, ao contrário dos dados etiquetados, pela dificuldade de etiquetar.
+\item \textbf{Aprendizado Semi-Supervisionado}: Neste cenário, é possível acessar uma conjunto de exemplos sem etiquetas e uma com etiquetas. Esse é o caso de problemas em que dados sem etiquetas são fáceis de serem adquiridos, ao contrário dos dados etiquetados, pela dificuldade de etiquetar.
 
 \end{description}
 
@@ -49,33 +49,33 @@ Note que se as máquinas conhecidamente suspeitas não se encontrarem no grupo d
 
 \section{K-Médias}
 
-Segundo \citet{witten2011data}, K-Médias é um algoritmo de aprendizado iterativo baseado na distância geométrica. Inicialmente o algoritmo inicializa \textit{K} centróides em posições distintas. Cada exemplo, então, é associado ao centróide mais próximo. Em seguida o centróide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroíde em sua nova posição.
+Segundo \citet{witten2011data}, K-Médias é um algoritmo de aprendizado iterativo baseado na distância geométrica. Inicialmente o algoritmo inicializa \textit{K} centroides em posições distintas. Cada exemplo, então, é associado ao centroide mais próximo. Em seguida o centroide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroide em sua nova posição.
 
-Note que a função custo que se espera minimizar é a soma de todas as distâncias entre os exemplos e seus respectivos centróides, como descrito na seguinte equação
+Note que a função custo que se espera minimizar é a soma de todas as distâncias entre os exemplos e seus respectivos centroides, como descrito na seguinte equação
 
 \[
 \sum_{i=1}^{n} \lVert cent(\mathbf{X_{i}}) - \mathbf{X_{i}} \rVert
 \]
 
-O qual \(cent(\mathbf{X})\) é a função que retorna o centróide mais próximo das coordenadas \(\mathbf{X}\)
+O qual \(cent(\mathbf{X})\) é a função que retorna o centroide mais próximo das coordenadas \(\mathbf{X}\)
 
 \begin{figure}
 \includegraphics[width=\textwidth]{k_means_example}
 \caption[Aplicação do K-Médias]{Aplicação do K-Médias} \label{fig:k_means_example}
 \end{figure}
 
-A \ref{fig:k_means_example} representa a aplicação da técnica em dados bidimensionais com três grupos. É possível notar que converge rapidamente, nesse caso em apenas 9 iterações chegou-se a um resultado satisfatório. Além disso, espera-se uma quantidade de máquinas da ordem de \(10^4\), como o algoritmo K-Médias é linear tanto na decisão do cluster para cada instância quanto no cálculo do novo centróide, a temporização do algoritmo é muito baixa.
+A \ref{fig:k_means_example} representa a aplicação da técnica em dados bidimensionais com três grupos. É possível notar que converge rapidamente, nesse caso em apenas 9 iterações chegou-se a um resultado satisfatório. Além disso, espera-se uma quantidade de máquinas da ordem de \(10^4\), como o algoritmo K-Médias é linear tanto na decisão do grupo para cada instância quanto no cálculo do novo centroide, a temporização do algoritmo é muito baixa.
 
 \subsection{Determinação do Número de Grupos}
 
-Para a operação plena do algoritmo é necessário que seja informada a quantidade de grupos que são buscados. Isso pode ser um problema simples quandos é possível visualizar os dados, como na figura \ref{fig:k_means_example}, mas não é possível realizar o mesmo procedimento quando os exemplos têm mais que três dimensões, como no caso deste projeto.
+Para a operação plena do algoritmo é necessário que seja informada a quantidade de grupos que são buscados. Isso pode ser um problema simples quando é possível visualizar os dados, como na figura \ref{fig:k_means_example}, mas não é possível realizar o mesmo procedimento quando os exemplos têm mais que três dimensões, como no caso deste projeto.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{between_two_clusters}
 \caption[Centróide Pouco Representativo]{Centróide Pouco Representativo} \label{fig:between_two_clusters}
 \end{figure}
 
-Além disso, se por um lado, pode-se carecer centróides levando a cenários como na figura \ref{fig:between_two_clusters}, no qual o centróide não generaliza os dados, por outro, como é possível visualizar na figura \ref{fig:cluster_overfitting}, um grupo pode acabar se separando por centróides desnecessários.
+Além disso, se por um lado, pode-se carecer centroides levando a cenários como na figura \ref{fig:between_two_clusters}, no qual o centroide não generaliza os dados, por outro, como é possível visualizar na figura \ref{fig:cluster_overfitting}, um grupo pode acabar se separando por centroides desnecessários.
 
 \begin{figure}[htbp]
 \centering
@@ -83,7 +83,7 @@ Além disso, se por um lado, pode-se carecer centróides levando a cenários com
 \caption[Grupo Dividido]{Grupo Dividido} \label{fig:cluster_overfitting}
 \end{figure}
 
-Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariya2013review}. Trata-se de um método visual no qual procura-se o ponto em que a adição de um novo centróide não implica mais na redução drástica da função custo. Esse efeito é observado na figura \ref{fig:elbow}
+Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariya2013review}. Trata-se de um método visual no qual procura-se o ponto em que a adição de um novo centroide não implica mais na redução drástica da função custo. Esse efeito é observado na figura \ref{fig:elbow}
 
 \begin{figure}[htbp]
 \centering
