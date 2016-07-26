@@ -14,12 +14,21 @@ def load():
 	cursor = conn.cursor()
 
 	# execute our Query
+	# cursor.execute( "SELECT client_ip, "
+	# 				"count_domain_with_numbers, "
+	# 				"average_domain_length, "
+	# 				"std_domain_length, "
+	# 				"count_request, "
+	# 				"average_requisition_degree, "
+	# 				"minimum_requisition_degree "
+	# 				"FROM clients")
 	cursor.execute( "SELECT client_ip, "
 					"count_domain_with_numbers, "
 					"average_domain_length, "
 					"std_domain_length, "
 					"count_request, "
 					"average_requisition_degree, "
+					"std_requisition_degree, "
 					"minimum_requisition_degree "
 					"FROM clients")
 
@@ -27,7 +36,6 @@ def load():
 	ids = dataset[:,0]
 	dataset = np.array(dataset[:,1:], dtype=np.float64)
 	# retrieve the records from the database
- 
 	return (dataset, ids)
 
 
@@ -65,4 +73,3 @@ def separate_dataset(dataset, ids, rate=(0.8,0.2), validation=False):
 
 def normalize(X):
 	return (X-np.mean(X,axis=0))/np.std(X,axis=0)
-
