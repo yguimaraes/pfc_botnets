@@ -5,7 +5,8 @@
 using namespace std;
 
 string DnsQuery::toString(){
-	return m_date + "," + m_time + "," + m_client_ip + "," + m_client_port + "," + m_domain + "," + m_type + "," + m_dns_server_ip;
+	return m_date + "," + m_time + "," + m_client_ip + "," + m_client_port + 
+        "," + m_domain + "," + m_type + "," + m_dns_server_ip;
 }
 
 DnsQuery::DnsQuery(string request_line){
@@ -22,6 +23,19 @@ DnsQuery::DnsQuery(string request_line){
     m_type = request_line_match[6];
     m_dns_server_ip = request_line_match[7];
     
+    SetTypes();
     if(m_domain.empty())
         throw std::runtime_error("Couldn't match: '" + request_line + "'");
 }
+
+void DnsQuery::SetTypes(){
+    m_is_type_a = m_is_type_mx = m_is_type_txt = m_is_type_cname = false;
+    if(m_type.compare("A") == 0)
+        m_is_type_a = true;
+    else if(m_type.compare("MX") == 0)
+        m_is_type_mx = true;
+    else if(m_type.compare("CNAME") == 0) 
+        m_is_type_cname = true;
+    else if(m_type.compare("TXT") == 0)
+        m_is_type_txt = true;
+}  
