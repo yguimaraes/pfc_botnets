@@ -6,11 +6,13 @@ Como \citet{bishop2006pattern} descreve, aprendizado de máquina é uma maneira 
 Algumas breves definições serão apresentadas com a finalidade de ambientar o leitor nos temas discutidos neste capítulo.
 
 \begin{description}
-\item \textbf{Conjunto de exemplos}: É o conjunto de entidades modeladas no problema.
+\item \textbf{Conjunto de exemplos}: É o conjunto de entidades modeladas no problema. Essas entidades poderiam ser pessoas, máquinas, imagens, sinais de som, enfim qualquer objeto que se queira estudar.
 
 \item \textbf{Características}: É um conjunto ordenado de valores que descrevem um exemplo. A escolha das características utilizadas pra representar os exemplos traz consequências diretas ao problema.
 
 \item \textbf{Etiqueta}: É a classe que um exemplo particular pertence. Essa definição será utilizada para descrever o diversos tipos de cenário que os dados podem se encontrar.
+
+\item \textbf{Função Custo}: É a função que mede quanto o modelo se adequa ao conjunto de exemplos. Por exemplo, em uma regressão linear utiliza-se a soma das distâncias entre as características dos exemplos e o modelo linear que se quer utilizar para generalizar essas características.
 \end{description}
 
 
@@ -26,7 +28,7 @@ Dentro do universo de problemas que são resolvidos pelas técnicas de aprendiza
 \item \textbf{Redução de Dimensionalidade}: Representar o conjunto de exemplos com um número reduzido de dimensões, por exemplo comprimir imagens para processamento de imagens.
 \end{description}
 
-Neste projeto o objetivo é identificar grupos com padrão de comportamento semelhantes. A expectativa é que o comportamento dos bots formem grupos divergentes dos usuários legítimos. Todavia, nem toda máquina pertencente a esse grupo divergente está infectada, o que se quer garantir é um número de reduzido, não mais que 100, de máquinas suspeitas para serem analisadas.
+Neste projeto o objetivo é identificar grupos com padrão de comportamento semelhantes. A expectativa é que o comportamento dos bots formem grupos divergentes dos usuários legítimos. Todavia, nem toda máquina pertencente a esse grupo divergente está infectada, o que se quer garantir é um número de reduzido, da ordem de \(10\), de máquinas suspeitas para serem analisadas.
 
 \section{Cenários dos Dados}
 
@@ -47,7 +49,20 @@ No caso deste trabalho, algumas máquinas identificadas pelo IP foram confirmada
 
 Note que se as máquinas conhecidamente suspeitas não se encontrarem no grupo divergente, o sistema falhou.
 
-\section{K-Médias}
+\section{Algoritmos de Agrupamento}
+
+Existem diversas definições pra grupos de entidades similares \citep{faceli2011inteligencia}, dentre elas podem ser citadas:
+\begin{description}
+\item \textbf{Grupos bem separado}: Cada exemplo de um grupo está mais próximo de outro exemplo do mesmo grupo do que a qualquer outro ponto não pertencente a ele. Essa definição se assemelha bastante à abordagem de aprendizado K vizinhos mais próximos.
+\item \textbf{Grupo baseado em centro}: Cada exemplo do grupo está mais próximo do centroide do próprio grupo do que do centroide de qualquer outro grupo. Essa é a premissa básica do K-médias.
+\item \textbf{Grupo contínuo}: Qualquer exemplo de um grupo está mais próximo a um mais exemplos do mesmo grupo do que a qualquer outro exemplo não pertencente ao grupo. Essa definição é bastante similar ao Grupo bem separado. Porém, no Grupo contínuo basta estar mais próximo a um conjunto reduzido do mesmo grupo, diferente do bem separado que precisa estar mais próximo a todos do mesmo grupo.
+\item \textbf{Grupo baseado em densidade}: Um grupo é uma região de alta densidade, separada de outras regiões de alta densidade por zonas de baixa densidade.
+\item \textbf{Grupo baseado em similaridade}: Um grupo é um conjunto de pontos similares contratados por outros grupos que não são similiares.
+\end{description}
+
+Cada definição induz uma abordagem de algoritmo diferente. Assumiu-se o algoritmo mais simples baseado em centros para resolver o problema, que é o algoritmo de K-médias que será apresentado detalhadamente na seção \ref{sec:kmeans}. Porém, outros modelos, como o baseado em similaridade, podem vir a ser úteis, já que o objetivo desse trabalho é identificar grupos baseado em comportamentos tipicamente divergentes do comportamento comum.
+
+\section{K-Médias}\label{sec:kmeans}
 
 Segundo \citet{witten2011data}, K-Médias é um algoritmo de aprendizado iterativo baseado na distância geométrica. Inicialmente o algoritmo inicializa \textit{K} centroides em posições distintas. Cada exemplo, então, é associado ao centroide mais próximo. Em seguida o centroide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroide em sua nova posição.
 
@@ -91,4 +106,4 @@ Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariy
 \caption[Ponto Crítico da Otimização]{Ponto Crítico da Otimização} \label{fig:elbow}
 \end{figure}
 
-O artigo \citep{kodinariya2013review} também cita outros métodos para com critérios matemáticos menos subjetivos, porém este foi utilizado para fins de simplicidade. No capítulo 5 relativo aos experimentos, esse método será avaliado para os dados que utilizados neste trabalho.
+O artigo \citep{kodinariya2013review} também cita outros métodos com critérios matemáticos menos subjetivos. Porém, decidiu-se utilizar o Método \textit{Elbow} para uma análise inicial, por fins de simplicidade. No capítulo \ref{ch:discussion} relativo aos experimentos, esse método será avaliado para os dados que foram utilizados neste trabalho.
