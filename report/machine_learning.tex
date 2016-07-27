@@ -50,6 +50,18 @@ No caso deste trabalho, algumas máquinas identificadas pelo IP foram confirmada
 Note que se as máquinas conhecidamente suspeitas não se encontrarem no grupo divergente, o sistema falhou.
 
 \section{K-Médias}
+\section{Algoritmos de Agrupamento}
+
+Existem diversas definições pra grupos de entidades similares \citep{faceli2011inteligencia}, dentre elas pode citar:
+\begin{description}
+\item \textbf{Grupos bem separado}: Cada exemplo de um grupo está mais próximo de outro exemplo do mesmo grupo do que a qualquer outro ponto não pertencente a ele. Essa definição se assemelha bastante à abordagem de aprendizado K vizinhos mais próximos.
+\item \textbf{Grupo baseado em centro}: Cada exemplo do grupo está mais próximo do centróide do próprio grupo do que do centróide de qualquer outro grupo. Essa é a premissa básica do K-médias.
+\item \textbf{Grupo contínuo}: Qualquer exemplo de um grupos está mais próximo a um mais exemplos do mesmo grupo do que a qualquer outro exemplo não pertencente ao grupo. Essa definição é bastante similar ao \textit{Grupo bem separado}, porém neste basta estar mais próximo a um conjunto reduzido do mesmo grupo, diferente do bem separado que precisa estar mais próximo a todos do mesmo grupo.
+\item \textbf{Grupo baseado em densidade}: Um grupo é uma região de alta densidade separada de outras regiões de alta densidade por zonas de baixa densidade.
+\item \textbf{Grupo baseado em similaridade}: Um grupo é um conjunto de pontos similares contratados por outros grupos que não são similiares.
+\end{description}
+
+Cada definição induz uma abordagem de algoritmo diferente. Assumiu-se o modelo mais simples baseado em centros para resolver o problema, baseado em centros através do algoritmo de K-médias que será apresentado detalhadamente na seção \ref{sec:kmeans}. Porém outros modelos, como o baseado em similaridade, poderiam vir a ser úteis também, pois o objetivo é identificar grupos baseado em comportamentos tipicamente divergentes do comportamento comum.
 
 Segundo \citet{witten2011data}, K-Médias é um algoritmo de aprendizado iterativo baseado na distância geométrica. Inicialmente o algoritmo inicializa \textit{K} centroides em posições distintas. Cada exemplo, então, é associado ao centroide mais próximo. Em seguida o centroide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroide em sua nova posição.
 
