@@ -1,5 +1,5 @@
 \chapter{Preparação Dos Dados}
-Muitos dos métodos existentes para detecção de botnets, utilizam informações completas do tráfego da rede, inclusive de informações do \textit{payload} para extrair as características relevantes \citep{krmicek2011inspecting}. Infelizmente, nem sempre todas essas informações estão presentes, por diversos motivos, como questões de privacidade ou falta de autorização para acessar o conteúdo dos pacotes. Por isso, torna-se necessário analisar a capacidade de utilizar informações mais simples, como o fluxo da rede (\textit{NetFlow}) ou o registro do log de requisições a um servidor DNS, para características.
+Muitos dos métodos existentes para detecção de botnets, utilizam informações completas do tráfego da rede, inclusive de informações do \textit{payload} para extrair as características relevantes \citep{krmicek2011inspecting}. Infelizmente, nem sempre todas essas informações estão presentes, por diversos motivos, como questões de privacidade ou falta de autorização para acessar o conteúdo dos pacotes. Por isso, torna-se necessário analisar a capacidade de utilizar informações mais simples, como o fluxo da rede (\textit{NetFlow}) ou o registro do log de requisições a um servidor DNS, como características.
 
 Nesse trabalho vamos focar nos dados das requisições coletadas pelo servidor DNS do IME no período de fevereiro a abril de 2012. Ao longo desse capítulo mostraremos quais as informações contidas nesses registros, as características que consideramos relevantes e como foi feito o tratamento para a extração das mesmas.
 
@@ -29,7 +29,7 @@ Após aplicar a expressão regular em cada linha extraída do log do servidor DN
 \section{A Estrutura do Banco de Dados}
 Apenas conseguir fazer a leitura de cada campo do log individualmente não é o suficiente para representar as características que serão utilizadas pelos algoritmos de aprendizado de máquina. Ou seja, elas ainda precisam ser submetidas a diversos cálculos e tratamentos. Com o objetivo de acelerar o processamento desses tratamentos, além de facilitar e agilizar a consulta de informações posteriormente para efetuar uma investigação inicial dos suspeitos levantados pelo sistema, decidimos armazenar as informações em um banco de dados relacional.
 
-O Sistema Gerenciador de Banco de Dados utilizado foi o PostgreSQL, como parte da nossa solução, para facilitar a escrita, leitura e atualização das informações coletadas dos registros DNS. Na modelagem feita, utilizou-se três tabelas para representar as informações contidas no log. A figura \ref{fig:relational_diagram} apresenta a representação relacional do banco de dados, no qual já está incluso as características a serem analisadas como será esclarecido na sessão Levantamento das Características. Dessas três tabelas, a mais importante é a \textit{clients}, pois essa é a que realmente será utilizada pelos algoritmos de aprendizado de máquina. As tabelas \textit{dns\_queries} e \textit{domains} tem função apenas de auxiliar o cálculo da tabela \textit{clients}, porém podem servir também para consultas, caso alguém deseje utilizar a base de dados construídas para inspeção manual posterior.
+O Sistema Gerenciador de Banco de Dados utilizado foi o PostgreSQL, como parte da nossa solução, para facilitar a escrita, leitura e atualização das informações coletadas dos registros DNS. Na modelagem feita, utilizou-se três tabelas para representar as informações contidas no log. A figura \ref{fig:relational_diagram} apresenta a representação relacional do banco de dados, no qual já está incluso as características a serem analisadas como será esclarecido na sessão \ref{sec:levantamento_das_caracteristicas}. Dessas três tabelas, a mais importante é a \textit{clients}, pois essa é a que realmente será utilizada pelos algoritmos de aprendizado de máquina. As tabelas \textit{dns\_queries} e \textit{domains} tem função apenas de auxiliar o cálculo da tabela \textit{clients}, porém podem servir também para consultas, caso alguém deseje utilizar a base de dados construídas para inspeção manual posterior.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{relational_diagram}
@@ -58,6 +58,7 @@ A tabela \textit{clients} representa as máquinas que fizeram requisições DNS 
 \end{figure}
 
 \section{Levantamento das Características}
+\label{sec:levantamento_das_caracteristicas}
 De posse das informações apresentadas nos capítulos anteriores, é possível definir mais claramente o problema que esse trabalho se propõe a resolver e, em linhas gerais, como ele será abordado.
 
 O objetivo desse trabalho é a partir das informações obtidas no log de registros de um servidor DNS, acusar quais máquinas na rede são suspeitas de pertencer a uma botnet e merecem atenção para uma investigação mais profunda. Para isso, foram pensadas características que uma máquina pertencente a uma botnet pode exibir que a distingue de uma máquina com uso normal.
@@ -65,7 +66,7 @@ O objetivo desse trabalho é a partir das informações obtidas no log de regist
 As características analisadas foram divididas em quatro tipos, que identificam comportamentos divergentes do uso comum que esperam ser observados: a forma de escolha dos domínios, o comportamento de máquina, os domínios visitados em comum e tipos de requisição.
 
 \subsection{Escolha dos Domínios}
-Muitas botnets utilizam técnicas de geração de domínio \citep{zhou2013dga}. Essa técnica permite que os bots consultem um grande conjunto de domínios a procura do C\&C, porém apenas um pequeno conjunto desses domínios são de fato utilizados. Essa prática gera nomes não legíveis, muitas vezes formados apenas por números e palavras não legíveis. Além disso, por conveniência, é possível que os domínios gerados por uma mesma botnet tenham o mesmo número de caracteres. Por outro lado, apenas 7.3\% dos domínios dos um milhão primeiros domínios da Alexa contem número e que o tamanho do domínio de um usuário comum não segue nenhum padrão específico.
+Muitas botnets utilizam técnicas de geração de domínio \citep{zhou2013dga}. Essa técnica permite que os bots consultem um grande conjunto de domínios a procura do C\&C, porém apenas um pequeno conjunto desses domínios são de fato utilizados. Essa prática gera nomes não legíveis, muitas vezes formados apenas por números e palavras não legíveis. Além disso, por conveniência, é possível que os domínios gerados por uma mesma botnet tenham o mesmo número de caracteres. Ademais, caracteres numéricos são os mais raros e cerca de 90\% dos domínios \textit{.com}e \textit{.net} não contém nenhum número \cite{data2016domain}. Mostrando que o tamanho do domínio de um usuário comum não segue nenhum padrão específico.
 
 Não há garantias de que essa característica seja sempre efetiva, dado que o atacante pode gerar domínios de tamanho variável e evitar números ao gerar o domínio, por isso após a realização dos experimentos será possível confirmar ou não essa hipótese.
 
@@ -89,8 +90,8 @@ Para explorar essas propriedades foram propostas as seguintes características
 \item Quantidade total de consultas realizadas
 \end{itemize}
 
-\subsection{Domínio Visitados em Comum}
-Espera-se que domínios suspeitos sejam acessados apenas por poucas máquinas, como os domínios gerados por algoritmos de geração de domínios para tentar estabelecer uma comunicação com o C\&C. Devido a isso, espera-se que os bots tentem acessar domínios que dificilmente serão procurados por máquinas normais, além do que, se a máquina infectada procura o centro de comando e controle, espera-se que muito dos domínios consultados por ela também sejam dessa forma, ou seja pouco procurado por outras máquinas.
+\subsection{Domínios Visitados em Comum}
+Espera-se que domínios suspeitos sejam acessados apenas por poucas máquinas, como os domínios gerados por algoritmos de geração de domínios para tentar estabelecer uma comunicação com o C\&C. Devido a isso, espera-se que os bots tentem acessar domínios que dificilmente serão procurados por máquinas normais, além do que, se a máquina infectada procura o centro de comando e controle, espera-se que muitos dos domínios consultados por ela também sejam dessa forma, ou seja pouco procurado por outras máquinas.
 
 Para analisar essa propriedade, foi necessário realizar um pré-processamento, que analisa para cada domínio consultado, por quantas máquinas diferentes ele foi consultado. Essa quantidade de máquinas que requisitou um domínio específico chamaremos de grau de requisição do domínio.
 
@@ -105,7 +106,7 @@ Dessa forma, acredita-se que as informações relativas ao grau dos domínios co
 
 \subsection{Tipos de Requisição}
 
-Não se tem informação sobre máquinas seguindo padrão quanto ao tipo de requisição DNS solicitadas. Porém, esse dado é de fácil acesso e seu estudo pode evidenciar a exploração de alguma fragilidade ainda não analisada nas requisições DNS. Por exemplo, os registros do tipo TXT raramente são utilizados atualmente para leitura de seres humanos. Para isso levantamos algumas características quanto ao tipos de requisição DNS realizadas:
+Não se tem informação sobre máquinas seguindo padrão quanto ao tipo de requisição DNS solicitadas. Porém, esse dado é de fácil acesso e seu estudo pode evidenciar a exploração de alguma fragilidade ainda não analisada nas requisições DNS. Por exemplo, os registros do tipo TXT raramente são utilizados atualmente para leitura de seres humanos. Para isso levantamos algumas características quanto aos tipos de requisição DNS realizadas:
 
 \begin{itemize}
 \item Quantidade de consultas do tipo A (Registro de Endereço) realizadas
