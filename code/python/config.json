@@ -1,0 +1,16 @@
+{
+	"features"	: [
+					"count_domain_with_numbers",
+					"average_domain_length",
+					"std_domain_length",
+					"count_request",
+					"average_requisition_degree",
+					"std_requisition_degree",
+					"minimum_requisition_degree "
+				 ],
+	
+	"algorithm"	: "KMeans",
+	"param"		: {
+					"n_clusters" : 4
+				  }
+}
