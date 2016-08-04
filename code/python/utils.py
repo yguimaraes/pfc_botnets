@@ -23,11 +23,6 @@ def load(features):
 	return (dataset, ids)
 
 
-def shuffle_dataset(dataset, ids):
-	# np.random.seed(1234)
-	p = np.random.permutation(ids.shape[0])
-	return (dataset[p], ids[p])
-
 def separate_dataset(dataset, ids, rate=(0.8,0.2), validation=False):
 	
 	if sum(rate)!=1:
