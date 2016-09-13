@@ -1,6 +1,8 @@
 #include "dataloaderworker.h"
 #include <iostream>
 #include <unistd.h>
+#include "queryfilter.h"
+#include "domainexecuter.h"
 
 DataloaderWorker::DataloaderWorker(QObject *parent) : QObject(parent)
 {
@@ -8,10 +10,10 @@ DataloaderWorker::DataloaderWorker(QObject *parent) : QObject(parent)
 }
 
 void DataloaderWorker::loadLog(){
-    for( int count = 0; count < 5; count++ )
-     {
-        usleep( 100000 );
-        std::cout << "Ping long!" << std::endl;
-        emit progress(count);
-     }
+    QueryFilter* qf = new QueryFilter();
+    qf->ProcessLogs();
+    delete qf;
+    DomainExecuter* de = new DomainExecuter();
+    de->CalculateDomainDegrees();
+    delete de;
 }
