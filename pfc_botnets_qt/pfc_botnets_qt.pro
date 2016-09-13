@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui concurrent
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,9 +14,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         logselectorform.cpp \
-    dataloader.cpp
+    dataloaderworker.cpp
 
 HEADERS  += logselectorform.h \
-    dataloader.h
+    dataloaderworker.h
 
 FORMS    += logselectorform.ui
