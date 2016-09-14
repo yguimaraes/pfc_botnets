@@ -3,11 +3,8 @@
 
 #include <unordered_set>
 #include <vector>
-#include <boost/algorithm/string.hpp>
 
 using namespace std;
-
-typedef vector< boost::iterator_range<string::iterator> > find_vector_type;
 
 enum FILE_TYPE {prefix_file, white_list_file, dictionary_file};
 

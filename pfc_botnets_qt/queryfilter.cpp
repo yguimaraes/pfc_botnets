@@ -1,7 +1,8 @@
 #include "queryfilter.h"
 #include "queryexecuter.h"
 
-void QueryFilter::ProcessLogs(){
+void QueryFilter::ProcessLogs(QString filename){
+    /*
     string files[] = {
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120224-log-dns-ime.txt",
         "../private/log_completo/log_fev_mar_abr_2012/log_completo_separado_por_dia/20120225-log-dns-ime.txt",
@@ -36,6 +37,9 @@ void QueryFilter::ProcessLogs(){
         QueryExecuter query_executer(files[i], m_storage);
         query_executer.ProcessDnsLog();
     }
+    */
+    QueryExecuter query_executer(filename.toStdString(), m_storage);
+    query_executer.ProcessDnsLog();
 }
 
 QueryFilter::~QueryFilter(){

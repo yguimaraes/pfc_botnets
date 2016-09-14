@@ -11,9 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = pfc_botnets_qt
 TEMPLATE = app
 
-INCLUDEPATH += /usr/local/Cellar/postgresql/9.5.0/include \
-               /usr/local/Cellar/boost/1.60.0_1/include
-LIBS += -L/usr/local/lib -lpq -lboost_system -lboost_filesystem
+INCLUDEPATH += /usr/local/Cellar/postgresql/9.5.0/include
+LIBS += -L "/usr/local/Cellar/postgresql/9.5.0/lib" -lpq
 
 SOURCES += main.cpp\
         logselectorform.cpp \

@@ -34,7 +34,7 @@ void LogSelectorForm::on_pushButton_clicked(){
 
 
 void LogSelectorForm::on_pushButton_2_clicked(){
-    QFuture<void> future = QtConcurrent::run(&this->MyDataloader, &DataloaderWorker::loadLog);
+    QFuture<void> future = QtConcurrent::run(&this->MyDataloader, &DataloaderWorker::loadLog, ui->label_filename->text());
     this->FutureWatcher.setFuture(future);
     this->ProgressDialog->setMinimum(0);
     this->ProgressDialog->setMaximum(0);

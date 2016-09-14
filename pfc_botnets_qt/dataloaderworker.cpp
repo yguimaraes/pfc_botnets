@@ -9,9 +9,9 @@ DataloaderWorker::DataloaderWorker(QObject *parent) : QObject(parent)
 
 }
 
-void DataloaderWorker::loadLog(){
+void DataloaderWorker::loadLog(QString filename){
     QueryFilter* qf = new QueryFilter();
-    qf->ProcessLogs();
+    qf->ProcessLogs(filename);
     delete qf;
     DomainExecuter* de = new DomainExecuter();
     de->CalculateDomainDegrees();

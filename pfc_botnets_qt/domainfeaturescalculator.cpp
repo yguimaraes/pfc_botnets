@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "domainfeaturescalculator.h"
+#include <QString>
 
 using namespace std;
 
@@ -54,8 +55,10 @@ int DomainFeaturesCalculator::CalculateNumberOfDigits() {
 }
 
 int DomainFeaturesCalculator::ReadableStringLength(){
-    string domain_without_dots = domain_name;
-    boost::erase_all(domain_without_dots, ".");
+    QString qs_domain_without_dots =  QString::fromStdString(domain_name);
+    qs_domain_without_dots.remove(QChar('.'), Qt::CaseInsensitive);
+    string domain_without_dots = qs_domain_without_dots.toStdString();
+    //boost::erase_all(domain_without_dots, ".");
     int domain_length = domain_without_dots.length();
 
     int biggest_readable = 0;

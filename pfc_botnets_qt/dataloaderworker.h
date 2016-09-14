@@ -9,7 +9,7 @@ class DataloaderWorker : public QObject
     Q_OBJECT
 public:
     explicit DataloaderWorker(QObject *parent = 0);
-    void loadLog();
+    void loadLog(QString filename);
 signals:
     void progress(int);
 public slots:
