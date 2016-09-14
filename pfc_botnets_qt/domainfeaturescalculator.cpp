@@ -10,15 +10,15 @@ void DomainFeaturesCalculator::populate(FILE_TYPE var) {
     unordered_set<string> *variable;
     switch (var){
         case prefix_file:
-            file_name = "../private/lista_tld.txt";
+            file_name = "config_files/lista_tld.txt";
             variable = &prefix;
             break;
         case white_list_file:
-            file_name = "../private/whitelist_dom.txt";
+            file_name = "config_files/whitelist_dom.txt";
             variable = &white_list;
             break;
         case dictionary_file:
-            file_name = "../private/dicionario.txt";
+            file_name = "config_files/dicionario.txt";
             variable = &dictionary;
             break;
     }
