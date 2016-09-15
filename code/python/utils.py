@@ -14,7 +14,7 @@ def load(features):
 	cursor = conn.cursor()
 
 	# execute our Query
-	cursor.execute( "SELECT client_ip, " + str.join(", ", features) + "FROM clients")
+	cursor.execute( "SELECT client_ip, " + str.join(", ", features) + " FROM clients")
 
 	dataset = np.array(cursor.fetchall())
 	ids = dataset[:,0]
