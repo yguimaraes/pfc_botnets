@@ -2,6 +2,7 @@
 #include <fstream>
 #include "domainfeaturescalculator.h"
 #include <QString>
+#include <QFile>
 
 using namespace std;
 
@@ -23,10 +24,10 @@ void DomainFeaturesCalculator::populate(FILE_TYPE var) {
             variable = &dictionary;
             break;
     }
-    ifstream file(file_name);
-    if (file.is_open()){
-        while (getline(file, line)){
-            variable->insert(line);
+    QFile file(QString::fromStdString(file_name));
+    if (file.isOpen()){
+        while (!file.atEnd()){
+            variable->insert(file.readLine().toStdString());
         }
     }
     else{
