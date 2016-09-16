@@ -178,3 +178,5 @@ private/*
 *.pyc
 
 *.run
+
+build-pfc_botnets_qt-Desktop_Qt*/*
