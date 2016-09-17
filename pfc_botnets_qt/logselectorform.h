@@ -25,6 +25,8 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_plot_button_clicked();
+
 private:
     Ui::LogSelectorForm *ui;
     QFutureWatcher<void> FutureWatcher;
