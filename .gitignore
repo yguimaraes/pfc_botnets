@@ -165,6 +165,7 @@ TSWLatexianTemp*
 
 # Compiled C++ files
 *.bin
+*.o
 
 #PDFs
 /report/*.pdf
@@ -179,4 +180,9 @@ private/*
 
 *.run
 
-build-pfc_botnets_qt-Desktop_Qt*/*
+# Ignoring auto Qt generated stuff
+pfc_botnets_qt/moc_*.cpp
+pfc_botnets_qt/Makefile
+pfc_botnets_qt/ui_*.h
+pfc_botnets_qt/.qmake.stash
+pfc_botnets_qt/pfc_botnets_qt.app/*
