@@ -78,6 +78,19 @@
     <string>Arquivo não carregado.</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="conf_button">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>131</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Configurações</string>
+   </property>
+  </widget>
   <widget class="QPushButton" name="plot_button">
    <property name="geometry">
     <rect>

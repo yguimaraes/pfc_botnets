@@ -25,6 +25,8 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_conf_button_clicked();
+
     void on_plot_button_clicked();
 
 private:
