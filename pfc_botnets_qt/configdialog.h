@@ -2,6 +2,9 @@
 #define CONFIGDIALOG_H
 
 #include <QDialog>
+#include <map>
+#include <QString>
+#include <QCheckBox>
 
 namespace Ui {
 class ConfigDialog;
@@ -17,6 +20,7 @@ public:
 
 private:
     Ui::ConfigDialog *ui;
+    std::map<QString,QCheckBox*> mapCheckBox;
 };
 
 #endif // CONFIGDIALOG_H
