@@ -41,7 +41,7 @@
    <property name="title">
     <string>Algoritmo de agrupamento</string>
    </property>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="k_means">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -54,7 +54,7 @@
      <string>K-médias</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="agglo_clust">
     <property name="geometry">
      <rect>
       <x>240</x>
