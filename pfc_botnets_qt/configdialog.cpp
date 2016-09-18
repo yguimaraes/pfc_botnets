@@ -71,3 +71,26 @@ ConfigDialog::~ConfigDialog()
 {
     delete ui;
 }
+
+void ConfigDialog::on_buttonBox_accepted(){
+    QFile::remove(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/config.json"));
+
+    QJsonArray features;
+    QJsonValue algorithm(ui->k_means->isChecked() ? "KMeans" : "AgglomerativeClustering");
+    QJsonObject param = QJsonObject();
+    param.insert("n_clusters",QJsonValue(4));
+    for (std::map<QString,QCheckBox*>::iterator it = mapCheckBox.begin(); it != mapCheckBox.end(); it++){
+        if (it->second->isChecked()){
+            features.append(it->first);
+        }
+    }
+    QJsonObject target = QJsonObject();
+    target.insert("algorithm",algorithm);
+    target.insert("features",features);
+    target.insert("param",param);
+    QJsonDocument config_out(target);
+    QFile out_file(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/config.json"));
+    out_file.open(QIODevice::WriteOnly | QIODevice::Text);
+    out_file.write(config_out.toJson());
+    out_file.close();
+}

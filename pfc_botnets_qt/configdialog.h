@@ -18,6 +18,10 @@ public:
     explicit ConfigDialog(QWidget *parent = 0);
     ~ConfigDialog();
 
+private slots:
+
+    void on_buttonBox_accepted();
+
 private:
     Ui::ConfigDialog *ui;
     std::map<QString,QCheckBox*> mapCheckBox;
