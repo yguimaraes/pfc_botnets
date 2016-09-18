@@ -3,18 +3,20 @@
 CREATE DATABASE botnets_pfc;
 
 CREATE TABLE domains(
-	domain varchar(255) PRIMARY KEY,
+	domain varchar(255),
 	length integer,
 	is_suspect boolean,
 	numeric_count integer,
 	alexa_degree integer,
 	readable_string_length integer,
 	is_in_whitelist boolean,
-	requisition_degree integer
+	requisition_degree integer,
+	log_id integer,
+	PRIMARY KEY (domain, log_id)
 );
 
 CREATE TABLE clients(
-	client_ip inet PRIMARY KEY,
+	client_ip inet,
 	count_domain_with_numbers integer,
 	average_domain_length numeric,
 	std_domain_length numeric,
@@ -32,19 +34,24 @@ CREATE TABLE clients(
 	count_request_mx integer,
 	percentage_request_mx real,
 	count_request_txt integer,
-	percentage_request_txt real
+	percentage_request_txt real,
+	log_id integer,
+	PRIMARY KEY (client_ip, log_id)
 );
 
 CREATE TABLE dns_queries(
 	id SERIAL PRIMARY KEY,
 	query_time timestamp,
-	client_ip inet REFERENCES clients,
-	domain varchar(255) REFERENCES domains,
+	client_ip inet,
+	domain varchar(255),
 	type varchar(30),
 	is_type_a integer,
 	is_type_mx integer,
 	is_type_txt integer,
-	is_type_cname integer
+	is_type_cname integer,
+	log_id integer,
+	FOREIGN KEY (client_ip, log_id) REFERENCES clients (client_ip, log_id),
+	FOREIGN KEY (domain, log_id) REFERENCES domains (domain, log_id)
 );
 
 -- CLEAR DB

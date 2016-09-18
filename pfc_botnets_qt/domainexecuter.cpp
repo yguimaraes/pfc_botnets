@@ -10,6 +10,6 @@ DomainExecuter::~DomainExecuter(){
     delete m_domain_storage;
 }
 
-DomainExecuter::DomainExecuter(){
-    m_domain_storage = new DomainStorage();
+DomainExecuter::DomainExecuter(int log_id){
+    m_domain_storage = new DomainStorage(log_id);
 }

@@ -7,8 +7,9 @@
 class QueryStorage
 {
     PGconn* m_connection;
+    int m_log_id;
 public:
-    void save(DnsQuery query);
+    void save(DnsQuery query, int log_id);
 
     void addDomain(string domain);
 
@@ -17,6 +18,8 @@ public:
     void addClient(string client_ip);
 
     bool containsClient(string client_ip);
+
+    int MaxLogID();
 
     string BoolToString(bool m_boolean);
 

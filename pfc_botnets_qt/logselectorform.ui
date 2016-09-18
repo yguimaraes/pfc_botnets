@@ -52,7 +52,7 @@
     <string>Escolher Arquivo</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="btn_load">
    <property name="geometry">
     <rect>
      <x>10</x>
