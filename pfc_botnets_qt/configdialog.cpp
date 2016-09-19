@@ -6,6 +6,7 @@
 #include <QJsonValue>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QDir>
 
 ConfigDialog::ConfigDialog(QWidget *parent) :
     QDialog(parent),
@@ -48,6 +49,8 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
         ui->average_requisition_degree->setChecked(true);
         ui->std_requisition_degree->setChecked(true);
         ui->minimum_requisition_degree->setChecked(true);
+
+        QDir().mkpath(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
 
     } else {
         file.close();
