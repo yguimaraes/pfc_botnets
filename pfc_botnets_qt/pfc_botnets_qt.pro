@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     queryexecuter.cpp \
     domainfeaturescalculator.cpp \
     domainexecuter.cpp \
-    domainstorage.cpp
+    domainstorage.cpp \
+    configdialog.cpp \
+    plotdialog.cpp
 
 HEADERS  += logselectorform.h \
     dataloaderworker.h \
@@ -33,6 +35,12 @@ HEADERS  += logselectorform.h \
     queryexecuter.h \
     domainfeaturescalculator.h \
     domainexecuter.h \
-    domainstorage.h
+    domainstorage.h \
+    configdialog.h \
+    plotdialog.h
 
-FORMS    += logselectorform.ui
+FORMS    += logselectorform.ui \
+    configdialog.ui \
+    plotdialog.ui
+
+DISTFILES +=

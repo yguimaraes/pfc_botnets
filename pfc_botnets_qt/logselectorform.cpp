@@ -4,6 +4,8 @@
 #include "dataloaderworker.h"
 #include <iostream>
 #include <QtConcurrent>
+#include "configdialog.h"
+#include "plotdialog.h"
 
 LogSelectorForm::LogSelectorForm(QWidget *parent) :
     QWidget(parent),
@@ -46,4 +48,15 @@ void LogSelectorForm::on_btn_load_clicked()
     this->ProgressDialog->setLabelText("Importando logs para o banco de dados...");
     this->ProgressDialog->setWindowModality(Qt::WindowModal);
     this->ProgressDialog->exec();
+}
+
+void LogSelectorForm::on_conf_button_clicked(){
+    ConfigDialog config_dialog;
+    config_dialog.setModal(true);
+    config_dialog.exec();
+}
+
+void LogSelectorForm::on_plot_button_clicked(){
+    PlotDialog plot_dialog;
+    plot_dialog.exec();
 }
