@@ -6,7 +6,7 @@
 
 using namespace std;
 
-QueryExecuter::QueryExecuter(string path, QueryStorage* qs){
+QueryExecuter::QueryExecuter(string path, QueryStorage* qs, int log_id){
     dns_log_file.exceptions( std::ifstream::failbit | std::ifstream::badbit );
 
     try {
@@ -28,6 +28,7 @@ QueryExecuter::QueryExecuter(string path, QueryStorage* qs){
 
     query_storage = qs;
     m_path = path;
+    m_log_id = log_id;
 };
 
 QueryExecuter::~QueryExecuter(){
@@ -49,7 +50,7 @@ void QueryExecuter::ProcessDnsLog(){
             try{
                 DnsQuery current_query(request_line);
                 if(whitelist.count(current_query.m_client_ip) == 0){
-                    query_storage->save(current_query);
+                        query_storage->save(current_query, m_log_id);
                     }
                 }
             catch(std::runtime_error &e){

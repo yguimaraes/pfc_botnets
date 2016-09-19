@@ -8,8 +8,9 @@ class DomainStorage
 {
 private:
     PGconn* m_connection;
+    int m_log_id;
 public:
-    DomainStorage();
+    DomainStorage(int log_id);
     ~DomainStorage();
     void updateAllDegrees();
 };

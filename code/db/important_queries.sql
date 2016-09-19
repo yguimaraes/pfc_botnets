@@ -38,13 +38,13 @@ FROM (
  	COUNT(z.id) as count_request_not_in_whitelist
  FROM clients 
  INNER JOIN (
- 	SELECT dns_queries.id, dns_queries.domain, dns_queries.client_ip FROM dns_queries) as z 
- 	ON clients.client_ip = z.client_ip
- INNER JOIN domains ON z.domain = domains.domain
- WHERE domains.is_in_whitelist = false
+ 	SELECT dns_queries.id, dns_queries.domain, dns_queries.client_ip, dns_queries.log_id FROM dns_queries) as z 
+ 	ON (clients.client_ip = z.client_ip AND clients.log_id = z.log_id)
+ INNER JOIN domains ON (z.domain = domains.domain AND z.log_id = domains.log_id)
+ WHERE (domains.is_in_whitelist = false AND domains.log_id = 1)
  GROUP BY clients.client_ip
  ) AS y 
-WHERE x.client_ip = y.client_ip;
+WHERE (x.client_ip = y.client_ip AND x.log_id = 1);
 
 UPDATE clients x 
 SET count_request = y.count_request,

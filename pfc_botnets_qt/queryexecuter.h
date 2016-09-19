@@ -13,8 +13,9 @@ class QueryExecuter {
     QueryStorage* query_storage;
     unordered_set<string> whitelist;
     string m_path;
+    int m_log_id;
 public:
-    QueryExecuter(string path, QueryStorage* qs);
+    QueryExecuter(string path, QueryStorage* qs, int log_id);
 
     ~QueryExecuter();
 

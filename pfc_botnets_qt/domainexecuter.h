@@ -8,8 +8,9 @@ using namespace std;
 class DomainExecuter {
 protected:
     DomainStorage* m_domain_storage;
+    int m_log_id;
 public:
-    DomainExecuter();
+    DomainExecuter(int log_id);
 
     ~DomainExecuter();
 

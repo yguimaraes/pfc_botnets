@@ -9,7 +9,9 @@ class QueryFilter
 protected:
     QueryStorage* m_storage;
 public:
-    void ProcessLogs(QString filename);
+    void ProcessLogs(QString filename, int log_id);
+
+    int NextLogID();
 
     QueryFilter();
 

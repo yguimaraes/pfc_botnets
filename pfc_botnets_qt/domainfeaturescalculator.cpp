@@ -2,32 +2,30 @@
 #include <fstream>
 #include "domainfeaturescalculator.h"
 #include <QString>
-#include <QFile>
 
 using namespace std;
 
 void DomainFeaturesCalculator::populate(FILE_TYPE var) {
     string line, file_name;
     unordered_set<string> *variable;
-    Q_INIT_RESOURCE(private);
     switch (var){
         case prefix_file:
-            file_name = ":/lista_tld.txt";
+            file_name = "config_files/lista_tld.txt";
             variable = &prefix;
             break;
         case white_list_file:
-            file_name = ":/whitelist_dom.txt";
+            file_name = "config_files/whitelist_dom.txt";
             variable = &white_list;
             break;
         case dictionary_file:
-            file_name = ":/dicionario.txt";
+            file_name = "config_files/dicionario.txt";
             variable = &dictionary;
             break;
     }
-    QFile file(QString::fromStdString(file_name));
-    if (file.isOpen()){
-        while (!file.atEnd()){
-            variable->insert(file.readLine().toStdString());
+    ifstream file(file_name);
+    if (file.is_open()){
+        while (getline(file, line)){
+            variable->insert(line);
         }
     }
     else{
