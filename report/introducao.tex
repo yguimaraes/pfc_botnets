@@ -11,9 +11,13 @@ O objetivo deste trabalho é desenvolver uma ferramenta para detectar possíveis
 Além disso, o desempenho dessa ferramenta será avaliado, utilizando as informações do log de DNS dos servidores do IME, para o qual já temos algumas máquinas infectadas previamente mapeadas por inspeção e investigação manuais.
 
 \section{Motivação}
-O crescimento e diversificação do uso da Internet, criaram o cenário ideal para o desenvolvimento das botnets, que são consideradas uma das maiores ameaças atuais na área de segurança da informação \citep{ji2008botnet}.
+O crescimento e diversificação do uso da Internet, criaram o cenário ideal para o desenvolvimento das botnets, que são consideradas uma das maiores ameaças atuais na área de segurança da informação \citep{ji2008botnet}. 
 
-A detecção das botnets é um grande desafio, pois os atacantes estão sempre aprimorando o funcionamento dos bots, com isso os mecanismos atuais muitas vezes falham ao detectar novas implementações de botnets. Isso motivou o uso de algoritmos de agrupamento para serem utilizados na detecção de botnets, de forma que a ferramenta seja capaz de detectar inclusive botnets que eram desconhecidas. 
+Esta ameaça requer uma atenção especial, principalmente no âmbito militar, devido a aplicação que as botnets podem ter no contexto de guerra cibernética. Permitindo que os atacantes inutilizem servidores do inimigo e/ou coletem informações confidenciais.
+
+A detecção das botnets é um grande desafio, pois os atacantes estão sempre aprimorando o funcionamento dos bots, com isso os mecanismos atuais muitas vezes falham ao detectar novas implementações de botnets. Isso motivou o uso de algoritmos de agrupamento para serem utilizados na detecção de botnets, de forma que a ferramenta seja capaz de detectar inclusive botnets que eram desconhecidas.
+
+Por esses motivos, torna-se muito clara a necessidade da criação de uma ferramenta que permita facilitar o trabalho de detecção de novas botnets, não previstas pelas ferramentas atuais. Já que novas botnets só poderiam ser identificadas por inspeção manual, que é um processo bastante complexo devido à enorme quantidade de informações presentes em uma rede.
 
 \section{Justificativa}
 A justificativa desse trabalho é contribuir para a área de defessa cibernética, uma área de interesse do IME, apoiando à pesquisa com o conhecimento de características de consultas de DNS que podem ser usadas para realizar a detecção de botnets. Além disso, a ferramenta pode ser utilizada pelo Centro de Defesa Cibernética (CDCiber) ou servir como um módulo de um sistema integrado de detecção de botnets \citep{silva2012arquitetura}.
