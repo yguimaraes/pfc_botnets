@@ -42,6 +42,7 @@ void LogSelectorForm::on_btn_load_clicked()
     connect(&this->FutureWatcher, SIGNAL (finished()), this->ProgressDialog, SLOT (cancel()));
     this->ProgressDialog->setMinimum(0);
     this->ProgressDialog->setMaximum(0);
+    this->ProgressDialog->setCancelButton(0);
     this->ProgressDialog->setLabelText("Importando logs para o banco de dados...");
     this->ProgressDialog->setWindowModality(Qt::WindowModal);
     this->ProgressDialog->exec();
