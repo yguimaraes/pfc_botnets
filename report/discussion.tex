@@ -1,10 +1,16 @@
 \chapter{Resultados e Discussões}\label{ch:discussion}
 
-Os experimentos foram realizados com a base de dados organizada como descrita no Capítulo 4 relativo à Preparação de Dados. Os experimentos foram feitos com o apoio da ferramenta \textit{Scikit-Learn} que possui a implementação de diversos algoritmos de aprendizado de máquina e agrupamento, dentre eles K-Médias, que já foi discutido no capítulo 3. Também foi utilizado o pacote \textit{NumPy}, ferramenta para cálculos matriciais não menos importantes para o sucesso do trabalho.
+Os experimentos foram realizados com a base de dados organizada como descrita no Capítulo \label{ch:data_preparation}. Os experimentos foram feitos com o apoio da ferramenta \textit{Scikit-Learn} que possui a implementação de diversos algoritmos de aprendizado de máquina e agrupamento, dentre eles K-Médias, que já foi discutido no capítulo 3. Também foi utilizado o pacote \textit{NumPy}, que é uma ferramenta para cálculos matriciais.
 
-Para a preparação das análises foi adicionado ao banco de dados o registro de atividades do servidor DNS do IME de 12 de março de 2012. Nesse registro de atividades há rastros de 3 suspeitos já confirmados como parte integrante de botnets, através de inspeções manuais feitas na época.
+Para a preparação das análises foi adicionado ao banco de dados o registro de atividades do servidor DNS do IME de 12 de março de 2012. Nesse registro de atividades há rastros de 3 clientes suspeitos já confirmados como parte integrante de botnets através de inspeções manuais feitas na época que levaram a criação da lista de suspeitos na figura \ref{fig:suspects}.
 
-Foi realizada a comparação da qualidade da saída algoritmo para dados normalizados e não normalizados. Para normalizar, decidiu-se arbitrariamente, utilizar a forma \ref{eq:norm}
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.7]{ip_suspects}
+\caption[Lista de IPs Suspeitos Detectados Manualmente na Base de Dados]{Lista de IPs Suspeitos Detectados Manualmente na Base de Dados} \label{fig:suspects}
+\end{figure}
+
+Foi realizada a comparação da qualidade da saída do algoritmo para dados normalizados e não normalizados. Para normalizar foi utilizada a forma \ref{eq:norm}
 
 \begin{equation} \label{eq:norm}
 \frac{\mathbf{X} - \mathbf{\bar{X}}}{\sigma}
@@ -15,6 +21,8 @@ Foi realizada a comparação da qualidade da saída algoritmo para dados normali
 Para o cálculo da distribuição da função custo, foram criados 10 modelos para cada quantidade de centroides e calculou-se a média das funções de custos dentre cada quantidade de centroide. Esse procedimento é realizado para estabilizar os valores da função custo, já que a função custo pode estar sujeita a flutuação, por outro lado isso não pareceu crítico para esse conjunto de dados.
 
 As figuras \ref{fig:cost_per_k} e \ref{fig:cost_per_k_not_norm} apresentam o comportamento dos valores da função custo ao serem adicionados centroides.
+
+% TODO entender o que o professor quis dizer aqui
 
 \begin{figure}[htbp]
 \centering
@@ -64,4 +72,4 @@ Para a segunda análise, foi efetuada a normalização das características, par
 
 A hipótese que se levanta para explicar o sucesso é que apesar de as máquinas com comportamento suspeito divergirem das outras máquinas, por exemplo em quantidade de requisição, a distância marginal entre elas é grande o suficiente para confundir o algoritmo ao tentar agrupa-los.
 
-Além disso observou-se que, ao ser descartado, o campo \textit{std\_requisition\_degree} não influenciou na identificação dos itens do menor grupo, isto é os mesmo 26 elementos permanecem consistentemente no mesmo grupos. Isso reforça a necessidade de ser aplicada uma técnica para realizar a seleção das melhores características.
+Além disso observou-se que, ao ser descartado, o campo \textit{std\_requisition\_degree} não influenciou na identificação dos itens do menor grupo, isto é os mesmo 26 elementos permanecem consistentemente no mesmo grupo. Isso reforça a necessidade de ser aplicada uma técnica para realizar a seleção das melhores características.
