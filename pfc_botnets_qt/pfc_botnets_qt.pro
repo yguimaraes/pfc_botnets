@@ -43,7 +43,4 @@ FORMS    += logselectorform.ui \
     configdialog.ui \
     plotdialog.ui
 
-RESOURCES += \
-    ../private/private.qrc
-
 DISTFILES +=
