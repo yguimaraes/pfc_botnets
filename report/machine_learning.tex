@@ -1,5 +1,5 @@
 \chapter{Aprendizado de Máquina}
-Como \citet{bishop2006pattern} descreve, aprendizado de máquina é uma maneira de abordar um problema de computação. Nessa abordagem, a partir de um grande conjunto de dados, chamados conjunto de treinamento, são inferidos um conjunto de parâmetros a serem utilizados em um modelo parametrizado.
+Como \citet{rezende2003sistemas} descreve, aprendizado de máquina é uma área de Inteligência Artificial no qual sistemas são capazes de adiquirir conhecimento automaticamente. Um sistema de aprendizado é programa capaz de tomar decisões baseado em experiências acumuladas. Dessa forma, a partir de um conjunto de dados, chamados conjunto de treinamento, são inferidos um conjunto de parâmetros a serem utilizados em um modelo parametrizado.
 
 \section{Definições}
 
@@ -10,7 +10,7 @@ Algumas breves definições serão apresentadas com a finalidade de ambientar o 
 
 \item \textbf{Características}: É um conjunto ordenado de valores que descrevem um exemplo. A escolha das características utilizadas pra representar os exemplos traz consequências diretas ao problema.
 
-\item \textbf{Etiqueta}: É a classe que um exemplo particular pertence. Essa definição será utilizada para descrever o diversos tipos de cenário que os dados podem se encontrar.
+\item \textbf{Etiqueta}: É a classe que um exemplo particular pertence. Essa definição será utilizada para descrever o diversos tipos de cenário que os dados podem se encontrar, por exemplo nem sempre as etiquetas estão disponíveis.
 
 \item \textbf{Função Custo}: É a função que mede quanto o modelo se enquadra ao conjunto de exemplos. Por exemplo, em uma regressão linear utiliza-se a soma das distâncias entre as características dos exemplos e o modelo linear que se quer utilizar para generalizar essas características.
 \end{description}
@@ -28,22 +28,20 @@ Dentro do universo de problemas que são resolvidos pelas técnicas de aprendiza
 \item \textbf{Redução de Dimensionalidade}: Representar o conjunto de exemplos com um número reduzido de dimensões, por exemplo comprimir imagens para processamento de imagens.
 \end{description}
 
-Neste projeto o objetivo é identificar grupos com padrão de comportamento semelhantes. A expectativa é que o comportamento dos bots formem grupos divergentes dos usuários legítimos. Todavia, nem toda máquina pertencente a esse grupo divergente está infectada, o que se quer garantir é um número de reduzido, da ordem de \(10\), de máquinas suspeitas para serem analisadas.
+Neste projeto o objetivo é identificar grupos com padrão de comportamento semelhantes. A expectativa é que o comportamento dos bots formem grupos divergentes dos usuários legítimos. Todavia, nem toda máquina pertencente a esse grupo divergente está infectada, o que se quer garantir é um número de reduzido, da ordem das dezenas, de máquinas suspeitas para serem analisadas, dessa forma o usuário poderar dar atenção aos casos divergentes.
 
 \section{Cenários dos Dados}
 
-Categoriza-se \citep{mohri2012foundations} sete cenários para os algoritmos de aprendizado, esse cenários são fortemente influenciados pelas condições dos dados de treinamento.
+Categoriza-se \citep{mohri2012foundations} diversos cenários para os algoritmos de aprendizado, esses cenários são fortemente influenciados pelas condições dos dados de treinamento. Dentre os quais os três principais são:
 
 \begin{description}
 \item \textbf{Aprendizado Supervisionado}: O modelo tem acesso a dados com os resultados de saída já esperados, ou etiquetados, como lê-se na literatura. Os problemas mais comuns desse tipo de cenário são classificação, regressão e ordenação.
 
-\item \textbf{Aprendizado Não Supervisionado}: Só se dispõe da conjunto de exemplos para treinamento sem etiquetas. Geralmente é mais utilizado para classificação, agrupamento e redução de dimensionalidade
-
-\item \textbf{Aprendizado Semi-Supervisionado}: Neste cenário, é possível acessar uma conjunto de exemplos sem etiquetas e uma com etiquetas. Esse é o caso de problemas em que dados sem etiquetas são fáceis de serem adquiridos, ao contrário dos dados etiquetados, pela dificuldade de etiquetar.
+\item \textbf{Aprendizado Não Supervisionado}: Só se dispõe do conjunto de exemplos para treinamento sem etiquetas. Geralmente é mais utilizado para classificação, agrupamento e redução de dimensionalidade
 
 \end{description}
 
-E ainda há outros possíveis cenários ainda mais complexos e específicos. Esses cenários não foram catalogados neste trabalho porque a campo de Aprendizado de Máquina está ainda em constante fase de crescimento.
+E ainda há outros possíveis cenários ainda mais complexos e específicos, como o cenário semi-supervisionado, o qual os exemplos estão parcialmente etiquetados. Os demais cenários não foram catalogados neste trabalho por causa da exaustiva lista.
 
 No caso deste trabalho, algumas máquinas identificadas pelo IP foram confirmadas como bots, mas não há garantia de que sejam os únicos bots na rede. O algoritmo se vê num cenário não supervisionado, mas os desenvolvedores validam os resultados a partir dos bots já conhecidos.
 
@@ -53,11 +51,11 @@ Note que se as máquinas conhecidamente suspeitas não se encontrarem no grupo d
 
 Existem diversas definições pra grupos de entidades similares \citep{faceli2011inteligencia}, dentre elas podem ser citadas:
 \begin{description}
-\item \textbf{Grupos bem separado}: Cada exemplo de um grupo está mais próximo de outro exemplo do mesmo grupo do que a qualquer outro ponto não pertencente a ele. Essa definição se assemelha bastante à abordagem de aprendizado K vizinhos mais próximos.
+\item \textbf{Grupos bem separados}: Cada exemplo de um grupo está mais próximo de outro exemplo do mesmo grupo do que a qualquer outro ponto não pertencente a ele. Essa definição se assemelha bastante à abordagem de aprendizado K vizinhos mais próximos num cenário supervisionado.
 \item \textbf{Grupo baseado em centro}: Cada exemplo do grupo está mais próximo do centroide do próprio grupo do que do centroide de qualquer outro grupo. Essa é a premissa básica do K-médias.
-\item \textbf{Grupo contínuo}: Qualquer exemplo de um grupo está mais próximo a um mais exemplos do mesmo grupo do que a qualquer outro exemplo não pertencente ao grupo. Essa definição é bastante similar ao Grupo bem separado. Porém, no Grupo contínuo basta estar mais próximo a um conjunto reduzido do mesmo grupo, diferente do bem separado que precisa estar mais próximo a todos do mesmo grupo.
+\item \textbf{Grupo contínuo}: Qualquer exemplo de um grupo está mais próximo a um ou mais exemplos do mesmo grupo do que a qualquer outro exemplo não pertencente ao grupo. Essa definição é bastante similar ao Grupo bem separado. Porém, no Grupo contínuo basta estar mais próximo a um conjunto reduzido do mesmo grupo, diferente do bem separado que precisa estar mais próximo a todos do mesmo grupo.
 \item \textbf{Grupo baseado em densidade}: Um grupo é uma região de alta densidade, separada de outras regiões de alta densidade por zonas de baixa densidade.
-\item \textbf{Grupo baseado em similaridade}: Um grupo é um conjunto de pontos similares contratados por outros grupos que não são similares.
+\item \textbf{Grupo baseado em similaridade}: Cada exemplo é comparado através de uma matriz de similaridade para então se tomar a decisão de agrupamento.
 \end{description}
 
 Cada definição induz uma abordagem de algoritmo diferente. Para esse trabalho, decidiu-se utilizar o modelo mais simples que é o de Grupo baseado em centro para resolver o problema. O algoritmo utilizado que é baseado na definição escolhida é o algoritmo de K-médias que será apresentado detalhadamente na seção \ref{sec:kmeans}. Porém, outros modelos, como o baseado em similaridade, podem vir a ser úteis, já que o objetivo desse trabalho é identificar grupos baseado em comportamentos tipicamente divergentes do comportamento comum.
@@ -79,15 +77,15 @@ O qual \(cent(\mathbf{X})\) é a função que retorna o centroide mais próximo 
 \caption[Aplicação do K-Médias]{Aplicação do K-Médias} \label{fig:k_means_example}
 \end{figure}
 
-A \ref{fig:k_means_example} representa a aplicação da técnica em dados bidimensionais com três grupos. É possível notar que converge rapidamente, nesse caso em apenas 9 iterações chegou-se a um resultado satisfatório. Além disso, espera-se uma quantidade de máquinas da ordem de \(10^4\), como o algoritmo K-Médias é linear tanto na decisão do grupo para cada instância quanto no cálculo do novo centroide, a temporização do algoritmo é muito baixa.
+Pode-se visualizar a aplicação da técnica em dados bidimensionais com três grupos na figura \ref{fig:k_means_example}. Além disso, nota-se que a convergência é rápida, nesse caso em apenas 9 iterações chegou-se a um resultado satisfatório. Além disso, espera-se uma quantidade de máquinas da ordem de \(10^4\), como o algoritmo K-Médias é linear tanto na decisão do grupo para cada instância quanto no cálculo do novo centroide, a temporização do algoritmo é muito baixa.
 
 \subsection{Determinação do Número de Grupos}
 
-Para a operação plena do algoritmo é necessário que seja informada a quantidade de grupos que são buscados. Isso pode ser um problema simples quando é possível visualizar os dados, como na figura \ref{fig:k_means_example}, mas não é possível realizar o mesmo procedimento quando os exemplos têm mais que três dimensões, como no caso deste projeto.
+Para a operação plena do algoritmo é necessário que seja informada a quantidade de grupos que são buscados. A visualização é facilitada quando é possível avaliar visualmente os dados, como na figura \ref{fig:k_means_example}, mas não é possível realizar o mesmo procedimento quando os exemplos têm mais que três dimensões, como no caso deste projeto.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{between_two_clusters}
-\caption[Centróide Pouco Representativo]{Centróide Pouco Representativo} \label{fig:between_two_clusters}
+\caption[Centroide Pouco Representativo]{Centroide Pouco Representativo} \label{fig:between_two_clusters}
 \end{figure}
 
 Além disso, se por um lado, pode-se carecer centroides levando a cenários como na figura \ref{fig:between_two_clusters}, no qual o centroide não generaliza os dados, por outro, como é possível visualizar na figura \ref{fig:cluster_overfitting}, um grupo pode acabar se separando por centroides desnecessários.
@@ -98,7 +96,7 @@ Além disso, se por um lado, pode-se carecer centroides levando a cenários como
 \caption[Grupo Dividido]{Grupo Dividido} \label{fig:cluster_overfitting}
 \end{figure}
 
-Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariya2013review}. Trata-se de um método visual no qual procura-se o ponto em que a adição de um novo centroide não implica mais na redução drástica da função custo. Esse efeito é observado na figura \ref{fig:elbow}
+Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariya2013review}. Trata-se de um método baseado na aferência visual no qual procura-se o ponto em que a adição de um novo centroide não implica mais na redução drástica da função custo criando um bico, ou cotovelo. Esse efeito é observado na figura \ref{fig:elbow}
 
 \begin{figure}[htbp]
 \centering
@@ -107,3 +105,5 @@ Para resolver esse problema utiliza-se o Método \textit{Elbow} \citep{kodinariy
 \end{figure}
 
 O artigo \citep{kodinariya2013review} também cita outros métodos com critérios matemáticos menos subjetivos. Porém, decidiu-se utilizar o Método \textit{Elbow} para uma análise inicial, por fins de simplicidade. No capítulo \ref{ch:discussion} relativo aos experimentos, esse método será avaliado para os dados que foram utilizados neste trabalho.
+
+% TODO avaliar as considerações finais do capítulo

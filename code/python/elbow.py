@@ -16,4 +16,6 @@ ax.annotate('cotovelo', xy=(3*1.03,500.0/(3**2)*1.03), xytext=(4, 100),
 plt.plot(3,500.0/(3**2),"ko")
 ax.set_xlim(0,10)
 ax.set_ylim(0, 550)
+plt.xlabel("n_labels")
+plt.ylabel("Cost")
 plt.show()
