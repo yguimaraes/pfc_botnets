@@ -18,11 +18,7 @@ Foi realizada a comparação da qualidade da saída do algoritmo para dados norm
 
 \section{Análise do Número de Grupos}
 
-Para o cálculo da distribuição da função custo, foram criados 10 modelos para cada quantidade de centroides e calculou-se a média das funções de custos dentre cada quantidade de centroide. Esse procedimento é realizado para estabilizar os valores da função custo, já que a função custo pode estar sujeita a flutuação, por outro lado isso não pareceu crítico para esse conjunto de dados.
-
-As figuras \ref{fig:cost_per_k} e \ref{fig:cost_per_k_not_norm} apresentam o comportamento dos valores da função custo ao serem adicionados centroides.
-
-% TODO entender o que o professor quis dizer aqui
+Para o cálculo da distribuição da função custo em relação ao número grupos, apresentado na figura \ref{fig:cost_per_k}, foram criados 10 modelos para cada quantidade de centroides e calculou-se a média das funções de custos dentre cada quantidade de centroide. Esse procedimento é realizado para estabilizar os valores da função custo, já que a função custo pode estar sujeita a flutuação, por outro lado isso não pareceu crítico para esse conjunto de dados.
 
 \begin{figure}[htbp]
 \centering
@@ -30,13 +26,7 @@ As figuras \ref{fig:cost_per_k} e \ref{fig:cost_per_k_not_norm} apresentam o com
 \caption[Custo pelo Número de Centroides para Dados Normalizados]{Custo pelo Número de Centroides para Dados Normalizados} \label{fig:cost_per_k}
 \end{figure}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[scale=0.7]{cost_per_k_not_norm}
-\caption[Custo pelo Número de Centroides para Dados não Normalizados]{Custo pelo Número de Centroides para Dados não Normalizados} \label{fig:cost_per_k_not_norm}
-\end{figure}
-
-Apesar de se perceber um bico quando o modelo tem 4 centroides em ambas figuras, ainda há ambiguidade quanto ao ponto crítico. Outras técnicas mais robustas serão avaliadas nas fases posteriores do projeto para validar a hipótese de que há utilização de 4 centroides gera os melhores resultados.
+Percebe-se certa há ambiguidade quanto ao ponto crítico, mas é possível notar uma leve variação de curvatura no ordenada 4.
 
 \section{Análise da Base de Dados}
 
