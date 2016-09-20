@@ -24,9 +24,7 @@ void PlotDialog::on_pushButton_clicked(){
     int count = 0;
     QStringList params, env;
     QProcess *graph = new QProcess(this);
-    QString project = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) ;
-    std::cout << project.toStdString() << std::endl;
-    params << project + "/git_storage/pfc_botnets/code/python/plot.py";
+    params << "../code/python/plot.py";
     env << "PYTHONPATH=/usr/lib/python2.7/site-packages:/usr/local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages";
 
     graph->setEnvironment(env);
