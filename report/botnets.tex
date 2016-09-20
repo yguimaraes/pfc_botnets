@@ -15,7 +15,8 @@ As botnets apresentam alguns elementos estruturais tipicamente envolvidos, que e
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=\textwidth]{typical_elements}
+\centering
+\includegraphics[width=10cm]{typical_elements}
 \caption[Elementos das botnets]{Elementos das botnets \citep{silva2013botnets}} \label{fig:typical_elements}
 \end{figure}
 
@@ -26,7 +27,7 @@ Existem características que tornam o \textit{host} mais interessante ao \textit
 
 Existem duas formas para combater um ataque realizado por botnets: reativamente ou preventivamente. A forma reativa é a mais comum e envolve detectar a existência da atividade maliciosa e reagir ao ataque tentando reduzir o tráfego malicioso para níveis aceitáveis. Uma desvantagem é que o ataque já vai ter sido inicializado quando for detectado, ou seja, já vai haver causado danos antes de ser solucionado. A forma preventiva busca evitar que a botnet possa realizar alguma atividade maliciosa, porém essa atividade não é simples, já que o atacante pode aprimorar seus bots, tornando-os mais sofisticados, exigindo grandes investimentos para manter os recursos de segurança atualizados.
 
-O mecanismo que estamos desenvolvendo é da forma preventiva, já que o algoritmo busca encontrar padrões e identificar possíveis máquinas infectadas por botnets. Tudo isso na fase em que o \textit{botmaster} ainda está infectando máquinas com o bot para a botnet. Ou seja, buscamos detectar as máquinas infectadas antes do ataque, como um ataque de negação de serviço, em si ser efetivado. Uma característica desejável para um detector é a detecção em tempo real, com o objetivo de minimizar os danos causados e o tempo de reação do \textit{botmaster}. Porém, obter essa característica é um desafio, devido ao grande número de dados que devem ser tratados e analisados. Dessa forma, nosso projeto não fará detecção em tempo real, mas tentará se aproximar disso, utilizando a detecção dos dados coletados ao longo de um dia para detectar bots que atuaram nas últimas 24 horas.
+O mecanismo que estamos desenvolvendo é da forma preventiva, já que o algoritmo busca encontrar padrões e identificar possíveis máquinas infectadas por botnets. Espera-se que a detecção seja feita enquanto o \textit{botmaster} ainda está infectando as máquinas com o \textit{malware} do bot da botnet. Ou seja, buscamos detectar as máquinas infectadas antes do ataque, como um ataque de negação de serviço, em si ser efetivado. Uma característica desejável para um detector é a detecção em tempo real, com o objetivo de minimizar os danos causados e o tempo de reação do \textit{botmaster}. Porém, obter essa característica é um desafio, devido ao grande número de dados que devem ser tratados e analisados. Dessa forma, nosso projeto não fará detecção em tempo real, mas tentará se aproximar disso, utilizando a detecção dos dados coletados ao longo de um dia para detectar bots que atuaram nas últimas 24 horas.
 
 \section{Ciclo de Vida das Botnets}
 Na maioria dos casos, existe um ciclo com fases bem definidas de como uma botnet é criada e mantida, a Figura \ref{fig:botnets_lifecycle} mostra essas fases para cada novo hospedeiro que é contaminado.
@@ -64,7 +65,8 @@ Existem 4 tipos de arquiteturas para as botnets: centralizada, descentralizada, 
 Na arquitetura centralizada, mostrada na Figura \ref{fig:centralized_architecture} todos os bots se comunicam com um número pequeno de servidores de C\&C. Embora ela ofereça vantagens ao \textit{botmaster}, como baixa latência e facilidade de manutenção, ela também torna a botnet bastante vulnerável, permitindo que a botnet seja desligada após a identificação dos poucos pontos centrais de C\&C. Esta arquitetura é muito utilizada por botnets que utilizam o protocolo IRC (\textit{Internet Relay Chat}) para comunicação. Todavia, o tráfego desse protocolo é incomum e raramente utilizado, especialmente em ambientes corporativos, por esse motivo, o tráfego desse tipo de protocolo costuma ser bloqueado, inutilizando a botnet. Devido a isso, o uso do protocolo HTTP (\textit{HyperText Transfer Protocol}) se popularizou já que ele é amplamente utilizado, disfarçando as comunicações das botnets.
 
 \begin{figure}
-\includegraphics[width=\textwidth]{centralized}
+\centering
+\includegraphics[width=10cm]{centralized}
 \caption[Arquitetura Centralizada]{Arquitetura Centralizada\citep{wang2010advanced}} \label{fig:centralized_architecture}
 \end{figure}
 
@@ -75,7 +77,8 @@ As arquiteturas híbridas apresentam características de ambas as arquiteturas c
 Por fim, a arquitetura aleatória é um modelo, até agora, apenas teórico. No qual o bot não se comunica ativamente com o \textit{botmaster} ou com outros bot. Dessa forma, para realizar um ataque, o \textit{botmaster} precisa vasculhar a rede em busca de um bot para enviar o comando e realizar as atividades maliciosas.
 
 \begin{figure}
-\includegraphics[width=\textwidth]{hybrid}
+\includegraphics[width=10cm]{hybrid}
+\centering
 \caption[Arquitetura Híbrida]{Arquitetura Híbrida\citep{wang2010advanced}} \label{fig:hybrid_architecture}
 \end{figure}
 
