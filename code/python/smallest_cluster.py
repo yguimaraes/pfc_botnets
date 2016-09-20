@@ -2,6 +2,7 @@
 from sklearn import cluster
 from utils import *
 import json
+import xlwt
 
 def get_cluster_distribution(cluster_labels, n_clusters=8):
 	return [sum(i==cluster_labels) for i in range(n_clusters)]
@@ -25,15 +26,26 @@ def get_ips(features=[], algorithm="KMeans", param=dict(), log_id=0):
 		IPs[i] = Y[cluster_labels==index]
 		Coor[i] = X[cluster_labels==index]
 	return IPs, Coor
-	
-	cluster_labels = mKmeans.fit_predict(X)
-	dist = get_cluster_distribution(cluster_labels, n_clusters=nc)
-	index = dist.index(min(dist))
-	smallest = Y[cluster_labels==index]
-	print dist
-	for i in smallest:
-		print i
 
+def export_sheet(IPs, Coor, labels, output):
+	wb = xlwt.Workbook()
+	
+	header = ["IP"]
+	header.extend(labels)
+	style = xlwt.easyxf('font: bold on;')
+	for cl_ind in range(len(Coor)):
+		ws = wb.add_sheet('Grupo %d' % (cl_ind+1))
+		for f_ind in range((Coor[cl_ind].shape)[1]+1):
+			ws.write(0,f_ind,header[f_ind],style)
+
+			for ip_ind in range((Coor[cl_ind].shape)[0]):
+
+				if f_ind:
+					ws.write(ip_ind+1,f_ind,float(Coor[cl_ind][ip_ind][f_ind-1]))
+				else:
+					ws.write(ip_ind+1,f_ind,IPs[cl_ind][ip_ind])
+	print "salvando " + output
+	wb.save(output)
 
 if __name__ == '__main__':
 	import argparse
@@ -49,3 +61,4 @@ if __name__ == '__main__':
 	output = args.output_path[0]
 
 	IPs, Coor = get_ips(log_id=log_id, **config)
+	export_sheet(IPs, Coor, config["features"], output)
