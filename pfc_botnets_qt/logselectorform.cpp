@@ -97,7 +97,7 @@ void LogSelectorForm::on_cluster_button_clicked(){
     QString config_path = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
     QString filename = QFileDialog::getSaveFileName(
                 this,
-                tr("Abrir Arquivo"),
+                tr("Salvar Arquivo"),
                 "~/",
                 "Planilha (*.xls)"
                 );
