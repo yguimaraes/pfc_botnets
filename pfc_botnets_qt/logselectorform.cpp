@@ -17,6 +17,8 @@ LogSelectorForm::LogSelectorForm(QWidget *parent) :
 void LogSelectorForm::slot_finished(){
     //std::cout << "Finished" << std::endl;
     ui->btn_load->setEnabled(true);
+    ui->cluster_button->setEnabled(true);
+    ui->plot_button->setEnabled(true);
     ui->label_file_status->setText("Arquivo de Logs Carregado com Sucesso!");
 }
 
