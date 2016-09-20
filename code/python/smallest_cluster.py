@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from sklearn import cluster
 from utils import *
+import json
 
 def get_cluster_distribution(cluster_labels, n_clusters=8):
 	return [sum(i==cluster_labels) for i in range(n_clusters)]
@@ -34,4 +35,14 @@ def main():
 
 if __name__ == '__main__':
 	main()
+	import argparse
+	parser = argparse.ArgumentParser(description='Clusters IP address from PostgreSql')
+	parser.add_argument('config_path', type=str, nargs=1,help='Path to configuration file')
+	parser.add_argument('log_id_path', type=str, nargs=1,help='Path to log_id file')
+	parser.add_argument('output_path', type=str, nargs=1,help='Path to output target')
 
+	args = parser.parse_args()
+
+	config = json.load(file(args.config_path[0]))
+	log_id = str(json.load(file(args.log_id_path[0]))["log_id"])
+	output = args.output_path[0]
