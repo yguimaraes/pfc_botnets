@@ -28,6 +28,7 @@ void PlotDialog::on_pushButton_clicked(){
     env << "PYTHONPATH=/usr/lib/python2.7/site-packages:/usr/local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages";
 
     graph->setEnvironment(env);
+    params << QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/log_id.json");
 
     if(ui->average_domain_length->isChecked()){
         count++;

@@ -1,10 +1,11 @@
 from utils import *
+import json
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
-def main(features):
-    (X,Y) = load(features)
+def main(features, log_id):
+    (X,Y) = load(features, log_id)
 
     X = normalize(X)
     if len(features) == 3:
@@ -27,10 +28,14 @@ def main(features):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description="Plots 2d from DB")
+    parser.add_argument('log_id_path', type=str, nargs=1,help='Path to log_id file')
     parser.add_argument('axis', type=str, nargs='+', help="Features be analyzed")
 
     args = parser.parse_args()
+
+    log_id = str(json.load(file(args.log_id_path[0]))["log_id"])
+
     if len(args.axis) not in [2,3]:
         print "Enter two or three arguments"
     else:
-        main(args.axis)
+        main(args.axis, log_id)
