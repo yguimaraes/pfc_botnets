@@ -2,7 +2,7 @@
 import psycopg2
 import numpy as np
 
-def load(features):
+def load(features, log_id):
 	conn_string = "host='localhost' dbname='botnets_pfc'"
 	# print the connection string we will use to connect
 	print "Connecting to database\n	->%s" % (conn_string)
@@ -14,7 +14,7 @@ def load(features):
 	cursor = conn.cursor()
 
 	# execute our Query
-	cursor.execute( "SELECT client_ip, " + str.join(", ", features) + " FROM clients")
+	cursor.execute( "SELECT client_ip, " + str.join(", ", features) + " FROM clients WHERE log_id = " + log_id)
 
 	dataset = np.array(cursor.fetchall())
 	ids = dataset[:,0]

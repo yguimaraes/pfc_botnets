@@ -17,6 +17,8 @@ LogSelectorForm::LogSelectorForm(QWidget *parent) :
 void LogSelectorForm::slot_finished(){
     //std::cout << "Finished" << std::endl;
     ui->btn_load->setEnabled(true);
+    ui->cluster_button->setEnabled(true);
+    ui->plot_button->setEnabled(true);
     ui->label_file_status->setText("Arquivo de Logs Carregado com Sucesso!");
 }
 
@@ -59,4 +61,53 @@ void LogSelectorForm::on_conf_button_clicked(){
 void LogSelectorForm::on_plot_button_clicked(){
     PlotDialog plot_dialog;
     plot_dialog.exec();
+}
+
+void LogSelectorForm::check_config(){
+    QString conf_path = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/config.json");
+
+    QFile f(conf_path);
+
+    if (!f.exists()){
+        QDir().mkpath(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
+        QJsonValue algorithm("KMeans");
+        QJsonObject param = QJsonObject();
+        param.insert("n_clusters",4);
+        QJsonArray features;
+        features.append(QString("count_domain_with_numbers"));
+        features.append(QString("average_domain_length"));
+        features.append(QString("std_domain_length"));
+        features.append(QString("count_request"));
+        features.append(QString("average_requisition_degree"));
+        features.append(QString("std_requisition_degree"));
+        features.append(QString("minimum_requisition_degree"));
+        QJsonObject target = QJsonObject();
+        target.insert("algorithm",algorithm);
+        target.insert("features",features);
+        target.insert("param",param);
+        QJsonDocument config_out(target);
+        QFile out_file(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/config.json"));
+        out_file.open(QIODevice::WriteOnly | QIODevice::Text);
+        out_file.write(config_out.toJson());
+        out_file.close();
+    }
+}
+
+void LogSelectorForm::on_cluster_button_clicked(){
+    QString config_path = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
+    QString filename = QFileDialog::getSaveFileName(
+                this,
+                tr("Salvar Arquivo"),
+                "~/",
+                "Planilha (*.xls)"
+                );
+    check_config();
+    QStringList params, env;
+    QProcess *graph = new QProcess(this);
+    params << "../code/python/smallest_cluster.py";
+    params << config_path + "/config.json";
+    params << config_path + "/log_id.json";
+    params << filename;
+    graph->startDetached("python",params);
+    graph->waitForFinished(-1);
 }
