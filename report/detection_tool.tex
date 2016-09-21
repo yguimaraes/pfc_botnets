@@ -82,7 +82,13 @@ Pré-condições: & Nenhuma   \\ \hline
 \section{Visão Geral do Sistema}
 A aplicação desenvolvida serve para auxiliar na detecção de botnets. Esse auxílio é feito baseado em informações coletadas por um servidor de DNS. Para oferecer informações relevantes ao usuário, utilizando os algoritmos de agrupamento, a aplicação segue um fluxo básico, constituídos por etapas distintas: Leitura do Log DNS, Cálculo das Informações dos Domínios, Cálculo das Características das Máquinas, Seleção das Configurações, Execução do Algoritmo de Agrupamento e Disponibilização dos Resultados no Arquivo CSV. A Figura \ref{fig:program_flow} mostra um diagrama do fluxo básico de funcionamento do sistema.
 
-As etapas de Leitura de Log DNS, Cálculo das Informações das Informações dos Domínios e Cálculo das Características são feitas durante o caso de uso descrito na Tabela \ref{tag:use_case_load_file}.
+As etapas de Leitura de Log DNS, Cálculo das Informações das Informações dos Domínios e Cálculo das Características são feitas durante o caso de uso descrito na Tabela \ref{tab:use_case_load_file}. Na etapa de Leitura de Log DNS, é feita a extração das informações brutas coletadas pelo servidor DNS para o banco de dados. Nas etapas de Cálculo, as informações são calculadas utilizando chamadas as funções de agrupamento do SQL.
+
+Na Etapa de Seleção das Configurações, descrita pelo caso de uso na Tabela \ref{tab:use_case_config} ...
+
+Por fim, na fase de Execução do Algoritmo de Agrupamento..
+
+%%TODO mostrar telas com estados do Sistema: e.g. layout do xls gerado, pop para selecionar as configurações, etc....
 
 \begin{figure}
 \centering
