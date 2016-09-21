@@ -14,7 +14,7 @@ A aplicação desenvolvida no Qt se comunica com o módulo desenvolvido em Pytho
 Ao longo dessa seção é exibida a documentação das funcionalidades do sistema, além de uma visão geral sobre a aplicação desenvolvida.
 
 \section{Documentação de Casos de Uso}
-Nesta seção é mostrada a documentação dos casos de usos atendidos pelo sistema. São 4 casos de uso no total: Carregar Arquivo de Log DNS, Configurar Técnica de Agrupamento, Visualizar Gráfico e Realizar Agrupamento. O diagrama dos casos de usos pode ser visto na Figura \ref{fig:diagram_use_cases}. 
+Nesta seção é mostrada a documentação dos casos de usos atendidos pelo sistema. São 5 casos de uso no total: Carregar Arquivo de Log DNS (Tabela \ref{tab:use_case_load_file}), Configurar Técnica de Agrupamento (Tabela \ref{tab:use_case_config}), Visualizar Gráfico (Tabela \ref{tab:use_case_visualize}), Realizar Agrupamento (Tabela \ref{tab:use_case_clustering}) e Identificar Cliente no Gráfico (Tabela \ref{tab:use_case_identify}). O diagrama dos casos de usos pode ser visto na Figura \ref{fig:diagram_use_cases}. 
 
 \begin{figure}
 \centering
@@ -22,7 +22,9 @@ Nesta seção é mostrada a documentação dos casos de usos atendidos pelo sist
 \caption[Diagrama de Casos de Uso]{Diagrama de Casos de Uso} \label{fig:diagram_use_cases}
 \end{figure}
 
-A descrição de cada caso de uso é feita ao longo dessa seção. No modelo de especificação de casos de uso utilizado, os passos do Fluxo Básico de Eventos (FBE), são referenciados no Fluxo Alternativo de Eventos. Além disso, as pós-condições são atendidas quando o caso de uso é encerrado com sucesso.
+A descrição de cada caso de uso é feita ao longo dessa seção, nas tabelas previamente citadas na apresentação de cada caso de uso. 
+
+No modelo de especificação de casos de uso utilizado, os passos do Fluxo Básico de Eventos (FBE), são referenciados no Fluxo Alternativo de Eventos. Além disso, as pós-condições são atendidas quando o caso de uso é encerrado com sucesso. Nos casos de falha, a não ser que algo seja especificado, o sistema retorna ao estado em que estava antes do caso de uso ter sido iniciado.
 
 \begin{table}[]
 \centering
@@ -105,7 +107,7 @@ Ator: & Usuário   \\ \hline
 \begin{table}[]
 \centering
 \caption{Caso de Uso - Realizar Agrupamento}
-\label{tab:use_case_clutering}
+\label{tab:use_case_clustering}
 \begin{tabular}{|lp{10cm}|}
 \hline
 Nome: & Realizar Agrupamento  \\ \hline
@@ -122,19 +124,62 @@ Ator: & Usuário   \\ \hline
 \end{tabular}
 \end{table}
 
+\begin{table}[]
+\centering
+\caption{Caso de Uso - Identificar Cliente no Gráfico}
+\label{tab:use_case_identify}
+\begin{tabular}{|lp{10cm}|}
+\hline
+Nome: & Identificar Cliente no Gráfico  \\ \hline
+Ator: & Usuário   \\ \hline
+\multirow{2}{*}{Pré-Condições:} & O Sistema exibiu o gráfico interativo com os eixos informados pelo Usuário.  \\ \hline
+\multirow{6}{*}{Fluxo Básico de Eventos:} & 1. O Usuário seleciona o ponto no gráfico que deseja identificar.  \\
+ & 2. O Sistema recupera as informações do ponto, exibe em um rótulo no gráfico interativo o endereço de IP da máquina cliente no ponto desejado e o caso de uso termina com sucesso. \\
+ \hline
+ \multirow{2}{*}{Pós-Condições:} & 1. O Sistema exibiu o endereço de IP da máquina que estava no ponto selecionado. \\
+ \hline
+\end{tabular}
+\end{table}
+
 \section{Visão Geral do Sistema}
-A aplicação desenvolvida serve para auxiliar na detecção de botnets. Esse auxílio é feito baseado em informações coletadas por um servidor de DNS. Para oferecer informações relevantes ao usuário, utilizando os algoritmos de agrupamento, a aplicação segue um fluxo básico, constituídos por etapas distintas: Leitura do Log DNS, Cálculo das Informações dos Domínios, Cálculo das Características das Máquinas, Seleção das Configurações, Execução do Algoritmo de Agrupamento e Disponibilização dos Resultados no Arquivo CSV. A Figura \ref{fig:program_flow} mostra um diagrama do fluxo básico de funcionamento do sistema.
-
-As etapas de Leitura de Log DNS, Cálculo das Informações das Informações dos Domínios e Cálculo das Características são feitas durante o caso de uso descrito na Tabela \ref{tab:use_case_load_file}. Na etapa de Leitura de Log DNS, é feita a extração das informações brutas coletadas pelo servidor DNS para o banco de dados. Nas etapas de Cálculo, as informações são calculadas utilizando chamadas as funções de agrupamento do SQL.
-
-Na Etapa de Seleção das Configurações, descrita pelo caso de uso na Tabela \ref{tab:use_case_config} ...
-
-Por fim, na fase de Execução do Algoritmo de Agrupamento..
-
-%%TODO mostrar telas com estados do Sistema: e.g. layout do xls gerado, pop para selecionar as configurações, etc....
+A aplicação desenvolvida serve para auxiliar na detecção de botnets. Esse auxílio é feito baseado em informações coletadas por um servidor de DNS. Para oferecer informações relevantes ao usuário, utilizando os algoritmos de agrupamento, a aplicação segue um fluxo básico, constituídos por etapas distintas: Leitura do Log DNS, Cálculo das Informações dos Domínios, Cálculo das Características das Máquinas, Seleção das Configurações, Execução do Algoritmo de Agrupamento e Disponibilização dos Resultados no Arquivo XLS. A Figura \ref{fig:program_flow} mostra um diagrama do fluxo básico de funcionamento do sistema.
 
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{program_flow}
 \caption[Diagram do Fluxo do Programa]{Diagrama do Fluxo do Programa} \label{fig:program_flow}
 \end{figure}
+
+As primeiras etapas que devem ser cumpridas, são as seguintes: Leitura de Log DNS, Cálculo das Informações das Informações dos Domínios e Cálculo das Características que são concluídas durante o caso de uso descrito na Tabela \ref{tab:use_case_load_file}. Na etapa de Leitura de Log DNS, é feita a extração das informações brutas coletadas pelo servidor DNS para o banco de dados. Nas etapas de Cálculo, as informações são calculadas utilizando chamadas as funções de agrupamento do SQL. A Figura \ref{fig:screen_file_loaded} mostra o estado da aplicação após a conclusão do caso de uso Carregar Arquivo de Log DNS, onde pode ser visto que a aplicação libera a utilização das opções ``Agrupar'' e ``Visualizar''.
+
+\begin{figure}
+\centering
+\includegraphics[width=10cm]{screen_file_loaded}
+\caption[Tela do Sistema após Executar o Caso de Uso Carregar Arquivo de Log DNS]{Tela do Sistema após Executar o Caso de Uso Carregar Arquivo de Log DNS} \label{fig:screen_file_loaded}
+\end{figure}
+
+A Etapa de Seleção das Configurações, descrita pelo caso de uso na Tabela \ref{tab:use_case_config} é opcional, pois caso não seja realizada a aplicação carregará os valores padrão ou os utilizados em outro uso prévio da ferramenta. Essa etapa serve para que o usuário escolha as características que deseje que o algoritmo de agrupamento utilize, especifique o algoritmo de agrupamento desejado e o número de grupos que devem ser formados. A Figura \ref{fig:screen_config} mostra a tela na qual o usuário pode realizar essas configurações.
+
+\begin{figure}
+\centering
+\includegraphics[width=10cm]{screen_config}
+\caption[Tela do Sistema para Realizar a Seleção das Configurações]{Tela do Sistema para Realizar a Seleção das Configurações} \label{fig:screen_config}
+\end{figure}
+
+Por fim, as etapas de Execução do Algoritmo de Agrupamento e Disponibilização dos Resultados no Arquivo XLS acontecem na execução do caso de uso na Tabela \ref{tab:use_case_clustering}. Nesse etapa, o algoritmo de agrupamento escolhido é executado com os parâmetros selecionados na Etapa de Seleção das Configurações para as máquinas que estavam presentes no arquivo de log DNS utilizado. Em seguida, os resultados do algoritmo de agrupamento são persistidos no arquivo XLS com nome e caminho definidos pelo usuário da aplicação. Nesse arquivo, cada aba representa um grupo que foi identificado pelo algoritmo e contém as máquinas presentes nos respectivos grupos. A Figura \ref{fig:screen_xls_file} mostra como fica a visualização desse arquivo.
+
+\begin{figure}
+\centering
+\includegraphics[width=13cm]{screen_xls_file}
+\caption[\textit{Layout} do Arquivo XLS Gerado com os Resultados do Agrupamento]{\textit{Layout} do Arquivo XLS Gerado com os Resultados do Agrupamento} \label{fig:screen_xls_file}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{3d_graf_example}
+\caption[\textit{Layout}  do Gráfico Gerado com um Ponto Isolado Selecionado]{\textit{Layout}  do Gráfico Gerado com um Ponto Isolado Selecionado} \label{fig:3d_graf_example}
+\end{figure}
+
+A aplicação apresenta também a funcionalidade de geração de gráficos. Uma funcionalidade da aplicação se encontra fora do fluxo principal da técnica de inteligência artificial, mas se mostrou preciosa para auxiliar na seleção das melhores características, além de permitir encontrar máquinas suspeitas visualmente. Os casos de uso dessa parte se encontram descritos nas tabelas \ref{tab:use_case_visualize} e \ref{tab:use_case_identify}.
+
+Esses gráficos permitem identificar como as máquinas estão distribuídas espacialmente de acordo com as características selecionadas. Ou seja, o usuário pode selecionar 2 ou 3 características e visualizar o gráfico de como elas se encontram distribuídas no espaço. Isso permite identificar se as características utilizadas são úteis, ao exibir como a distribuição das máquinas se comporta com os valores de características selecionadas. Além disso, o usuário pode identificar os endereços de IP dos pontos que estão muito fora da normalidade, como na Figura \ref{fig:3d_graf_example} comportamento que pode ser considerado suspeito, auxiliando na detecção mais uma vez.
