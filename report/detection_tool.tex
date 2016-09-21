@@ -3,39 +3,19 @@ A ferramenta para detecção de botnets foi desenvolvida utilizando o Ambiente d
 
 \begin{figure}
 \centering
-\includegraphics[width=12cm]{initial_screen}
+\includegraphics[width=10cm]{initial_screen}
 \caption[Tela inicial da Ferramenta]{Tela inicial da Ferramenta} \label{fig:initial_screen}
 \end{figure}
 
 Qt é um IDE multi-plataforma que permite desenvolver aplicações com interface gráfica utilizando a linguagem C++ \citep{qtsite}. A escolha de Qt para o desenvolvimento da plataforma foi motivada pelo fato dele ser multi-plataforma, assim como o banco de dados utilizado (PostgreSQL), além do suporte à C++, que foi a linguagem adotada na fase inicial para implementar a preparação de dados.
 
-\section{Documentação de Casos de Uso}
-Nesta seção é mostrada a documentação dos casos de usos disponíveis do sistema. O diagrama dos casos de usos pode ser visto na Figura \ref{fig:diagram_use_cases}. A descrição de cada caso de uso é feita ao longo dessa seção. Os passos do Fluxo Básico de Eventos (FBE), são referenciados no Fluxo Alternativo de Eventos.
+A aplicação desenvolvida no Qt se comunica com o módulo desenvolvido em Python para....
+%%TODO: Rochinha escreve sobre a parte do python biblioteca utilizada e o que foi feito em python.
 
-\begin{table}[]
-\centering
-\caption{Caso de Uso - Carregar Arquivo de Log DNS}
-\label{tb:use_case_load_file}
-\begin{tabular}{|lp{10cm}|}
-\hline
-Nome: & Carregar Arquivo de Log DNS  \\ \hline
-Ator: & Usuário   \\ \hline
-Pré-condições: & Nenhuma   \\ \hline
-\multirow{15}{*}{Fluxo Básico de Eventos:} & 1. O Usuário clica no botão ``Escolher Arquivo''  \\
- & 2. O Sistema exibe uma janela com os arquivos no formato txt presentes no sistema de arquivos do Usuário.  \\
- & 3. O Usuário seleciona um arquivo de log para importar.  \\
- & 4. O Sistema informa o endereço do arquivo selecionado e disponibiliza o botão ``Carregar''. \\
- & 5. O Usuário seleciona a opção ``Carregar'' \\
- & 6. O Sistema exibe um \textit{pop-up} informando que o arquivo está sendo importado para o banco de dados e inicializa a importação dos dados do arquivo para o banco de dados. \\
- & 7. O Sistema retira o \textit{pop-up} informando que o arquivo está sendo importado para o banco de dados e altera o rótulo ``Arquivo não carregado'' para ``Arquivo de Logs Carregado com Sucesso!'' e o caso de uso é encerrado com sucesso.\\ \hline
-\multirow{3}{*}{Fluxo Alternativo de Eventos:} & \textbf{(A1) Nenhum Arquivo Selecionado:} No passo 4 do FBE se o Usuário cancelar a seleção de arquivo.\\
- & A1.a) O caso de uso é encerrado com falha.\\ \hline
-\multirow{4}{*}{Pós-Condições:} & 1. Os dados contidos no log informado pelo usuário são carregados no banco de dados. \\
- & 2. Os botões ``Agrupar'' e ``Visualizar'' são habilitados.\\
- & 3. O botão ``Carregar'' é desativado.\\
-\hline 
-\end{tabular}
-\end{table}
+Ao longo dessa seção é exibida a documentação das funcionalidades do sistema, além de uma visão geral sobre a aplicação desenvolvida.
+
+\section{Documentação de Casos de Uso}
+Nesta seção é mostrada a documentação dos casos de usos atendidos pelo sistema. São 4 casos de uso no total: Carregar Arquivo de Log DNS, Configurar Técnica de Agrupamento, Visualizar Gráfico e Realizar Agrupamento. O diagrama dos casos de usos pode ser visto na Figura \ref{fig:diagram_use_cases}. 
 
 \begin{figure}
 \centering
@@ -43,8 +23,66 @@ Pré-condições: & Nenhuma   \\ \hline
 \caption[Diagrama de Casos de Uso]{Diagrama de Casos de Uso} \label{fig:diagram_use_cases}
 \end{figure}
 
-\section{Arquitetura do Sistema}
-A Figura \ref{fig:program_flow} mostra um diagrama do fluxo básico de funcionamento do sistema.
+A descrição de cada caso de uso é feita ao longo dessa seção. No modelo de especificação de casos de uso utilizado, os passos do Fluxo Básico de Eventos (FBE), são referenciados no Fluxo Alternativo de Eventos. Além disso, as pós-condições são atendidas quando o caso de uso é encerrado com sucesso.
+
+\begin{table}[]
+\centering
+\caption{Caso de Uso - Carregar Arquivo de Log DNS}
+\label{tab:use_case_load_file}
+\begin{tabular}{|lp{10cm}|}
+\hline
+Nome: & Carregar Arquivo de Log DNS  \\ \hline
+Ator: & Usuário   \\ \hline
+Pré-condições: & Nenhuma   \\ \hline
+\multirow{15}{*}{Fluxo Básico de Eventos:} & 1. O Usuário seleciona a opção ``Escolher Arquivo''  \\
+ & 2. O Sistema exibe uma janela com os arquivos no formato txt presentes no sistema de arquivos do Usuário.  \\
+ & 3. O Usuário seleciona um arquivo de log para importar.  \\
+ & 4. O Sistema informa o endereço do arquivo selecionado e disponibiliza a opção ``Carregar''. \\
+ & 5. O Usuário seleciona a opção ``Carregar'' \\
+ & 6. O Sistema exibe um \textit{pop-up} informando que o arquivo está sendo importado para o banco de dados e inicializa a importação dos dados do arquivo para o banco de dados. \\
+ & 7. O Sistema retira o \textit{pop-up} informando que o arquivo está sendo importado para o banco de dados e altera a mensagem ``Arquivo não carregado'' para ``Arquivo de Logs Carregado com Sucesso!'' e o caso de uso é encerrado com sucesso.\\ \hline
+\multirow{3}{*}{Fluxo Alternativo de Eventos:} & \textbf{(A1) Nenhum Arquivo Selecionado:} No passo 4 do FBE se nenhum arquivo tiver sido selecionado.\\
+ & A1.a) O caso de uso é encerrado com falha.\\ \hline
+\multirow{4}{*}{Pós-Condições:} & 1. Os dados contidos no log informado pelo usuário são carregados no banco de dados. \\
+ & 2. As opções ``Agrupar'' e ``Visualizar'' são disponibilizadas.\\
+ & 3. A opção ``Carregar'' é desativada.\\
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[]
+\centering
+\caption{Caso de Uso - Configurar Técnica de Agrupamento}
+\label{tab:use_case_config}
+\begin{tabular}{|lp{10cm}|}
+\hline
+Nome: & Configurar Técnica de Agrupamento  \\ \hline
+Ator: & Usuário   \\ \hline
+Pré-condições: & Nenhuma   \\ \hline
+\multirow{12}{*}{Fluxo Básico de Eventos:} & 1. O Usuário seleciona a opção ``Configurar''  \\
+ & 2. O Sistema recupera as informações do último arquivo de configuração salvo. \\
+ & 3. O Sistema exibe as opções disponíveis para as Informações de Configuração, pré-selecionando as opções recuperadas no passo 2. \\
+ & 4. O Usuário seleciona as Informações de Configuração desejadas.  \\
+ & 5. O Sistema exclui o arquivo de configuração anterior, salva as Informações de Configuração selecionadas pelo Usuário em um novo arquivo de configuração e o caso de uso é encerrado com sucesso. \\
+ \hline
+\multirow{9}{*}{Fluxo Alternativo de Eventos:} & \textbf{(A1) Arquivo de Configuração Não Encontrado:} No passo 2 do FBE se o Sistema detectar que o arquivo de configuração anterior não existe.\\
+ & A1.a) O Sistema utiliza os valores padrões como informação recuperada do arquivo.\\
+ & A1.b) O Sistema retorna ao passo 3 do FBE. \\ 
+ & \textbf{(A2) Janela de Configuração Cancelada:} No passo 5 do FBE se o Usuário cancelar a janela de configuração. \\
+ & A2.a) O caso de uso é encerrado com falha. \\
+ \hline
+\multirow{2}{*}{Pós-Condições:} & 1. As Informações de Configuração selecionadas pelo Usuário são armazenadas no arquivo de configuração. \\
+\hline
+\multirow{10}{*}{Outras Informações:} & 1. Informações de Configuração: Lista de Características para Agrupamento, Algoritmo de Agrupamento e Número de Grupos. \\
+ & 2. Valores Padrão: Lista de Características para Agrupamento: [\textit{count\_domain\_with\_numbers, average\_domain\_length, std\_domain\_length, count\_request, average\_requisition\_degree, std\_requisition\_degree, minimum\_requisition\_degree}], Algoritmo de Agrupamento: K-Médias, Número de Grupos: 4. \\
+\hline 
+\end{tabular}
+\end{table}
+
+\section{Visão Geral do Sistema}
+A aplicação desenvolvida serve para auxiliar na detecção de botnets. Esse auxílio é feito baseado em informações coletadas por um servidor de DNS. Para oferecer informações relevantes ao usuário, utilizando os algoritmos de agrupamento, a aplicação segue um fluxo básico, constituídos por etapas distintas: Leitura do Log DNS, Cálculo das Informações dos Domínios, Cálculo das Características das Máquinas, Seleção das Configurações, Execução do Algoritmo de Agrupamento e Disponibilização dos Resultados no Arquivo CSV. A Figura \ref{fig:program_flow} mostra um diagrama do fluxo básico de funcionamento do sistema.
+
+As etapas de Leitura de Log DNS, Cálculo das Informações das Informações dos Domínios e Cálculo das Características são feitas durante o caso de uso descrito na Tabela \ref{tag:use_case_load_file}.
 
 \begin{figure}
 \centering
