@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>504</width>
-    <height>453</height>
+    <height>369</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>410</y>
+     <x>140</x>
+     <y>330</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -33,7 +33,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>240</y>
+     <y>180</y>
      <width>481</width>
      <height>61</height>
     </rect>
@@ -74,7 +74,7 @@
      <x>10</x>
      <y>20</y>
      <width>481</width>
-     <height>211</height>
+     <height>151</height>
     </rect>
    </property>
    <property name="title">
@@ -97,26 +97,13 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>160</y>
+      <y>120</y>
       <width>221</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>average_requisition_degree</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="percentage_request_txt">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>180</y>
-      <width>221</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>percentage_request_txt</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="count_domain_with_numbers">
@@ -149,7 +136,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>80</y>
+      <y>60</y>
       <width>221</width>
       <height>20</height>
      </rect>
@@ -162,7 +149,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>160</y>
+      <y>100</y>
       <width>221</width>
       <height>20</height>
      </rect>
@@ -175,26 +162,13 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>120</y>
+      <y>80</y>
       <width>221</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
      <string>count_request</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="std_request_interval">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>100</y>
-      <width>221</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>std_request_interval</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="std_domain_length">
@@ -210,37 +184,11 @@
      <string>std_domain_length</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="percentage_request_a">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>100</y>
-      <width>221</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>percentage_request_a</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="percentage_request_cname">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>60</y>
-      <width>221</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>percentage_request_cname</string>
-    </property>
-   </widget>
    <widget class="QCheckBox" name="count_request_not_in_whitelist">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>140</y>
+      <y>100</y>
       <width>221</width>
       <height>20</height>
      </rect>
@@ -253,26 +201,13 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>120</y>
-      <width>221</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>count_request_mx</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="average_request_interval">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
       <y>80</y>
       <width>221</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>average_request_interval</string>
+     <string>count_request_mx</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="average_domain_length">
@@ -288,24 +223,11 @@
      <string>average_domain_length</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="percentage_request_mx">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>140</y>
-      <width>221</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>percentage_request_mx</string>
-    </property>
-   </widget>
    <widget class="QCheckBox" name="std_requisition_degree">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>180</y>
+      <x>240</x>
+      <y>120</y>
       <width>221</width>
       <height>20</height>
      </rect>
@@ -319,7 +241,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>310</y>
+     <y>250</y>
      <width>481</width>
      <height>71</height>
     </rect>
