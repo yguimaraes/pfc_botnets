@@ -102,6 +102,26 @@ Pré-condições: & Dados do Caso de Uso \ref{tab:use_case_load_file} devem esta
 \end{tabular}
 \end{table}
 
+\begin{table}[]
+\centering
+\caption{Caso de Uso - Realizar Agrupamento}
+\label{tab:use_case_clutering}
+\begin{tabular}{|lp{10cm}|}
+\hline
+Nome: & Realizar Agrupamento  \\ \hline
+Ator: & Usuário   \\ \hline
+Pré-condições: & Dados do Caso de Uso \ref{tab:use_case_load_file} devem estar carregados   \\ \hline
+\multirow{12}{*}{Fluxo Básico de Eventos:} & 1. O Usuário seleciona a opção ``Agrupar''  \\
+ & 2. O Sistema apresenta um ambiente para a escolha do destino do arquivo. \\
+ & 3. O Usuário escolhe a pasta onde será salvo e o nome do arquivo. \\
+ & 4. O Sistema agrupa os IPs segundo suas características resgatadas no banco de dados e aplica um algoritmo de agrupamento com parâmetros definidos no arquivo de configuração.  \\
+ & 5. O Sistema salva os IPs e suas características na pasta escolhida pelo usuário e o caso de uso termina com sucesso. \\
+ \hline
+\multirow{3}{*}{Pós-Condições:} & 1. Um arquivo compatível ao Microsoft Excel é armazenado na pasta e com o nome definidos pelo usuário. Os grupos são separados por aba. \\
+\hline
+\end{tabular}
+\end{table}
+
 \section{Visão Geral do Sistema}
 A aplicação desenvolvida serve para auxiliar na detecção de botnets. Esse auxílio é feito baseado em informações coletadas por um servidor de DNS. Para oferecer informações relevantes ao usuário, utilizando os algoritmos de agrupamento, a aplicação segue um fluxo básico, constituídos por etapas distintas: Leitura do Log DNS, Cálculo das Informações dos Domínios, Cálculo das Características das Máquinas, Seleção das Configurações, Execução do Algoritmo de Agrupamento e Disponibilização dos Resultados no Arquivo CSV. A Figura \ref{fig:program_flow} mostra um diagrama do fluxo básico de funcionamento do sistema.
 
