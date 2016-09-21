@@ -18,21 +18,15 @@ ConfigDialog::ConfigDialog(QWidget *parent) :
     mapCheckBox[QString("count_domain_with_numbers")] = ui->count_domain_with_numbers;
     mapCheckBox[QString("average_domain_length")] = ui->average_domain_length;
     mapCheckBox[QString("std_domain_length")] = ui->std_domain_length;
-    mapCheckBox[QString("average_request_interval")] = ui->average_request_interval;
-    mapCheckBox[QString("std_request_interval")] = ui->std_request_interval;
     mapCheckBox[QString("count_request")] = ui->count_request;
     mapCheckBox[QString("count_request_not_in_whitelist")] = ui->count_request_not_in_whitelist;
     mapCheckBox[QString("average_requisition_degree")] = ui->average_requisition_degree;
     mapCheckBox[QString("std_requisition_degree")] = ui->std_requisition_degree;
     mapCheckBox[QString("minimum_requisition_degree")] = ui->minimum_requisition_degree;
     mapCheckBox[QString("count_request_cname")] = ui->count_request_cname;
-    mapCheckBox[QString("percentage_request_cname")] = ui->percentage_request_cname;
     mapCheckBox[QString("count_request_a")] = ui->count_request_a;
-    mapCheckBox[QString("percentage_request_a")] = ui->percentage_request_a;
     mapCheckBox[QString("count_request_mx")] = ui->count_request_mx;
-    mapCheckBox[QString("percentage_request_mx")] = ui->percentage_request_mx;
     mapCheckBox[QString("count_request_txt")] = ui->count_request_txt;
-    mapCheckBox[QString("percentage_request_txt")] = ui->percentage_request_txt;
 
     QFile file(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/config.json"));
     file.open(QIODevice::ReadOnly | QIODevice::Text);

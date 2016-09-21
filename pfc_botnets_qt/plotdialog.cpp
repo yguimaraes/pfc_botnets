@@ -34,10 +34,6 @@ void PlotDialog::on_pushButton_clicked(){
         count++;
          params << "average_domain_length";
     }
-    if(ui->average_request_interval->isChecked()){
-        count++;
-         params << "average_request_interval";
-    }
     if(ui->average_requisition_degree->isChecked()){
         count++;
          params << "average_requisition_degree";
@@ -74,29 +70,9 @@ void PlotDialog::on_pushButton_clicked(){
         count++;
          params << "minimum_requisition_degree";
     }
-    if(ui->percentage_request_a->isChecked()){
-        count++;
-         params << "percentage_request_a";
-    }
-    if(ui->percentage_request_cname->isChecked()){
-        count++;
-         params << "percentage_request_cname";
-    }
-    if(ui->percentage_request_mx->isChecked()){
-        count++;
-         params << "percentage_request_mx";
-    }
-    if(ui->percentage_request_txt->isChecked()){
-        count++;
-         params << "percentage_request_txt";
-    }
     if(ui->std_domain_length->isChecked()){
         count++;
          params << "std_domain_length";
-    }
-    if(ui->std_request_interval->isChecked()){
-        count++;
-         params << "std_request_interval";
     }
     if(ui->std_requisition_degree->isChecked()){
         count++;

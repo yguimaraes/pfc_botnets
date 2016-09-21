@@ -36,14 +36,14 @@ O Sistema Gerenciador de Banco de Dados utilizado foi o PostgreSQL, como parte d
 \caption[Diagrama Relacional do Sistema]{Diagrama Relacional do Sistema} \label{fig:relational_diagram}
 \end{figure}
 
-A tabela \textit{dns\_queries} é a que melhor representa a estrutura bruta do log de DNS. Mesmo sendo simples, sem muitos tratamentos, ela já apresenta consultas interessantes, como verificar que domínios uma máquina consultou. Os campos \textit{is\_type\_a}, \textit{is\_type\_mx}, \textit{is\_type\_cname}, \textit{is\_type\_txt} são booleanos e indicam apenas se o domínio é do tipo especificado. Embora essa informação já esteja presente na coluna \textit{type}, eles foram adicionados para facilitar cálculos posteriores. A Figura \ref{fig:dns_queries} mostra exemplos de algumas entradas nessa tabela, o cálculo da coluna \textit{query\_time} ainda não foi implementado.
+A tabela \textit{dns\_queries} é a que melhor representa a estrutura bruta do log de DNS. Mesmo sendo simples, sem muitos tratamentos, ela já apresenta consultas interessantes, como verificar que domínios uma máquina consultou. Os campos \textit{is\_type\_a}, \textit{is\_type\_mx}, \textit{is\_type\_cname}, \textit{is\_type\_txt} são booleanos e indicam apenas se o domínio é do tipo especificado. Embora essa informação já esteja presente na coluna \textit{type}, eles foram adicionados para facilitar cálculos posteriores. A Figura \ref{fig:dns_queries} mostra exemplos de algumas entradas nessa tabela.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{dns_queries}
 \caption[Exemplos de entradas na tabela \textit{dns\_queries}]{Exemplos de entradas na tabela \textit{dns\_queries}} \label{fig:dns_queries}
 \end{figure}
 
-A tabela \textit{domains} contém informações referentes à cada domínio consultado. A coluna \textit{length} representa a quantidade de caracteres presentes no nome do domínio. A coluna \textit{numeric\_count} contém a informação de quantos caracteres numéricos estão presentes no domínio. A coluna \textit{readable\_string\_length} calcula a maior \textit{substring} legível do domínio, porém essa coluna não foi utilizada posteriormente, já que o ideal seria calcular o tamanho total legível da \textit{string}, mas devido a complexidade desse cálculo  ele não foi utilizado. A coluna \textit{is\_in\_whitelist} verifica se o domínio está na \textit{whitelist} utilizada, porém verificou-se que muitos domínios consultados conhecidos não estavam lá, abrindo margem para aprimoramento ao incrementar a \textit{whitelist} utilizada para o cenário do Exército Brasileiro. Finalmente, a coluna \textit{requisition\_degree} é bem interessante, informando o grau de requisição do domínio, ou seja, quantas máquinas diferentes também consultaram esse domínio. A Figura \ref{fig:domains} mostra exemplos de algumas entradas nessa tabela, o cálculo das colunas \textit{is\_suspect} e \textit{alexa\_degree} ainda não foi implementado.
+A tabela \textit{domains} contém informações referentes à cada domínio consultado. A coluna \textit{length} representa a quantidade de caracteres presentes no nome do domínio. A coluna \textit{numeric\_count} contém a informação de quantos caracteres numéricos estão presentes no domínio. A coluna \textit{readable\_string\_length} calcula a maior \textit{substring} legível do domínio, porém essa coluna não foi utilizada posteriormente, já que o ideal seria calcular o tamanho total legível da \textit{string}, mas devido a complexidade desse cálculo  ele não foi utilizado. A coluna \textit{is\_in\_whitelist} verifica se o domínio está na \textit{whitelist} utilizada, porém verificou-se que muitos domínios consultados conhecidos não estavam lá, abrindo margem para aprimoramento ao incrementar a \textit{whitelist} utilizada para o cenário do Exército Brasileiro. Finalmente, a coluna \textit{requisition\_degree} é bem interessante, informando o grau de requisição do domínio, ou seja, quantas máquinas diferentes também consultaram esse domínio. A Figura \ref{fig:domains} mostra exemplos de algumas entradas nessa tabela.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{domains}
@@ -110,13 +110,9 @@ Não se tem informação sobre máquinas seguindo padrão quanto ao tipo de requ
 
 \begin{itemize}
 \item Quantidade de consultas do tipo A (Registro de Endereço) realizadas
-\item Porcentagem de consultas do tipo A realizadas
 \item Quantidade de consultas do tipo MX (Registro de Troca de Mensagens) realizadas
-\item Porcentagem de consultas do tipo MX realizadas
 \item Quantidade de consultas do tipo CNAME (Nome Canônico) realizadas
-\item Porcentagem de consultas do tipo CNAME realizadas
 \item Quantidade de consultas do tipo TXT (Registro de Texto) realizadas
-\item Porcentagem de consultas do tipo TXT realizadas
 \end{itemize}
 
 Com essas informações calculadas, é possível submeter as informações contidas no log de DNS para serem tratadas por algoritmos de agrupamento. Espera-se que os bots apresentem comportamento diferente de usuários normais, seguindo padrões que não são seguidos por usuários normais, fazendo com que eles fiquem agrupados em grupos menores, que devem ser investigados.
