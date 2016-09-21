@@ -42,7 +42,7 @@ Pré-condições: & Nenhuma   \\ \hline
  & 7. O Sistema retira o \textit{pop-up} informando que o arquivo está sendo importado para o banco de dados e altera a mensagem ``Arquivo não carregado'' para ``Arquivo de Logs Carregado com Sucesso!'' e o caso de uso é encerrado com sucesso.\\ \hline
 \multirow{3}{*}{Fluxo Alternativo de Eventos:} & \textbf{(A1) Nenhum Arquivo Selecionado:} No passo 4 do FBE se nenhum arquivo tiver sido selecionado.\\
  & A1.a) O caso de uso é encerrado com falha.\\ \hline
-\multirow{5}{*}{Pós-Condições:} & 1. Os dados contidos no log informado pelo usuário são carregados no banco de dados. \\
+\multirow{5}{*}{Pós-Condições:} & 1. Os dados contidos no log informado pelo usuário foram carregados no banco de dados. \\
  & 2. As opções ``Agrupar'' e ``Visualizar'' são disponibilizadas.\\
  & 3. A opção ``Carregar'' é desativada.\\
 \hline 
@@ -86,16 +86,16 @@ Pré-condições: & Nenhuma   \\ \hline
 \hline
 Nome: & Visualizar Gráfico  \\ \hline
 Ator: & Usuário   \\ \hline
-Pré-condições: & Dados do Caso de Uso \ref{tab:use_case_load_file} devem estar carregados  \\ \hline
+\multirow{2}{*}{Pré-Condições:} & Os dados contidos no log DNS foram carregados no banco de dados.  \\ \hline
 \multirow{10}{*}{Fluxo Básico de Eventos:} & 1. O Usuário seleciona a opção ``Visualizar''  \\
- & 2. O Sistema apresenta as opções de características disponíveis para serem visualizadas. \\
+ & 2. O Sistema exibe a Lista de Características para Agrupamento disponíveis para serem visualizadas. \\
  & 3. O Usuário seleciona 2 ou 3 características que deseja visualizar em um gráfico e seleciona a opção ``cria gráfico''. \\
  & 4. O Sistema buscará no banco de dados pelos endereços IP e as características selecionadas e apresenta os pontos resultantes em um gráfico e o caso de uso termina com sucesso  \\
  \hline
 \multirow{5}{*}{Fluxo Alternativo de Eventos:} & \textbf{(A1) Quantidade de características inválida:} No passo 3 do FBE se o cliente selecionar qualquer quantidade abaixo de 2 e acima de 3.\\
  & A1.a) O Sistema exibe uma mensagem de erro e o caso de uso termina com falha.\\
  \hline
-\multirow{3}{*}{Pós-Condições:} & 1. A qualquer momento o usuário pode selecionar pontos do gráfico para descobrir o IP relacionado ao ponto bem como o valor de suas características selecionadas. \\
+\multirow{2}{*}{Pós-Condições:} & 1. O Sistema exibiu o gráfico interativo com os eixos informados pelo Usuário. \\
 \hline
 \multirow{5}{*}{Outras Informações:} & 1. Lista de Características para Agrupamento: [\textit{count\_domain\_with\_numbers, average\_domain\_length, std\_domain\_length, count\_request, average\_requisition\_degree, std\_requisition\_degree, minimum\_requisition\_degree}].  \\
 \hline 
@@ -110,14 +110,14 @@ Pré-condições: & Dados do Caso de Uso \ref{tab:use_case_load_file} devem esta
 \hline
 Nome: & Realizar Agrupamento  \\ \hline
 Ator: & Usuário   \\ \hline
-Pré-condições: & Dados do Caso de Uso \ref{tab:use_case_load_file} devem estar carregados   \\ \hline
+\multirow{2}{*}{Pré-Condições:} & Os dados contidos no log DNS foram carregados no banco de dados.  \\ \hline
 \multirow{12}{*}{Fluxo Básico de Eventos:} & 1. O Usuário seleciona a opção ``Agrupar''  \\
  & 2. O Sistema apresenta um ambiente para a escolha do destino do arquivo. \\
  & 3. O Usuário escolhe a pasta onde será salvo e o nome do arquivo. \\
  & 4. O Sistema agrupa os IPs segundo suas características resgatadas no banco de dados e aplica um algoritmo de agrupamento com parâmetros definidos no arquivo de configuração.  \\
  & 5. O Sistema salva os IPs e suas características na pasta escolhida pelo usuário e o caso de uso termina com sucesso. \\
  \hline
-\multirow{3}{*}{Pós-Condições:} & 1. Um arquivo compatível ao Microsoft Excel é armazenado na pasta e com o nome definidos pelo usuário. Os grupos são separados por aba. \\
+\multirow{3}{*}{Pós-Condições:} & 1. O arquivo no formato XLS é armazenado no endereço definido pelo Usuário com as informações de cada grupo separadas por aba. \\
 \hline
 \end{tabular}
 \end{table}
