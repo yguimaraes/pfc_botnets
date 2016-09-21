@@ -16,7 +16,7 @@ LogSelectorForm::LogSelectorForm(QWidget *parent) :
 
 void LogSelectorForm::slot_finished(){
     //std::cout << "Finished" << std::endl;
-    ui->btn_load->setEnabled(true);
+    ui->btn_load->setEnabled(false);
     ui->cluster_button->setEnabled(true);
     ui->plot_button->setEnabled(true);
     ui->label_file_status->setText("Arquivo de Logs Carregado com Sucesso!");
@@ -33,8 +33,10 @@ void LogSelectorForm::on_pushButton_clicked(){
                 "~/",
                 "Arquivo Texto (*.txt)"
                 );
-    ui->label_filename->setText(filename);
-    ui->btn_load->setEnabled(true);
+    if(!filename.isEmpty()){
+        ui->label_filename->setText(filename);
+        ui->btn_load->setEnabled(true);
+    }
 }
 
 void LogSelectorForm::on_btn_load_clicked()
