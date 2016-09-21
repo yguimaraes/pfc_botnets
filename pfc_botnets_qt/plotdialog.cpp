@@ -25,7 +25,7 @@ void PlotDialog::on_pushButton_clicked(){
     QStringList params, env;
     QProcess *graph = new QProcess(this);
     params << "../code/python/plot.py";
-    env << "PYTHONPATH=/usr/lib/python2.7/site-packages:/usr/local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages";
+    //env << "PYTHONPATH=/usr/lib/python2.7/site-packages:/usr/local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages";
 
     graph->setEnvironment(env);
     params << QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/log_id.json");

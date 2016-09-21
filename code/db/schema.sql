@@ -15,6 +15,8 @@ CREATE TABLE domains(
 	PRIMARY KEY (domain, log_id)
 );
 
+CREATE INDEX DLIndex ON domains(log_id);
+
 CREATE TABLE clients(
 	client_ip inet,
 	count_domain_with_numbers integer,
@@ -39,6 +41,8 @@ CREATE TABLE clients(
 	PRIMARY KEY (client_ip, log_id)
 );
 
+CREATE INDEX CLIndex ON clients(log_id);
+
 CREATE TABLE dns_queries(
 	id SERIAL PRIMARY KEY,
 	query_time timestamp,
@@ -53,6 +57,8 @@ CREATE TABLE dns_queries(
 	FOREIGN KEY (client_ip, log_id) REFERENCES clients (client_ip, log_id),
 	FOREIGN KEY (domain, log_id) REFERENCES domains (domain, log_id)
 );
+
+CREATE INDEX DNSLIndex ON dns_queries(log_id);
 
 -- CLEAR DB
 
