@@ -31,7 +31,7 @@ Percebe-se certa há ambiguidade quanto ao ponto crítico, mas é possível nota
 \section{Análise da Base de Dados}
 \label{sec:db_analysis}
 
-Utilizando-se 4 centroides como parâmetro, foram realizadas análises da eficácia do algoritmo de agrupamento ao conjunto de exemplos contidos no banco de dados. Em todos os experimentos o sistema consulta a tabela \textit{clients} do banco de dados e retorna na saída padrão a cardinalidade de cada grupo e os IPs das máquina no menor grupo.
+Utilizando-se 4 centroides como parâmetro, foram realizadas análises da eficácia do algoritmo de agrupamento ao conjunto de exemplos contidos no banco de dados. Em todos os experimentos o sistema consulta a tabela \textit{clients} do banco de dados e retorna na saída padrão a cardinalidade de cada grupo e os IPs das máquinas no menor grupo.
 
 A primeira análise foi realizada observando os seguintes campos:
 
@@ -63,4 +63,4 @@ Para a segunda análise, foi efetuada a normalização das características, par
 
 A hipótese que se levanta para explicar o sucesso é que apesar de as máquinas com comportamento suspeito divergirem das outras máquinas, por exemplo em quantidade de requisição, a distância marginal entre elas é grande o suficiente para confundir o algoritmo ao tentar agrupa-los.
 
-Além disso observou-se que, ao ser descartado, o campo \textit{std\_requisition\_degree} não influenciou na identificação dos itens do menor grupo, isto é os mesmo 26 elementos permanecem consistentemente no mesmo grupo. Isso reforça a necessidade de ser aplicada uma técnica para realizar a seleção das melhores características.
+Além disso observou-se que, ao ser descartado, o campo \textit{std\_requisition\_degree} não influenciou na identificação dos itens do menor grupo, isto é, os mesmos 26 elementos permanecem consistentemente no mesmo grupo. Isso reforça a necessidade de ser aplicada uma técnica para realizar a seleção das melhores características.
