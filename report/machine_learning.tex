@@ -1,5 +1,5 @@
 \chapter{Aprendizado de Máquina}
-Como \citet{rezende2003sistemas} descreve, aprendizado de máquina é uma área de Inteligência Artificial no qual sistemas são capazes de adiquirir conhecimento automaticamente. Um sistema de aprendizado é programa capaz de tomar decisões baseado em experiências acumuladas. Dessa forma, a partir de um conjunto de dados, chamados conjunto de treinamento, são inferidos um conjunto de parâmetros a serem utilizados em um modelo parametrizado.
+Como \citet{rezende2003sistemas} descreve, aprendizado de máquina é uma área de Inteligência Artificial no qual sistemas são capazes de adquirir conhecimento automaticamente. Um sistema de aprendizado é programa capaz de tomar decisões baseado em experiências acumuladas. Dessa forma, a partir de um conjunto de dados, chamados conjunto de treinamento, são inferidos um conjunto de parâmetros a serem utilizados em um modelo parametrizado.
 
 \section{Definições}
 
@@ -8,9 +8,9 @@ Algumas breves definições serão apresentadas com a finalidade de ambientar o 
 \begin{description}
 \item \textbf{Conjunto de exemplos}: É o conjunto de entidades modeladas no problema. Essas entidades poderiam ser pessoas, máquinas, imagens, sinais de som, enfim qualquer objeto que se queira estudar.
 
-\item \textbf{Características}: É um conjunto ordenado de valores que descrevem um exemplo. A escolha das características utilizadas pra representar os exemplos traz consequências diretas ao problema.
+\item \textbf{Características}: É um conjunto ordenado de valores que descrevem um exemplo. A escolha das características utilizadas para representar os exemplos traz consequências diretas ao problema.
 
-\item \textbf{Etiqueta}: É a classe que um exemplo particular pertence. Essa definição será utilizada para descrever o diversos tipos de cenário que os dados podem se encontrar, por exemplo nem sempre as etiquetas estão disponíveis.
+\item \textbf{Etiqueta}: É a classe que um exemplo particular pertence. Essa definição será utilizada para descrever os diversos tipos de cenário que os dados podem se encontrar, por exemplo nem sempre as etiquetas estão disponíveis.
 
 \item \textbf{Função Custo}: É a função que mede quanto o modelo se enquadra ao conjunto de exemplos. Por exemplo, em uma regressão linear utiliza-se a soma das distâncias entre as características dos exemplos e o modelo linear que se quer utilizar para generalizar essas características.
 \end{description}
@@ -28,7 +28,7 @@ Dentro do universo de problemas que são resolvidos pelas técnicas de aprendiza
 \item \textbf{Redução de Dimensionalidade}: Representar o conjunto de exemplos com um número reduzido de dimensões, por exemplo comprimir imagens para processamento de imagens.
 \end{description}
 
-Neste projeto o objetivo é identificar grupos com padrão de comportamento semelhantes. A expectativa é que o comportamento dos bots formem grupos divergentes dos usuários legítimos. Todavia, nem toda máquina pertencente a esse grupo divergente está infectada, o que se quer garantir é um número de reduzido, da ordem das dezenas, de máquinas suspeitas para serem analisadas, dessa forma o usuário poderar dar atenção aos casos divergentes.
+Neste projeto o objetivo é identificar grupos com padrão de comportamento semelhantes. A expectativa é que o comportamento dos bots formem grupos divergentes dos usuários legítimos. Todavia, nem toda máquina pertencente a esse grupo divergente está infectada, o que se quer garantir é um número de reduzido, da ordem das dezenas, de máquinas suspeitas para serem analisadas, dessa forma o usuário poderá dar atenção aos casos divergentes.
 
 \section{Cenários dos Dados}
 
@@ -49,7 +49,7 @@ Note que se as máquinas conhecidamente suspeitas não se encontrarem no grupo d
 
 \section{Algoritmos de Agrupamento}
 
-Existem diversas definições pra grupos de entidades similares \citep{faceli2011inteligencia}, dentre elas podem ser citadas:
+Existem diversas definições para grupos de entidades similares \citep{faceli2011inteligencia}, dentre elas podem ser citadas:
 \begin{description}
 \item \textbf{Grupos bem separados}: Cada exemplo de um grupo está mais próximo de outro exemplo do mesmo grupo do que a qualquer outro ponto não pertencente a ele. Essa definição se assemelha bastante à abordagem de aprendizado K vizinhos mais próximos num cenário supervisionado.
 \item \textbf{Grupo baseado em centro}: Cada exemplo do grupo está mais próximo do centroide do próprio grupo do que do centroide de qualquer outro grupo. Essa é a premissa básica do K-médias.
@@ -88,7 +88,7 @@ Para a operação plena do algoritmo é necessário que seja informada a quantid
 \caption[Centroide Pouco Representativo]{Centroide Pouco Representativo} \label{fig:between_two_clusters}
 \end{figure}
 
-Além disso, se por um lado, pode-se carecer centroides levando a cenários como na figura \ref{fig:between_two_clusters}, no qual o centroide não generaliza os dados, por outro, como é possível visualizar na figura \ref{fig:cluster_overfitting}, um grupo pode acabar se separando por centroides desnecessários.
+Além disso, se por um lado, pode-se carecer de centroides levando a cenários como na figura \ref{fig:between_two_clusters}, no qual o centroide não generaliza os dados, por outro, como é possível visualizar na figura \ref{fig:cluster_overfitting}, um grupo pode acabar se separando por centroides desnecessários.
 
 \begin{figure}[htbp]
 \centering
