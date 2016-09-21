@@ -9,8 +9,7 @@ A ferramenta para detecção de botnets foi desenvolvida utilizando o Ambiente d
 
 Qt é um IDE multi-plataforma que permite desenvolver aplicações com interface gráfica utilizando a linguagem C++ \citep{qtsite}. A escolha de Qt para o desenvolvimento da plataforma foi motivada pelo fato dele ser multi-plataforma, assim como o banco de dados utilizado (PostgreSQL), além do suporte à C++, que foi a linguagem adotada na fase inicial para implementar a preparação de dados.
 
-A aplicação desenvolvida no Qt se comunica com o módulo desenvolvido em Python para....
-%%TODO: Rochinha escreve sobre a parte do python biblioteca utilizada e o que foi feito em python.
+A aplicação desenvolvida no Qt se comunica com o módulo desenvolvido em Python que serve de interface para leitura do banco de dados até o consumo final dos dados do banco, seja através de planilhas ou gráficos de distribuição espacial. As transações entre o interface gráfica e Python foram todas feitas através de criação de processos paralelos.
 
 Ao longo dessa seção é exibida a documentação das funcionalidades do sistema, além de uma visão geral sobre a aplicação desenvolvida.
 
