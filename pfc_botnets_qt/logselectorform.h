@@ -29,7 +29,11 @@ private slots:
 
     void on_plot_button_clicked();
 
+    void on_cluster_button_clicked();
+
 private:
+    void check_config();
+
     Ui::LogSelectorForm *ui;
     QFutureWatcher<void> FutureWatcher;
     QProgressDialog* ProgressDialog;

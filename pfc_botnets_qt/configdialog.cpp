@@ -81,7 +81,7 @@ void ConfigDialog::on_buttonBox_accepted(){
     QJsonArray features;
     QJsonValue algorithm(ui->k_means->isChecked() ? "KMeans" : "AgglomerativeClustering");
     QJsonObject param = QJsonObject();
-    param.insert("n_clusters",QJsonValue(4));
+    param.insert("n_clusters",QJsonValue(ui->spinBox->value()));
     for (std::map<QString,QCheckBox*>::iterator it = mapCheckBox.begin(); it != mapCheckBox.end(); it++){
         if (it->second->isChecked()){
             features.append(it->first);
