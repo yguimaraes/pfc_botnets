@@ -10,10 +10,10 @@ def get_cluster_distribution(cluster_labels, n_clusters=8):
 def get_ips(features=[], algorithm="KMeans", param=dict(), log_id=0):
 	(X,Y) = load(features, log_id)
 
-	X = normalize(X)
+	X_norm = normalize(X)
 
 	cluster_obj = getattr(cluster, algorithm)(**param)
-	cluster_labels = cluster_obj.fit_predict(X)
+	cluster_labels = cluster_obj.fit_predict(X_norm)
 
 	dist = get_cluster_distribution(cluster_labels, n_clusters=param["n_clusters"])
 	ord_dist = sorted(dist)
