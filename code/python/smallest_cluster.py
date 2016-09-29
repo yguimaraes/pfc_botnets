@@ -12,6 +12,9 @@ def get_ips(features=[], algorithm="KMeans", param=dict(), log_id=0):
 
 	X_norm = normalize(X)
 
+	if algorithm == "AgglomerativeClustering":
+		param["memory"] = "./.cache"
+		param["compute_full_tree"] = False
 	cluster_obj = getattr(cluster, algorithm)(**param)
 	cluster_labels = cluster_obj.fit_predict(X_norm)
 
