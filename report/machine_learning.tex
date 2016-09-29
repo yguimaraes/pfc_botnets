@@ -62,7 +62,7 @@ Cada definição induz uma abordagem de algoritmo diferente. Para esse trabalho,
 
 \section{K-Médias}\label{sec:kmeans}
 
-Segundo \citet{witten2011data}, K-Médias é um algoritmo de aprendizado iterativo baseado na distância geométrica. Inicialmente o algoritmo inicializa \textit{K} centroides em posições distintas. Cada exemplo, então, é associado ao centroide mais próximo. Em seguida o centroide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroide em sua nova posição.
+Segundo \citet{witten2011data}, K-Médias é um algoritmo de aprendizado iterativo baseado na distância euclidiana. Inicialmente o algoritmo inicializa \textit{K} centroides em posições distintas. Cada exemplo, então, é associado ao centroide mais próximo. Em seguida o centroide atualiza sua posição para a média das posições dos pontos associados a ele. A partir de então recomeça o ciclo, são reassociados os pontos que estão mais próximos do centroide em sua nova posição.
 
 Note que a função custo que se espera minimizar é a soma de todas as distâncias entre os exemplos e seus respectivos centroides, como descrito na seguinte equação
 
