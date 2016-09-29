@@ -112,4 +112,4 @@ A inicialização dos centroides é um problema a ser considerado ao se aplicar 
 
 Para ilustrar, considere o cenário em que dois centroides acabam inicializados muito próximos e dentro de um grupo denso de pontos e bastante separado dos demais grupos. Neste cenário, o modelo acabará dividindo o grupo em dois grupos separados deixando os demais centroides desamparados na tentativa de modelar os demais grupos.
 
-Para solucionar os problemas da inicialização como o do exemplo citado, foi proposto o algoritmo K-means++ \citep{arthur2007k}, que modifica a função densidade de probabilidade a cada centroide instanciado, de forma que a densidade de probabilidade do centroide ser criado próximo a um ponto já instanciado seja baixa.
+Para solucionar os problemas da inicialização como o do exemplo citado, foi proposto o algoritmo K-means++ \citep{arthur2007k}, que modifica a função densidade de probabilidade a cada centroide instanciado, de modo que reduza a densidade de probabilidade de um novo centróide ser instanciado próximo a outro já existente.
