@@ -113,3 +113,7 @@ A inicialização dos centroides é um problema a ser considerado ao se aplicar 
 Para ilustrar, considere o cenário em que dois centroides acabam inicializados muito próximos e dentro de um grupo denso de pontos e bastante separado dos demais grupos. Neste cenário, o modelo acabará dividindo o grupo em dois grupos separados deixando os demais centroides desamparados na tentativa de modelar os demais grupos.
 
 Para solucionar os problemas da inicialização como o do exemplo citado, foi proposto o algoritmo K-means++ \citep{arthur2007k}, que modifica a função densidade de probabilidade a cada centroide instanciado, de modo que reduza a densidade de probabilidade de um novo centróide ser instanciado próximo a outro já existente.
+
+\section{Agrupamento por Aglomeração}
+
+Segundo \citet{friedman2001elements}, o algoritmo de Agrupamento por Aglutinação inicia com vários grupos com apenas um exemplo cada. A cada passo, um par grupos mais próximos é aglomerado até se gerar um grupo único. Importante ressaltar que para bases muito grandes, esse algoritmo pode trazer demoras no tempo de execução já que \citet{rokach2005clustering} garante a incapacidade de escalar, já que o tempo de complexidade de algoritmos da classe do Agrupamento por Aglutinação é \(O(m^2)\) onde \(m\) é o número de nós.
