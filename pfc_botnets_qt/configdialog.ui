@@ -50,6 +50,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="accessibleName">
+     <string>KMeans</string>
+    </property>
     <property name="text">
      <string>K-médias</string>
     </property>
@@ -62,6 +65,9 @@
       <width>181</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="accessibleName">
+     <string>AgglomerativeClustering</string>
     </property>
     <property name="text">
      <string>Agglomerative Clustering</string>

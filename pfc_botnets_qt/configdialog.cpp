@@ -71,14 +71,22 @@ ConfigDialog::~ConfigDialog()
 
 void ConfigDialog::on_buttonBox_accepted(){
     QFile::remove(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/config.json"));
-
+    QObjectList radio_buttons = ui->groupBox->children();
     QJsonArray features;
-    QJsonValue algorithm(ui->k_means->isChecked() ? "KMeans" : "AgglomerativeClustering");
+    QRadioButton *tmp_rb;
+    QJsonValue algorithm;
     QJsonObject param = QJsonObject();
     param.insert("n_clusters",QJsonValue(ui->spinBox->value()));
     for (std::map<QString,QCheckBox*>::iterator it = mapCheckBox.begin(); it != mapCheckBox.end(); it++){
         if (it->second->isChecked()){
             features.append(it->first);
+        }
+    }
+    for (int i = 0; i < radio_buttons.length(); i++){
+        tmp_rb = (QRadioButton*)radio_buttons[i];
+        if (tmp_rb->isChecked()){
+            algorithm = QJsonValue(tmp_rb->accessibleName());
+            break;
         }
     }
     QJsonObject target = QJsonObject();
