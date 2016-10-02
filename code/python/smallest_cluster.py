@@ -12,6 +12,9 @@ def get_ips(features=[], algorithm="KMeans", param=dict(), log_id=0):
 
 	X_norm = normalize(X)
 
+	if algorithm == "AgglomerativeClustering":
+		param["memory"] = "./.cache"
+		param["compute_full_tree"] = False
 	cluster_obj = getattr(cluster, algorithm)(**param)
 	cluster_labels = cluster_obj.fit_predict(X_norm)
 
@@ -49,6 +52,10 @@ def export_sheet(IPs, Coor, labels, output):
 
 if __name__ == '__main__':
 	import argparse
+	from Tkinter import *
+	import tkMessageBox
+	from os.path import split
+
 	parser = argparse.ArgumentParser(description='Clusters IP address from PostgreSql')
 	parser.add_argument('config_path', type=str, nargs=1,help='Path to configuration file')
 	parser.add_argument('log_id_path', type=str, nargs=1,help='Path to log_id file')
@@ -62,3 +69,6 @@ if __name__ == '__main__':
 
 	IPs, Coor = get_ips(log_id=log_id, **config)
 	export_sheet(IPs, Coor, config["features"], output)
+
+	root = Tk().withdraw()
+	tkMessageBox.showinfo("Agrupar","O resultado foi gerado com sucesso em %s" %(os.path.split(output)[-1])
