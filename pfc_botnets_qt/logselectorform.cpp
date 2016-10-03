@@ -11,6 +11,8 @@ LogSelectorForm::LogSelectorForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::LogSelectorForm){
     ui->setupUi(this);
+    QDir config;
+    config.mkpath(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
     connect(&this->FutureWatcher, SIGNAL (finished()), this, SLOT (slot_finished()));
 }
 
