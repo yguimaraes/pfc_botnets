@@ -1,7 +1,7 @@
 \chapter{Preparação Dos Dados} \label{ch:data_preparation}
 Muitos dos métodos existentes para detecção de botnets, utilizam informações completas do tráfego da rede, inclusive de informações do \textit{payload} para extrair as características relevantes \citep{krmicek2011inspecting}. Infelizmente, nem sempre todas essas informações estão presentes, por diversos motivos, como questões de privacidade ou falta de autorização para acessar o conteúdo dos pacotes. Por isso, torna-se necessário analisar a capacidade de utilizar informações mais simples, como o fluxo da rede (\textit{NetFlow}) ou o registro do log de requisições a um servidor DNS, como características.
 
-Nesse trabalho vamos focar nos dados das requisições coletadas pelo servidor DNS do IME no período de fevereiro a abril de 2012. Ao longo desse capítulo mostraremos quais as informações contidas nesses registros, as características que consideramos relevantes e como foi feito o tratamento para a extração das mesmas.
+Nesse trabalho vamos focar nos dados das requisições coletadas pelo servidor DNS do IME no período de fevereiro a abril de 2012. Ao longo desse capítulo mostraremos quais as informações contidas nesses registros e as características que consideramos mais relevantes para auxiliar na detecção de botnets.
 
 \section{Estrutura do Log Bruto de DNS }
 O log de DNS utilizado foi baseado nos dados coletados pelo servidor DNS do IME. Esses dados são privados e foram coletados em diversos dias de fevereiro a abril de 2012. Cada registro no DNS é uma requisição que foi feita ao servidor por uma máquina cliente. As informações contidas em cada registro são:
@@ -25,37 +25,6 @@ Abaixo, encontra-se um exemplo de uma entrada no registro de requisições extra
 Dado que os dados não estão estruturados em um formato facilmente reconhecido pelo computador, como em um arquivo JSON ou XML, foi preciso realizar a extração dos dados do log utilizando expressões regulares. A expressão regular foi construída inicialmente para reconhecer alguns exemplos de entradas. Após isso, ela foi aperfeiçoada para reconhecer novos exemplos ao colocar um mecanismo para que o sistema avise quando a entrada não foi reconhecida pela expressão regular. Dessa forma, a expressão era adaptada para reconhecer entradas válidas e que não forem reconhecidas. O mecanismo de aviso foi mantido, afim de garantir o aviso ao usuário de entradas no log que não foram previstas pela expressão regular desenvolvida.
 
 Após aplicar a expressão regular em cada linha extraída do log do servidor DNS do IME, foram filtradas as requisições que foram feitas por máquinas que pertencem à infraestrutura do IME, como o servidor de correio, já que são seguras e muitas vezes responsáveis por mais de 50\% das entradas no log nos dias analisados. Depois de aplicar esse filtro, o dado tratado pode ser armazenado de modo amigável para a criação do modelo.
-
-\section{A Estrutura do Banco de Dados}
-A leitura e identificação de cada campo do log individualmente não é o suficiente para representar as características que serão utilizadas pelos algoritmos de aprendizado de máquina. Ou seja, elas ainda precisam ser submetidas a diversos cálculos e tratamentos. Com o objetivo de acelerar o processamento desses tratamentos, além de facilitar e agilizar a consulta de informações posteriormente para efetuar uma investigação inicial dos suspeitos levantados pelo sistema, decidimos armazenar as informações em um banco de dados relacional.
-
-O Sistema Gerenciador de Banco de Dados utilizado foi o PostgreSQL, como parte da nossa solução, para facilitar a escrita, leitura e atualização das informações coletadas dos registros DNS. Na modelagem feita, utilizou-se três tabelas para representar as informações contidas no log. A figura \ref{fig:relational_diagram} apresenta a representação relacional do banco de dados, no qual já está incluso as características a serem analisadas como será esclarecido na seção \ref{sec:levantamento_das_caracteristicas}. Dessas três tabelas, a mais importante é a \textit{clients}, pois essa é a que realmente será utilizada pelos algoritmos de aprendizado de máquina. As tabelas \textit{dns\_queries} e \textit{domains} tem função apenas de auxiliar o cálculo da tabela \textit{clients}, porém podem servir também para consultas, caso alguém deseje utilizar a base de dados construídas para inspeção manual posterior.
-
-\begin{figure}
-\includegraphics[width=\textwidth]{relational_diagram}
-\caption[Diagrama Relacional do Sistema]{Diagrama Relacional do Sistema} \label{fig:relational_diagram}
-\end{figure}
-
-A tabela \textit{dns\_queries} é a que melhor representa a estrutura bruta do log de DNS. Mesmo sendo simples, sem muitos tratamentos, ela já apresenta consultas interessantes, como verificar que domínios uma máquina consultou. Os campos \textit{is\_type\_a}, \textit{is\_type\_mx}, \textit{is\_type\_cname}, \textit{is\_type\_txt} são booleanos e indicam apenas se o domínio é do tipo especificado. Embora essa informação já esteja presente na coluna \textit{type}, eles foram adicionados para facilitar cálculos posteriores. A Figura \ref{fig:dns_queries} mostra exemplos de algumas entradas nessa tabela.
-
-\begin{figure}
-\includegraphics[width=\textwidth]{dns_queries}
-\caption[Exemplos de entradas na tabela \textit{dns\_queries}]{Exemplos de entradas na tabela \textit{dns\_queries}} \label{fig:dns_queries}
-\end{figure}
-
-A tabela \textit{domains} contém informações referentes à cada domínio consultado. A coluna \textit{length} representa a quantidade de caracteres presentes no nome do domínio. A coluna \textit{numeric\_count} contém a informação de quantos caracteres numéricos estão presentes no domínio. A coluna \textit{readable\_string\_length} calcula a maior \textit{substring} legível do domínio, porém essa coluna não foi utilizada posteriormente, já que o ideal seria calcular o tamanho total legível da \textit{string}, mas devido a complexidade desse cálculo  ele não foi utilizado. A coluna \textit{is\_in\_whitelist} verifica se o domínio está na \textit{whitelist} utilizada, porém verificou-se que muitos domínios consultados conhecidos não estavam lá, abrindo margem para aprimoramento ao incrementar a \textit{whitelist} utilizada para o cenário do Exército Brasileiro. Finalmente, a coluna \textit{requisition\_degree} é bem interessante, informando o grau de requisição do domínio, ou seja, quantas máquinas diferentes também consultaram esse domínio. A Figura \ref{fig:domains} mostra exemplos de algumas entradas nessa tabela.
-
-\begin{figure}
-\includegraphics[width=\textwidth]{domains}
-\caption[Exemplos de entradas na tabela \textit{domains}]{Exemplos de entradas na tabela \textit{domains}} \label{fig:domains}
-\end{figure}
-
-A tabela \textit{clients} representa as máquinas que fizeram requisições DNS no período de tempo analisado, sendo assim, ela é a mais importante para os algoritmos de aprendizado, já que o sistema está preocupado em descobrir as máquinas infectadas. O cálculo das colunas é feito com o auxílio das tabelas \textit{domains} e \textit{dns\_queries}, que guardam a informação de como o cliente tem se comportado na rede. Suas colunas foram motivadas pelas características que são analisadas na seção seguinte. Na figura \ref{fig:clients} são mostrados alguns valores para essas colunas. Devido ao elevado número de colunas nessa tabela, algumas delas foram omitidas para possibilitar a visualização.
-
-\begin{figure}
-\includegraphics[width=\textwidth]{clients}
-\caption[Exemplos de entradas na tabela \textit{clients}]{Exemplos de entradas na tabela \textit{clients}} \label{fig:clients}
-\end{figure}
 
 \section{Levantamento das Características}
 \label{sec:levantamento_das_caracteristicas}
