@@ -1,26 +1,28 @@
-# Botnet Detection
+# Instruções
 
-## Final Project
+## Configurações
 
-This is our Final Project on Computer Engineering Course. Our aim is to use a Clustering Algorithm to detect a Botnet
+- Qt creator 4.1.0
+- PostGreSQL 9.5.4
+- Python 2.7
 
-Dependências:
+## Instruções para UNIX
 
-- [PostgreSQL](https://www.postgresql.org/download/)
-- [Boost](https://sourceforge.net/projects/boost/files/boost/1.61.0/)
+##### Construindo o Projeto no Qt
 
-Para iniciar é necessário criar um banco de dados PostgreSQL. Certifique-se que o servidor do Banco de Dados está ativo e siga os seguintes passos:
+1. Importe o projeto na pfc_botnets_qt/pfc_botnets_qt.pro
+2. Aceite proceguir com as configurações antigas
+3. Modifique o path de "Build directory" para uma pasta a sua escolha
+	
+	![image](./build.png =400x)
+	
+	* A pasta destino do build deve estar no mesmo nível que a pasta ``code``
+4. Na sessão ``Run`` selecione o endereço da pasta ``pfc_botnets_qt`` como ``Working directory``
+	
+	![image](./run.png =400x)
 
-1. Crie o banco de dados: `createdb botnets_pfc`
-2. Execute o script: `psql botnets_pfc -f"./code/db/schema.sql"`
+##### Instalando Pacotes para Python
 
-Para compilar basta executar
-
-1. `cd code`
-2. `make`
-
-Para iniciar execute `./dataloader.run`
-
-##Nota importante:
-
-O makefile vai compilar qualquer arquivo na pasta `/src` até 1 pastas de profundidade partindo da `/src` e vai incluir os headers da pasta `/include`
+1. Baixe o conteúdo da página [https://bootstrap.pypa.io/get-pip.py](https://bootstrap.pypa.io/get-pip.py)
+2. No diretório do ``get-pip.py``,  execute ``sudo python get-pip.py``
+3. No diretório base do projeto, execute ``sudo pip install -r requirements.txt``
