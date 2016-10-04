@@ -71,4 +71,4 @@ if __name__ == '__main__':
 	export_sheet(IPs, Coor, config["features"], output)
 
 	root = Tk().withdraw()
-	tkMessageBox.showinfo("Agrupar","O resultado foi gerado com sucesso em %s" %(os.path.split(output)[-1])
+	tkMessageBox.showinfo("Agrupar","O resultado foi gerado com sucesso em %s" %(os.path.split(output)[-1]))
