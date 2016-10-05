@@ -11,10 +11,10 @@ Qt é um IDE multi-plataforma que permite desenvolver aplicações com interface
 
 A aplicação desenvolvida no Qt se comunica com o módulo desenvolvido em Python que serve de interface para leitura do banco de dados até o consumo final dos dados do banco, seja através de planilhas ou gráficos de distribuição espacial. As transações entre a interface gráfica e Python foram todas feitas através de criação de processos paralelos.
 
-Ao longo dessa seção é exibida a documentação das funcionalidades do sistema, além de uma visão geral sobre a aplicação desenvolvida.
+Ao longo dessa seção é exibida a documentação das funcionalidades do sistema, como o banco de dados foi modelado, além de uma visão geral sobre a aplicação desenvolvida.
 
 \section{Documentação de Casos de Uso}
-Nesta seção é mostrada a documentação dos casos de usos atendidos pelo sistema. São 5 casos de uso no total: Carregar Arquivo de Log DNS (Tabela \ref{tab:use_case_load_file}), Configurar Técnica de Agrupamento (Tabela \ref{tab:use_case_config}), Visualizar Gráfico (Tabela \ref{tab:use_case_visualize}), Realizar Agrupamento (Tabela \ref{tab:use_case_clustering}) e Identificar Cliente no Gráfico (Tabela \ref{tab:use_case_identify}). O diagrama dos casos de usos pode ser visto na Figura \ref{fig:diagram_use_cases}. 
+Nesta seção é mostrada a documentação dos casos de usos atendidos pelo sistema. São 5 casos de uso no total que podem ser vistos no diagrama de casos de usos exibido na Figura \ref{fig:diagram_use_cases}. 
 
 \begin{figure}
 \centering
@@ -25,6 +25,8 @@ Nesta seção é mostrada a documentação dos casos de usos atendidos pelo sist
 A descrição de cada caso de uso é feita em tabelas para melhor visualização. Essas descrições podem então ser vistas nas tabelas dessa seção. 
 
 No modelo de especificação de casos de uso utilizado, os passos do Fluxo Básico de Eventos (FBE), são referenciados no Fluxo Alternativo de Eventos. Além disso, as pós-condições são atendidas quando o caso de uso é encerrado com sucesso. Nos casos de falha, a não ser que algo seja especificado, o sistema retorna ao estado em que estava antes do caso de uso ter sido iniciado.
+
+O caso de uso Carregar Arquivo de Log DNS (Tabela \ref{tab:use_case_load_file}) é muito importante, já que concentra toda a lógica de tratamento de dados que será mostrada, em maiores detalhes, na seção \ref{sec:database_structure}. Nesse caso de uso, o usuário seleciona o arquivo que contém as informações brutas registradas pelo servidor de DNS para serem importadas na ferramenta. Nessa etapa de importação, os dados do arquivo são lidos e armazenados de uma forma estruturada em um banco de dados. Isso possibilita o cálculo das características de cada máquina que fez requisições ao servidor de DNS no período contido no arquivo.
 
 \begin{table}[]
 \centering
@@ -50,6 +52,8 @@ Pré-condições: & Nenhuma   \\ \hline
 \hline 
 \end{tabular}
 \end{table}
+
+O caso de uso Configurar Técnica de Agrupamento, descrito na Tabela \ref{tab:use_case_config}, permite que o usuário selecione qual algortimo de agrupamento deseja utilizar e o número de grupos alvo. Além disso, pode selecionar quais características deseja que o algoritmo de agrupamento selecionado utilize. As preferências são persistidas em um arquivo no formado JSON, sendo utilizadas como padrão na próxima vez que a ferramenta for executada.
 
 \begin{table}[]
 \centering
@@ -80,6 +84,31 @@ Pré-condições: & Nenhuma   \\ \hline
 \end{tabular}
 \end{table}
 
+Após realizar a carga do arquivo do log no banco de dados, o caso de uso Realizar Agrupamento (Tabela \ref{tab:use_case_clustering}) fica disponível. Nesse caso de uso, toda lógica de inteligência artificial é aplicada. Ou seja, o algoritmo de agrupamento é executado para a base de dados importada, utilizando as configurações presentes no arquivo de configuração no formato JSON. Os resultados, quais máquinas estão em cada grupo e as características não normalizadas de cada máquina, são armazenados em um arquivo no formato XLS e disponibilizados ao usuário.
+
+\begin{table}[]
+\centering
+\caption{Caso de Uso - Realizar Agrupamento}
+\label{tab:use_case_clustering}
+\begin{tabular}{|lp{10cm}|}
+\hline
+Nome: & Realizar Agrupamento  \\ \hline
+Ator: & Usuário   \\ \hline
+\multirow{2}{*}{Pré-Condições:} & Os dados contidos no log DNS foram carregados no banco de dados.  \\ \hline
+\multirow{13}{*}{Fluxo Básico de Eventos:} & 1. O Usuário seleciona a opção ``Agrupar''  \\
+ & 2. O Sistema apresenta um ambiente para a escolha do destino do arquivo. \\
+ & 3. O Usuário escolhe a pasta onde será salvo e o nome do arquivo. \\
+ & 4. O Sistema agrupa os IPs segundo suas características resgatadas no banco de dados e aplica um algoritmo de agrupamento com parâmetros definidos no arquivo de configuração.  \\
+ & 5. O Sistema salva os IPs e suas características na pasta escolhida pelo usuário. \\
+ & 6. O Sistema exibe um alerta de que o relatório foi gerado e o caso de uso termina com sucesso. \\
+ \hline
+\multirow{3}{*}{Pós-Condições:} & 1. O arquivo no formato XLS é armazenado no endereço definido pelo Usuário com as informações de cada grupo separadas por aba. \\
+\hline
+\end{tabular}
+\end{table}
+
+Por fim, os casos de uso Visualizar Gráfico (Tabela \ref{tab:use_case_visualize}) e Identificar Cliente no Gráfico (Tabela \ref{tab:use_case_identify}) auxiliam no processo de investigação e seleção de características. Permitindo que o usuário visualize como as máquinas ficam distribuídas graficamente de acordo com as características selecionadas, além de permitir identificar qual é a máquina correspondente a um ponto especifíco no gráfico.
+
 \begin{table}[]
 \centering
 \caption{Caso de Uso - Visualizar Gráfico}
@@ -106,27 +135,6 @@ Ator: & Usuário   \\ \hline
 
 \begin{table}[]
 \centering
-\caption{Caso de Uso - Realizar Agrupamento}
-\label{tab:use_case_clustering}
-\begin{tabular}{|lp{10cm}|}
-\hline
-Nome: & Realizar Agrupamento  \\ \hline
-Ator: & Usuário   \\ \hline
-\multirow{2}{*}{Pré-Condições:} & Os dados contidos no log DNS foram carregados no banco de dados.  \\ \hline
-\multirow{13}{*}{Fluxo Básico de Eventos:} & 1. O Usuário seleciona a opção ``Agrupar''  \\
- & 2. O Sistema apresenta um ambiente para a escolha do destino do arquivo. \\
- & 3. O Usuário escolhe a pasta onde será salvo e o nome do arquivo. \\
- & 4. O Sistema agrupa os IPs segundo suas características resgatadas no banco de dados e aplica um algoritmo de agrupamento com parâmetros definidos no arquivo de configuração.  \\
- & 5. O Sistema salva os IPs e suas características na pasta escolhida pelo usuário. \\
- & 6. O Sistema exibe um alerta de que o relatório foi gerado e o caso de uso termina com sucesso. \\
- \hline
-\multirow{3}{*}{Pós-Condições:} & 1. O arquivo no formato XLS é armazenado no endereço definido pelo Usuário com as informações de cada grupo separadas por aba. \\
-\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[]
-\centering
 \caption{Caso de Uso - Identificar Cliente no Gráfico}
 \label{tab:use_case_identify}
 \begin{tabular}{|lp{10cm}|}
@@ -141,6 +149,37 @@ Ator: & Usuário   \\ \hline
  \hline
 \end{tabular}
 \end{table}
+
+\section{A Estrutura do Banco de Dados} \label{sec:database_structure}
+A leitura e identificação de cada campo do log individualmente não é o suficiente para representar as características que serão utilizadas pelos algoritmos de aprendizado de máquina. Ou seja, elas ainda precisam ser submetidas a diversos cálculos e tratamentos. Com o objetivo de acelerar o processamento desses tratamentos, além de facilitar e agilizar a consulta de informações posteriormente para efetuar uma investigação inicial dos suspeitos levantados pelo sistema, decidimos armazenar as informações em um banco de dados relacional.
+
+O Sistema Gerenciador de Banco de Dados utilizado foi o PostgreSQL, como parte da nossa solução, para facilitar a escrita, leitura e atualização das informações coletadas dos registros DNS. Na modelagem feita, utilizou-se três tabelas para representar as informações contidas no log. A Figura \ref{fig:relational_diagram} apresenta a representação relacional do banco de dados, no qual já está incluso as características a serem analisadas como será esclarecido na seção \ref{sec:levantamento_das_caracteristicas}. Dessas três tabelas, a mais importante é a \textit{clients}, pois essa é a que realmente será utilizada pelos algoritmos de aprendizado de máquina. As tabelas \textit{dns\_queries} e \textit{domains} tem função apenas de auxiliar o cálculo da tabela \textit{clients}, porém podem servir também para consultas, caso alguém deseje utilizar a base de dados construídas para inspeção manual posterior.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{relational_diagram}
+\caption[Diagrama Relacional do Sistema]{Diagrama Relacional do Sistema} \label{fig:relational_diagram}
+\end{figure}
+
+A tabela \textit{dns\_queries} é a que melhor representa a estrutura bruta do log de DNS. Mesmo sendo simples, sem muitos tratamentos, ela já apresenta consultas interessantes, como verificar que domínios uma máquina consultou. Os campos \textit{is\_type\_a}, \textit{is\_type\_mx}, \textit{is\_type\_cname}, \textit{is\_type\_txt} são booleanos e indicam apenas se o domínio é do tipo especificado. Embora essa informação já esteja presente na coluna \textit{type}, eles foram adicionados para facilitar cálculos posteriores. A Figura \ref{fig:dns_queries} mostra exemplos de algumas entradas nessa tabela.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{dns_queries}
+\caption[Exemplos de entradas na tabela \textit{dns\_queries}]{Exemplos de entradas na tabela \textit{dns\_queries}} \label{fig:dns_queries}
+\end{figure}
+
+A tabela \textit{domains} contém informações referentes à cada domínio consultado. A coluna \textit{length} representa a quantidade de caracteres presentes no nome do domínio. A coluna \textit{numeric\_count} contém a informação de quantos caracteres numéricos estão presentes no domínio. A coluna \textit{readable\_string\_length} calcula a maior \textit{substring} legível do domínio, porém essa coluna não foi utilizada posteriormente, já que o ideal seria calcular o tamanho total legível da \textit{string}, mas devido a complexidade desse cálculo  ele não foi utilizado. A coluna \textit{is\_in\_whitelist} verifica se o domínio está na \textit{whitelist} utilizada, porém verificou-se que muitos domínios consultados conhecidos não estavam lá, abrindo margem para aprimoramento ao incrementar a \textit{whitelist} utilizada para o cenário do Exército Brasileiro. Finalmente, a coluna \textit{requisition\_degree} é bem interessante, informando o grau de requisição do domínio, ou seja, quantas máquinas diferentes também consultaram esse domínio. A Figura \ref{fig:domains} mostra exemplos de algumas entradas nessa tabela.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{domains}
+\caption[Exemplos de entradas na tabela \textit{domains}]{Exemplos de entradas na tabela \textit{domains}} \label{fig:domains}
+\end{figure}
+
+A tabela \textit{clients} representa as máquinas que fizeram requisições DNS no período de tempo analisado, sendo assim, ela é a mais importante para os algoritmos de aprendizado, já que o sistema está preocupado em descobrir as máquinas infectadas. O cálculo das colunas é feito com o auxílio das tabelas \textit{domains} e \textit{dns\_queries}, que guardam a informação de como o cliente tem se comportado na rede. Suas colunas foram motivadas pelas características que foram analisadas na seção \ref{sec:levantamento_das_caracteristicas}. Na figura \ref{fig:clients} são mostrados alguns valores para essas colunas. Devido ao elevado número de colunas nessa tabela, algumas delas foram omitidas para possibilitar a visualização.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{clients}
+\caption[Exemplos de entradas na tabela \textit{clients}]{Exemplos de entradas na tabela \textit{clients}} \label{fig:clients}
+\end{figure}
 
 \section{Visão Geral do Sistema}
 A aplicação desenvolvida serve para auxiliar na detecção de botnets. Esse auxílio é feito baseado em informações coletadas por um servidor de DNS. Para oferecer informações relevantes ao usuário, utilizando os algoritmos de agrupamento, a aplicação segue um fluxo básico, constituídos por etapas distintas: Leitura do Log DNS, Cálculo das Informações dos Domínios, Cálculo das Características das Máquinas, Seleção das Configurações, Execução do Algoritmo de Agrupamento e Disponibilização dos Resultados no Arquivo XLS. A Figura \ref{fig:program_flow} mostra um diagrama do fluxo básico de funcionamento do sistema.
@@ -177,7 +216,7 @@ Por fim, as etapas de Execução do Algoritmo de Agrupamento e Disponibilizaçã
 
 \begin{figure}
 \centering
-\includegraphics[width=12cm]{3d_graf_example}
+\includegraphics[width=10cm]{3d_graf_example}
 \caption[\textit{Layout}  do Gráfico Gerado com um Ponto Isolado Selecionado]{\textit{Layout}  do Gráfico Gerado com um Ponto Isolado Selecionado} \label{fig:3d_graf_example}
 \end{figure}
 
