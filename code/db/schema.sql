@@ -59,10 +59,3 @@ CREATE TABLE dns_queries(
 );
 
 CREATE INDEX DNSLIndex ON dns_queries(log_id);
-
--- CLEAR DB
-
-DELETE FROM dns_queries;
-DELETE FROM domains;
-DELETE FROM clients;
-SELECT SETVAL((SELECT pg_get_serial_sequence('dns_queries', 'id')), 1, false);
